@@ -1,0 +1,8 @@
+.tr >td{
+    text-align: left;
+    padding: 8px;
+    font-size: large;
+    font-weight: 500;
+    line-height: 1ch;
+    color: black;
+}
