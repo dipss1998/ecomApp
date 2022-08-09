@@ -77,9 +77,9 @@ const NavBar = () => {
         {listt()}
     </Drawer> */}
       {  navData.map(data=>(
-            <Component>
-               <Link to="/KitchenCategory"><Text >{data.text1} </Text></Link>
-               <Link to="/ElectronicCategory"><Text >{data.text}</Text></Link> 
+            <Component >
+               <Link to="/KitchenCategory" style = {{textDecoration:'none'}}><Text >{data.text1} </Text></Link>
+               <Link to="/ElectronicCategory" style = {{textDecoration:'none'}}><Text >{data.text}</Text></Link> 
 
 
             </Component>

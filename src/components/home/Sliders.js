@@ -7,6 +7,7 @@ import { secondbannerData } from '../constants/data';
 import { Button, Divider, Box, Typography } from '@mui/material';
 import { styled } from '@mui/material';
 import BannerCate from './BannerCate';
+import axios from 'axios';
 import { getProducts } from '../../redux/actions/productActions';
 
 import {Link} from 'react-router-dom'
@@ -27,7 +28,7 @@ const responsive = {
     }
 };
 const Image = styled('img')({
-    width: 200,
+    width: 150,
     height: 180,
     position: "fix",
     objectfit: "cover",
@@ -47,7 +48,7 @@ const Deal = styled(Box)`
 
 const Timer = styled(Box)`
     color: #7f7f7f;
-    margin-left: 10px;
+    margin-left: 50px;
     display: flex;
     align-items: center;
 `;
@@ -63,33 +64,42 @@ const DealText = styled(Typography)`
     font-weight: 600;
     line-height: 32px;
     margin-right: 25px;
-`
-
-
-const LastSlider = ({ data, timer, title }) => {
-
-    // const getProducts = useSelector(state => state.getProducts);
-    // const { products } = getProducts;
-    // const dispatch = useDispatch();
-
-    // console.log(getProducts.products);
-
-    // const Products = useSelector(state => state.getProducts);
-    // // const { products } = Products;
-    // const dispatch = useDispatch();
-
-    // console.log(Products);
-
-
-//   useEffect(() => {
-//        dispatch(getProducts)
-//     //   store.dispatch(getProducts())
-//   }, [dispatch])
-
-    const timerURL = 'https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/timer_a73398.svg';
-    const renderer = ({hours, minutes, seconds })=>{
-        return <Box variant = "span">{hours} : {minutes}: {seconds} Left</Box>
+`;
+const RenderTimer = styled(Box)(({ theme }) => ({
+    [theme.breakpoints.down('sm')]: {
+        display: 'none'
     }
+}));
+
+const LastSlider = ({  timer, title }) => {
+
+    const dispatch = useDispatch();
+  const  products = useSelector((state) => state.getallProducts.products);
+ 
+//   const {id, title, discount, url} = products
+ 
+   const fetchProducts = async () =>{
+
+  
+      const response = await axios
+      .get("http://localhost:5000/products").catch((err) => {
+        console.log("error", err);
+      });
+      // console.log(response);
+      dispatch(getProducts(response.data))
+      
+      
+  };
+
+  useEffect(()=>{
+    fetchProducts();
+  }, [])
+
+  const timerURL = 'https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/timer_a73398.svg';
+
+  const renderer = ({ hours, minutes, seconds }) => {
+      return <RenderTimer variant="span">{hours} : {minutes} : {seconds}  Left</RenderTimer>;
+  };
     return (
 
         <>
@@ -104,7 +114,7 @@ const LastSlider = ({ data, timer, title }) => {
                 }
                 <ViewAllButton variant="contained" color="primary">View All</ViewAllButton>
             </Deal>
-        
+            <Divider />
             <Carousel
                   swipeable={false}
                   draggable={false}
@@ -112,7 +122,7 @@ const LastSlider = ({ data, timer, title }) => {
                   centerMode={true}
                   infinite={true}
                   autoPlay={true}
-                  autoPlaySpeed={10000}
+                  autoPlaySpeed={2000}
                   keyBoardControl={true}
                   showDots={false}
                   containerClass="carousel-container"
@@ -122,18 +132,18 @@ const LastSlider = ({ data, timer, title }) => {
 
             >
 
-{
-                    data.map(temp => (
+                {
+                    products.map(temp => (
                         <Link to={`product/${temp.id}`} style={{textDecoration: 'none'}}>
-                            <Box textAlign="center" style={{ padding: '25px 15px' }}>
-                                <Image src={temp.url} />
-                                <Text style={{ fontWeight: 600, color: '#212121' }}>{temp.title.shortTitle}</Text>
-                                <Text style={{ color: 'green' }}>{temp.discount}</Text>
-                                <Text style={{ color: '#212121', opacity: '.6' }}>{temp.tagline}</Text>
-                            </Box>
-                         </Link>
+                             <Box textAlign="center" style={{ padding: '15px 15px' }}>
+                                    <Image src={temp.url} />
+                                    {/* <Text style={{ fontWeight: 600, color: '#212121' }}>{temp.title.shortTitle}</Text>  */}
+                                    <Text style={{ color: 'green' }}>{temp.discount}</Text>
+                                    <Text style={{ color: '#212121', opacity: '.6' }}>{temp.tagline}</Text>
+                            </Box> 
+                        </Link>
                     ))
-                }
+                }   
             </Carousel>
         </>
     )

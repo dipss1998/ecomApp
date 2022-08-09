@@ -34,8 +34,8 @@ function App() {
          <Route path= '/' element={<Home />} />    
          <Route path= '/KitchenCategory' element={<KitchenCategory/>} />
          <Route path= '/ElectronicCategory' element={<ElectronicCategory/>} />
-         <Route path= '/DetailView' element={<DetailView/>} /> 
-         <Route path= '/Checkout' element={<Checkout/>} /> 
+         <Route path= '/product/:id'  element={<DetailView />} /> 
+          <Route path= '/Checkout' element={<Checkout/>} /> 
          <Route path= '/PaymentForm' element={< PaymentForm/>} />  
 
       </Routes>

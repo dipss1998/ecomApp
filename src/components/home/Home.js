@@ -1,5 +1,6 @@
 import React, { useEffect }  from 'react'
 import NavBar from './NavBar';
+import axios from 'axios';
 import MidSection from './MidSection';
 import Banner from './Banner';
 import { styled } from '@mui/material/styles';
@@ -8,11 +9,11 @@ import BannerCate from './BannerCate';
 import LastSlider from './Sliders';
 import Footer from './Footer';
 import { useSelector, useDispatch, getState } from 'react-redux'; // hooks
-import { getProducts as listProducts  } from '../../redux/actions/productActions';
+import { getProducts  } from '../../redux/actions/productActions';
 // import {data} from '../redux/actions/productActions'
 import store from '../../redux/Store';
 import MidSlide from './MidSlide';
-import GET_PRODUCTS_SUCCESS from '../../redux/constants/productsuccessConstants';
+// import GET_PRODUCTS_SUCCESS from '../../redux/constants/productsuccessConstants';
 const Container = styled(Box)`
    padding: 0px 10px 0px 10px;
    background: #d9d9d9;
@@ -38,27 +39,29 @@ margin-top: -490px;
 `;
 const Home = () => {
 
+
+
   // useEffect(()=>{
   //    const {data} = store.dispatch(getProducts())
   //     console.log(getProducts(data));
 
   // }, [])
 
-  const dispatch = useDispatch();
-  const getProducts = useSelector(state => state.getProducts);
+  // const dispatch = useDispatch();
+  // const getProducts = useSelector(state => state.getProducts);
 
-  const { products } = getProducts;
-  console.log(products);
+  // const { products } = getProducts;
+  // console.log(products);
   
-  useEffect(() => {
-      dispatch(listProducts())
-  }, [dispatch])
+  // useEffect(() => {
+  //     dispatch(listProducts())
+  // }, [dispatch])
 
   
 
-  store.subscribe(()=>{
-    console.log("state change", store.getState());
-  })
+  // store.subscribe(()=>{
+  //   console.log("state change", store.getState());
+  // })
 
 // console.log(getProducts);
 //   const getProducts = store.dispatch({
@@ -66,7 +69,32 @@ const Home = () => {
 //   payload:getProducts()
 // })
 // console.log(getProducts());
+  //  const {id,  name} = products[0]
 
+  
+  const dispatch = useDispatch();
+  const  {products}  = useSelector((state) => state.getallProducts);
+  // console.log( "kjdsbfjhfbjf" , products)
+ 
+   const fetchProducts = async () =>{
+
+  
+      const response = await axios
+      .get("http://localhost:5000/getProducts").catch((err) => {
+        console.log("error", err);
+      });
+      // console.log(response);
+      dispatch(getProducts(response.data))
+     
+      
+  };
+
+  useEffect(()=>{
+    fetchProducts();
+  }, [])
+ 
+
+ 
   return (
 
     <>
@@ -77,12 +105,14 @@ const Home = () => {
       </Container>
       <Content>
         <BannerCate />
-        {/* <MidSlide products={products} />
+
+        {/* <Typography> {name} </Typography> */}
+         <MidSlide products={products} />  
         <MidSection/>
         <Box style={{ backgroundColor: "grey" }}>
 
                 <LastSlider
-                  data={products} 
+                  products={products} 
                   title='Discounts for You'
                   timer={false} 
                   multi={true} 
@@ -90,26 +120,26 @@ const Home = () => {
                 />
 
                 <LastSlider
-                    data={products} 
+                    products={products} 
                     title='Suggested Items'
                     timer={false} 
                     multi={true} 
                 />
                 <LastSlider
-                    data={products} 
+                    products={products} 
                     title='Top Selection'
                     timer={false} 
                     multi={true} 
                 />
                 <LastSlider
-                    data={products} 
+                    products={products} 
                     title='Recommended Items'
                     timer={false} 
                     multi={true} 
                 />
            
 
-        </Box> */}
+        </Box> 
         <Footer />
       </Content>
 

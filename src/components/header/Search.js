@@ -5,8 +5,9 @@ import { Box } from '@mui/system';
 import { styled } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import { useSelector, useDispatch, getState } from 'react-redux'; // hooks
-import { getProducts as listProducts } from '../../redux/actions/productActions';
-
+// import { getProducts as listProducts } from '../../redux/actions/productActions';
+import axios from 'axios'
+import {getProducts} from '../../redux/actions/productActions'
 const SearchContainer = styled(Box)`
     background: #fff;
     margin-left: 10px;
@@ -38,25 +39,41 @@ const SearchIconWrapper=styled(Box)`
  `;
 
 
-const Search = ({Products}) => {
+const Search = () => {
 
-
-  
-const [text, setText ] = useState('');
-const getText =(text)=>{
+ const [text, setText ] = useState('');
+ const [open, setOpen] = useState(true)
+ const getText =(text)=>{
       setText(text)
+      setOpen(false)
   }
-  const dispatch = useDispatch();
-  const getProducts = useSelector(state => state.getProducts);
-  const { products } = getProducts;
-  console.log(products);
+
+const {products} = useSelector((state) =>  state.getallProducts);
+
+const dispatch = useDispatch();
+
+ const fetchProducts = async () =>{
 
 
-  useEffect(() => {
-      dispatch(listProducts())
-  }, [dispatch])
+    const response = await axios
+    .get("http://localhost:5000/products").catch((err) => {
+      console.log("error", err);
+    });
+    // console.log(response);
+    dispatch(getProducts(response.data))
+    // console.log(response);
+    
+};
 
 
+
+useEffect(()=>{
+  fetchProducts();
+
+}, [dispatch])
+
+
+// console.log( products);
   return (
     <SearchContainer>
         <InputSearchBase
@@ -69,25 +86,23 @@ const getText =(text)=>{
           <SearchIcon/>
         </SearchIconWrapper>
 
-        {
-          text && <ListWrapper>
-            {
-              products.filter(product => product.title.lognTitle.toLowerCase().includes(text.toLowerCase())).map(product =>{
-                <ListItem>
-                  <Link
-                    to={`/product/${product.id}`}
-                    onClick={()=>setText('')}
-                    style = {{textDecoration: 'none', color:'inherit'}}
-                   
-                  >
-                    {product.title.longTitle}
-                    </Link>
-                </ListItem>
-              })
-            }
-
-                </ListWrapper>
-        }
+         {
+          text &&   <ListWrapper hidden={open}>
+          {
+            products.filter(product => product.title.longTitle.toLowerCase().includes(text.toLowerCase())).map(product => (
+              <ListItem>
+                <Link 
+                  to={`/product/${product.id}`} 
+                  style={{ textDecoration:'none', color:'inherit'}}
+                  onClick={() => setOpen(true)}  
+                >
+                  {product.title.longTitle}
+                </Link>
+              </ListItem>
+            ))
+          }  
+        </ListWrapper>
+        } 
          
     </SearchContainer>
   )

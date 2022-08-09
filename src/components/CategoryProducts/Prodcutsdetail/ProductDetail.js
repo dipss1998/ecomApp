@@ -1,6 +1,7 @@
+import React, {useEffect} from 'react'
 import { Box, Typography, Table, TableBody, TableRow, TableCell, styled } from '@mui/material';
 import { LocalOffer as Badge } from '@mui/icons-material';
-
+import { useParams } from 'react-router-dom';
 const SmallText = styled(Box)`
     font-size: 14px;
     vertical-align: baseline;
@@ -25,7 +26,9 @@ const StyledBadge = styled(Badge)`
     font-size: 15px;
 `;
 
-const ProductDetail = ({ product }) => {
+const ProductDetail = ({ products }) => {
+
+    const {productId} = useParams()
     const adURL = 'https://rukminim1.flixcart.com/lockin/774/185/images/CCO__PP_2019-07-14.png?q=50';
     const date = new Date(new Date().getTime()+(5*24*60*60*1000));
     
@@ -63,7 +66,7 @@ const ProductDetail = ({ product }) => {
                     </TableRow>
                     <ColumnText>
                         <TableCell style={{ color: '#878787' }}>Description</TableCell>
-                        <TableCell>{product.description}</TableCell>
+                        <TableCell>{products.description}</TableCell>
                     </ColumnText>
                 </TableBody>
             </Table>

@@ -163,8 +163,8 @@ const LoginDialog = ({ open, setOpen, }) => {
                     {
                         account.view === 'login' ? 
                         <Wrapper style = {{backgroundColor:'#232F3E'}}>
-                            <TextField variant="standard" onChange={(e) => onValueChange(e)} name='username' label='Enter username' />
-                            { error && <Error>Please enter valid Email ID/Mobile number</Error> }
+                            <TextField variant="standard" onChange={(e) => onValueChange(e)} name='email' label='Enter your email' />
+                            {/* { error && <Error>Please enter valid Email ID/Mobile number</Error> } */}
                             <TextField variant="standard" onChange={(e) => onValueChange(e)} name='password' label='Enter Password' />
                             <Text>By continuing, you agree to Flipkart's Terms of Use and Privacy Policy.</Text>
                             <LoginButton onClick={() => loginUser()} >Login</LoginButton>
@@ -180,7 +180,7 @@ const LoginDialog = ({ open, setOpen, }) => {
                             {/* <TextField variant="standard" onChange={(e) => onInputChange(e)} name='username' label='Enter Username' /> */}
                             <TextField variant="standard" onChange={(e) => onInputChange(e)} name='email' label='Enter Email' />
                             <TextField variant="standard" onChange={(e) => onInputChange(e)} name='password' label='Enter Password' />
-                            <TextField variant="standard" onChange={(e) => onInputChange(e)} name='phone' label='Enter Phone' />
+                            <TextField variant="standard" onChange={(e) => onInputChange(e)} name='contact' label='Enter Phone' />
                             <LoginButton onClick={() => signupUser()} >Continue</LoginButton>
                             {/* <CreateAccount>Already have account? go to login</CreateAccount> */}
 

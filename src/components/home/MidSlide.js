@@ -27,13 +27,37 @@ const Component = styled(Box)`
 
 
 const MidSlide = ({ products, title, timer }) => {
+
+    // const dispatch = useDispatch();
+    // const  {products}  = useSelector((state) => state.getallProducts);
+    // console.log( "kjdsbfjhfbjf" , products)
+   
+    //  const fetchProducts = async () =>{
+  
+    
+    //     const response = await axios
+    //     .get("http://localhost:5000/getProducts").catch((err) => {
+    //       console.log("error", err);
+    //     });
+    //     // console.log(response);
+    //     dispatch(getProducts(response.data))
+    //     console.log(response);
+        
+    // };
+  
+    // useEffect(()=>{
+    //   fetchProducts();
+    // }, [])
+
+
+
     const adURL = 'https://rukminim1.flixcart.com/flap/464/708/image/633789f7def60050.jpg?q=70';
   return (
    <>
         <Component>
             <LeftComponent>
             <LastSlider
-            data={products} 
+            products={products} 
             title={title}
             timer={timer} 
            
