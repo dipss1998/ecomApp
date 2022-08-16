@@ -21,7 +21,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
       {'Copyright © '}
-      <Link color="#fc9a21" href="">
+      <Link color="#fc9a21" href="http://localhost:3000/">
         CBNITS
       </Link>{' '}
       {new Date().getFullYear()}

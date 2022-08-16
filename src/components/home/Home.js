@@ -9,7 +9,7 @@ import BannerCate from './BannerCate';
 import LastSlider from './Sliders';
 import Footer from './Footer';
 import { useSelector, useDispatch, getState } from 'react-redux'; // hooks
-import { getProducts  } from '../../redux/actions/productActions';
+import { getProducts, fetchProducts  } from '../../redux/actions/productActions';
 // import {data} from '../redux/actions/productActions'
 import store from '../../redux/Store';
 import MidSlide from './MidSlide';
@@ -73,26 +73,27 @@ const Home = () => {
 
   
   const dispatch = useDispatch();
-  const  {products}  = useSelector((state) => state.getallProducts);
-  // console.log( "kjdsbfjhfbjf" , products)
+const  products = useSelector((state) => state.getallProducts.products);
+//  console.log("products", products);
+//   const {id, title, discount, url} = products
  
-   const fetchProducts = async () =>{
+  //  const fetchProducts = async () =>{
 
   
-      const response = await axios
-      .get("http://localhost:5000/getProducts").catch((err) => {
-        console.log("error", err);
-      });
-      // console.log(response);
-      dispatch(getProducts(response.data))
-     
+  //     const response = await axios
+  //     .get("http://localhost:5000/getProducts/getProducts").catch((err) => {
+  //       console.log("error", err);
+  //     });
+       
+  //     dispatch(getProducts(response.data))
+  //      console.log(response);
       
-  };
+  // };
 
   useEffect(()=>{
-    fetchProducts();
+    dispatch(fetchProducts());
   }, [])
- 
+  // console.log( "kjdsbfjhfbjf" , products)
 
  
   return (
@@ -107,12 +108,12 @@ const Home = () => {
         <BannerCate />
 
         {/* <Typography> {name} </Typography> */}
-         <MidSlide products={products} />  
-        <MidSection/>
+         <MidSlide  />  
+        {/* <MidSection/> */}
         <Box style={{ backgroundColor: "grey" }}>
 
                 <LastSlider
-                  products={products} 
+                  
                   title='Discounts for You'
                   timer={false} 
                   multi={true} 
@@ -120,19 +121,19 @@ const Home = () => {
                 />
 
                 <LastSlider
-                    products={products} 
+                    
                     title='Suggested Items'
                     timer={false} 
                     multi={true} 
                 />
                 <LastSlider
-                    products={products} 
+                    
                     title='Top Selection'
                     timer={false} 
                     multi={true} 
                 />
                 <LastSlider
-                    products={products} 
+                    
                     title='Recommended Items'
                     timer={false} 
                     multi={true} 

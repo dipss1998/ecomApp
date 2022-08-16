@@ -1,5 +1,6 @@
-import React from 'react';
-// import * as React from 'react';
+import React from 'react'
+
+
 import AppBar from '@mui/material/AppBar';
 import {Box, Typography, Card,Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -9,21 +10,25 @@ import Drawer from '@mui/material/Drawer';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#ebf1f7',
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: 'center',
-  // color: theme.palette.text.primary,
-}));
+
 
 const gridWraper = styled(Grid)`
       backgroundcolor:red;
  
 `
 
-const DefaultProfileScreen = () => {
-  <Box sx={{ flexGrow: 1,  }} style={{}}>
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#ebf1f7',
+    ...theme.typography.body2,
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    // color: theme.palette.text.primary,
+  }));
+
+const ProfileInformation = () => {
+  return (
+   <>
+   <Box sx={{ flexGrow: 1,  }} style={{}}>
     <Typography variant='h4'>Personal Information</Typography>
     <Card style={{height:500, backgroundColor:"#debf12", width:800}}>
             <Grid container spacing={3} style={{margin:30, width:600, paddingTop:30, paddingButtom:20}}>
@@ -51,6 +56,12 @@ const DefaultProfileScreen = () => {
    
       </Card>
     </Box>
+      
+   </>
+            
+           
+      
+  )
 }
 
-export default DefaultProfileScreen
+export default ProfileInformation

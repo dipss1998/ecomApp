@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import { Dialog, DialogContent, TextField, Box, Button, Typography, styled } from '@mui/material';
 
-import { authenticateLogin, authenticateSignup } from '../../service/api';
+import { userLogIn, userSignUp } from '../../service/api';
 
 import logo from './../../imges/logo.png'
 import { LoginContext } from '../context/ContextProvider';
@@ -124,7 +124,7 @@ const LoginDialog = ({ open, setOpen, }) => {
     }
 
     const loginUser = async() => {
-        let response = await authenticateLogin(login);
+        let response = await userLogIn(login);
         if(!response) {
             showError(true)}
         else {
@@ -135,7 +135,7 @@ const LoginDialog = ({ open, setOpen, }) => {
     }
 
     const signupUser = async() => {
-        let response = await authenticateSignup(signup);
+        let response = await  userSignUp(signup);
         // console.log(response);
         if(!response) return;
         handleClose();
@@ -156,13 +156,13 @@ const LoginDialog = ({ open, setOpen, }) => {
             <Component>
                 <Box style={{display: 'flex', height: '100%'}}>
                     <Image>
-                         <img src={logo} alt="logo" style={{ marginTop: 10, }} />
+                         <img src={logo} alt="logo" style={{ marginTop: 0, }} />
                         <Typography variant="h5">{account.heading}</Typography>
                         <Typography style={{marginTop: 20}}>{account.subHeading}</Typography>
                     </Image>
                     {
                         account.view === 'login' ? 
-                        <Wrapper style = {{backgroundColor:'#232F3E'}}>
+                        <Wrapper style = {{backgroundColor:'#232F3E', Height: '90%', marginTop: -10}}>
                             <TextField variant="standard" onChange={(e) => onValueChange(e)} name='email' label='Enter your email' />
                             {/* { error && <Error>Please enter valid Email ID/Mobile number</Error> } */}
                             <TextField variant="standard" onChange={(e) => onValueChange(e)} name='password' label='Enter Password' />
@@ -172,13 +172,13 @@ const LoginDialog = ({ open, setOpen, }) => {
                             <RequestOTP>Request OTP</RequestOTP>
                             <CreateAccount onClick={() => toggleSignup()}>New to Flipkart? Create an account</CreateAccount>
                         </Wrapper> : 
-                        <Wrapper style = {{backgroundColor:'#232F3E'}}>
+                        <Wrapper style = {{backgroundColor:'#232F3E', Height: '100%'}}>
                             {/* <TextField variant="standard" onChange={(e) => onInputChange(e)} name='firstname' label='Enter Firstname' />
                             <TextField variant="standard" onChange={(e) => onInputChange(e)} name='lastname' label='Enter Lastname' /> */}
                             <TextField variant="standard" onChange={(e) => onInputChange(e)} name='name' label='Enter your name' /> 
 
                             {/* <TextField variant="standard" onChange={(e) => onInputChange(e)} name='username' label='Enter Username' /> */}
-                            <TextField variant="standard" onChange={(e) => onInputChange(e)} name='email' label='Enter Email' />
+                            <TextField style = {{ Color: 'white'}} variant="standard" onChange={(e) => onInputChange(e)} name='email' label='Enter Email' />
                             <TextField variant="standard" onChange={(e) => onInputChange(e)} name='password' label='Enter Password' />
                             <TextField variant="standard" onChange={(e) => onInputChange(e)} name='contact' label='Enter Phone' />
                             <LoginButton onClick={() => signupUser()} >Continue</LoginButton>

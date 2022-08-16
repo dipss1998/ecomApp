@@ -14,7 +14,9 @@ import { useSelector, useDispatch, getState } from 'react-redux'; // hooks
 import { getProducts as listProducts } from './redux/actions/productActions';
 import TemplateProvider from './templates/TemplateProvider';
 import ContextProvider from './components/context/ContextProvider';
-
+import ProfileScreen from './components/profile/ProfileSceen';
+import Cart from './components/cart/Cart';
+import ManageAddress from './components/profile/ManageAddress'
 function App() {
 
       
@@ -37,6 +39,13 @@ function App() {
          <Route path= '/product/:id'  element={<DetailView />} /> 
           <Route path= '/Checkout' element={<Checkout/>} /> 
          <Route path= '/PaymentForm' element={< PaymentForm/>} />  
+         <Route path= '/ProfileScreen' element={< ProfileScreen/>} /> 
+         <Route path= '/ManageAddress' element={< ManageAddress/>} /> 
+
+         <Route path= '/Cart' element={<Cart />} />  
+
+ 
+
 
       </Routes>
     </Box>

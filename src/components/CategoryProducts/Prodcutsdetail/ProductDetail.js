@@ -24,9 +24,10 @@ const StyledBadge = styled(Badge)`
     margin-right: 10px;
     color: #00CC00;
     font-size: 15px;
+    marginLeft: 20px;
 `;
 
-const ProductDetail = ({ products }) => {
+const ProductDetail = ({ product }) => {
 
     const {productId} = useParams()
     const adURL = 'https://rukminim1.flixcart.com/lockin/774/185/images/CCO__PP_2019-07-14.png?q=50';
@@ -61,12 +62,12 @@ const ProductDetail = ({ products }) => {
                     </ColumnText>
                     <TableRow>
                         <TableCell colSpan={2}>
-                            <img src={adURL} style={{ width: 390 }} />
+                            {/* <img src={adURL} style={{ width: 390 }} /> */}
                         </TableCell>
                     </TableRow>
                     <ColumnText>
                         <TableCell style={{ color: '#878787' }}>Description</TableCell>
-                        <TableCell>{products.description}</TableCell>
+                        <TableCell>{product.data.description}</TableCell> 
                     </ColumnText>
                 </TableBody>
             </Table>

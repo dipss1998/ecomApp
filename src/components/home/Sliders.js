@@ -44,6 +44,7 @@ const Text = styled(Typography)`
 const Deal = styled(Box)`
     display: flex;    
     padding: 15px 20px;
+    background-Color: #f2f2f2
 `;
 
 const Timer = styled(Box)`
@@ -73,21 +74,21 @@ const RenderTimer = styled(Box)(({ theme }) => ({
 
 const LastSlider = ({  timer, title }) => {
 
-    const dispatch = useDispatch();
-  const  products = useSelector((state) => state.getallProducts.products);
- 
+const dispatch = useDispatch();
+const  products = useSelector((state) => state.getallProducts.products);
+//  console.log("products", products);
 //   const {id, title, discount, url} = products
  
    const fetchProducts = async () =>{
 
   
       const response = await axios
-      .get("http://localhost:5000/products").catch((err) => {
+      .get("http://localhost:5000/getProducts/getProducts").catch((err) => {
         console.log("error", err);
       });
-      // console.log(response);
+       
       dispatch(getProducts(response.data))
-      
+    //   console.log(response);
       
   };
 
@@ -135,9 +136,9 @@ const LastSlider = ({  timer, title }) => {
                 {
                     products.map(temp => (
                         <Link to={`product/${temp.id}`} style={{textDecoration: 'none'}}>
-                             <Box textAlign="center" style={{ padding: '15px 15px' }}>
+                             <Box textAlign="center" style={{ padding: '15px 15px', backgroundColor: '#f2f2f2'}}>
                                     <Image src={temp.url} />
-                                    {/* <Text style={{ fontWeight: 600, color: '#212121' }}>{temp.title.shortTitle}</Text>  */}
+                                     {/* <Text style={{ fontWeight: 600, color: '#212121' }}>{temp.title.shortTitle}</Text>   */}
                                     <Text style={{ color: 'green' }}>{temp.discount}</Text>
                                     <Text style={{ color: '#212121', opacity: '.6' }}>{temp.tagline}</Text>
                             </Box> 

@@ -1,11 +1,40 @@
-import * as React from 'react';
+import  React, {useState} from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-
+import addAddress from '../../service/addressapi'
 export default function AddressForm() {
+  const Addressinitialvalie = {
+    name:"", 
+    flatno :"",
+    addressline1:"",
+    addressline2:"",
+    city:"",
+    state:"",
+    zipcode:"",
+    country:""
+
+  }
+
+  const [address, SetAddress] = useState(Addressinitialvalie)
+  const [ error, showError ] = useState(false);
+
+    // const addtoAddress = async()=>{
+    //   let response = await addAddress(address);
+    //     if(!response){
+    //       showError(true)
+    //     }else {
+    //        showError(false)   
+    //     }
+
+    // }
+
+
+
+
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>

@@ -52,12 +52,13 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+import {Link} from 'react-router-dom'
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import { styled } from '@mui/material/styles';
 import logo from './../../imges/logo.png'
-
+import ProfileInformation from './ProfileInformation'
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -77,6 +78,7 @@ import Stack from '@mui/material/Stack';
 // import { AppBar, Toolbar, Box, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { Card } from '@mui/material';
+import DefaultProfileScreen from './DefaultProfileScreen';
 
 const drawerWidth = 300;
 const drawerHeigth = 0;
@@ -144,8 +146,8 @@ export default function ProfileSceen(props: Props) {
 
           <Stack spacing={2}>
               <Item>Profile Information</Item>
-              <Item>Manage Address</Item>
-              <Item>Identity Details</Item>
+              <Link to="/ManageAddress"><Item>Manage Address</Item></Link>
+              <Link to="/IdenyityDetails"><Item>Identity Details</Item></Link>
           </Stack>
           </Item>
             
@@ -228,42 +230,13 @@ export default function ProfileSceen(props: Props) {
             component="main"
             sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
         >
-            <Toolbar 
-            
-            />
+            <Toolbar/>
 
-<Box sx={{ flexGrow: 1,  }} style={{}}>
-    <Typography variant='h4'>Personal Information</Typography>
-    <Card style={{height:500, backgroundColor:"#debf12", width:800}}>
-            <Grid container spacing={3} style={{margin:30, width:600, paddingTop:30, paddingButtom:20}}>
-            <Grid item xs={6} style={{height:30}} >
-              <Typography>Username</Typography>
-                <Item>Username</Item>
-            </Grid>
-            <Grid item xs={6} >
-              <Typography>Contatc</Typography>
-                <Item>Contact </Item>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography>email Address</Typography>
-                <Item>email Address</Item>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography>Address</Typography>
-                <Item>Address</Item>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography>Female</Typography>
-                <Item>Female</Item>
-            </Grid>
-            </Grid>
-   
-      </Card>
-    </Box>
-            
-           
-        </Box>
-    </Box>
+            <ProfileInformation/>
+
+</Box>
+</Box>
+
   );
 }
  
