@@ -1,12 +1,13 @@
 
 import React, { useState, useEffect, useContext } from 'react';
-
+import Alert from '@mui/material/Alert';
 import { Dialog, DialogContent, TextField, Box, Button, Typography, styled } from '@mui/material';
 
 import { userLogIn, userSignUp } from '../../service/api';
-
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import logo from './../../imges/logo.png'
 import { LoginContext } from '../context/ContextProvider';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 const Component = styled(DialogContent)`
     height: 70vh;
     width: 90vh;
@@ -66,7 +67,7 @@ const Error = styled(Typography)`
 // height: 70vh;
     
 const Image = styled(Box)`
-    background: #fcba03 url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiXFycdPlA_4sAPz1tk65K0XXNzKsYsGRZHM8EPjRuTcKDfYq4eA6HiJtZmS5cA_sIAl0&usqp=CAU) center 85% no-repeat;
+    background: #fcba03;
     width: 40%;
     height: 100%;
     padding: 45px 35px;
@@ -75,19 +76,23 @@ const Image = styled(Box)`
         font-weight: 600
     }
 `;
+// const passwordButton = styled(Button)`
+//     margin-top: 80px;
+//     padding: 20px;
 
+// `;
 const loginInitialValues = {
-    username: '',
+    email: '',
     password: ''
 };
 
 const signupInitialValues = {
-    firstname: '',
-    lastname: '',
-    username: '',
+    name: '',
+    // lastname: '',
+    // username: '',
     email: '',
     password: '',
-    phone: ''
+    contact: ''
 };
 
 const accountInitialValues = {
@@ -107,39 +112,64 @@ const LoginDialog = ({ open, setOpen, }) => {
     const [ login, setLogin ] = useState(loginInitialValues);
     const [ signup, setSignup ] = useState(signupInitialValues);
     const [ error, showError ] = useState(false);
+    const [ errors, showErrors ] = useState({});
+     const [issubmit, setIssbumit] = useState(false)
     const [ account, toggleAccount ] = useState(accountInitialValues.login);
     // const [accounts, setAccounts] = useState('')
+    const [passshow, setPassshow] = useState(false)
     const {accounts, setAccounts} = useContext(LoginContext);
+    // const [formValues, setFormValues] = useState(initialValues);
 
     useEffect(() => {
         showError(false);
     }, [login])
 
     const onValueChange = (e) => {
+        e.preventDefault();
         setLogin({ ...login, [e.target.name]: e.target.value });
+        console.log(login);
     }
 
     const onInputChange = (e) => {
+        e.preventDefault();
         setSignup({ ...signup, [e.target.name]: e.target.value });
+        console.log(signup);
     }
 
     const loginUser = async() => {
+        // e.preventDefault();  
+        showErrors(validate(login))
+        setIssbumit(true) 
+        
+
         let response = await userLogIn(login);
+       
         if(!response) {
-            showError(true)}
+             showError(true)
+           
+        }
         else {
             showError(false);
             handleClose();
-            setAccounts(login.username);
-        }
+            setAccounts(login.name);
+        }  
+          
     }
 
     const signupUser = async() => {
+        // e.preventDefault();
+        showErrors(validate(signup))
+        setIssbumit(true)
+       
         let response = await  userSignUp(signup);
         // console.log(response);
         if(!response) return;
+        
         handleClose();
-        setAccounts(signup.username);
+        setAccounts(signup.name);
+      
+     
+       
     }
     
     const toggleSignup = () => {
@@ -151,8 +181,53 @@ const LoginDialog = ({ open, setOpen, }) => {
         toggleAccount(accountInitialValues.login);
     }
 
-    return (
+  
+
+    const validate = (values) =>{
+        const errors = {};
+        const regrex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+        if(!values.name){
+            errors.name = "name is required! ";
+
+        }
+        
+        if(!values.email){
+            errors.email = "email is required"
+        }
+        else if (!regrex.test(values.email)){
+            errors.email = "This is require valid email"
+        }
+
+        if(!values.password){
+            errors.password = "password is required"
+        }else if (values.password.length <=6 ){
+            errors.password = "password must br more then 5 character"
+        }else if (values.password.length >10 ){
+            errors.password = "password must be less then 10 character"
+        }
+return errors;
+    }
+
+
+    useEffect(()=>{
+        console.log(errors);
+        if(Object.keys(errors).length === 0 && login){
+            console.log(login);
+        }
+       
+      }, [errors])
+
+      useEffect(()=>{
+        console.log(errors);
+        if(Object.keys(errors).length === 0 && signup){
+            console.log(signup);
+        }
+       
+      }, [errors])
+   return (
         <Dialog open={open} onClose={handleClose} PaperProps={{ sx: { maxWidth: 'unset' } }}>
+            {/* { Object.keys(errors).length === 0 && signup } ? <p>Singup successfully</p> : */}
             <Component>
                 <Box style={{display: 'flex', height: '100%'}}>
                     <Image>
@@ -162,24 +237,76 @@ const LoginDialog = ({ open, setOpen, }) => {
                     </Image>
                     {
                         account.view === 'login' ? 
-                        <Wrapper style = {{backgroundColor:'#232F3E', Height: '90%', marginTop: -10}}>
-                            <TextField variant="standard" onChange={(e) => onValueChange(e)} name='email' label='Enter your email' />
-                            {/* { error && <Error>Please enter valid Email ID/Mobile number</Error> } */}
-                            <TextField variant="standard" onChange={(e) => onValueChange(e)} name='password' label='Enter Password' />
+                        <Wrapper style = {{backgroundColor:'#fff', Height: '90%', marginTop: -10}}>
+                            
+                            <TextField 
+                            variant="standard" 
+                            onChange={(e) => onValueChange(e)} 
+                            name='email' 
+                            label='Enter your email'  
+                             value={login.email} />
+                            <p>{errors.email}</p>
+                           
+                            {/* { error && <Error>Please enter valid Email</Error> } */}
+                            <Box style={{display: 'flex'}}>
+                            <TextField 
+                            variant="standard" 
+                            onChange={(e) => onValueChange(e)}  
+                             type= {!passshow ? "password":"text"} 
+                             name='password' 
+                             label='Enter Password'  
+                             fullWidth 
+                             value={login.password}/>
+                              
+
+                            <Box ><Button style={{marginTop: 10, marginLeft:-40}} onClick={()=>setPassshow(!passshow)}> {!passshow ? <VisibilityOffIcon/>:<VisibilityIcon   />}</Button></Box>
+                            </Box >
+                            <p style={{marginTop:10}}>{errors.password}</p>
                             <Text>By continuing, you agree to Flipkart's Terms of Use and Privacy Policy.</Text>
                             <LoginButton onClick={() => loginUser()} >Login</LoginButton>
                             <Text style={{textAlign:'center'}}>OR</Text>
                             <RequestOTP>Request OTP</RequestOTP>
                             <CreateAccount onClick={() => toggleSignup()}>New to Flipkart? Create an account</CreateAccount>
                         </Wrapper> : 
-                        <Wrapper style = {{backgroundColor:'#232F3E', Height: '100%'}}>
+                        <Wrapper style = {{backgroundColor:'#fff', Height: '100%', padding: 10, margin:10}}>
                             {/* <TextField variant="standard" onChange={(e) => onInputChange(e)} name='firstname' label='Enter Firstname' />
                             <TextField variant="standard" onChange={(e) => onInputChange(e)} name='lastname' label='Enter Lastname' /> */}
-                            <TextField variant="standard" onChange={(e) => onInputChange(e)} name='name' label='Enter your name' /> 
+                            <TextField 
+                            variant="standard" 
+                            onChange={(e) => onInputChange(e)}
+                             name='name' 
+                             label='Enter your name' 
+                             value={signup.name} /> 
+                              <p>{errors.name}</p>
+                              {/* <Alert severity="info">{errors.name}</Alert> */}
+                            {/* { error && <Error>Please enter valid Email ID/Mobile number</Error> } */}
 
                             {/* <TextField variant="standard" onChange={(e) => onInputChange(e)} name='username' label='Enter Username' /> */}
-                            <TextField style = {{ Color: 'white'}} variant="standard" onChange={(e) => onInputChange(e)} name='email' label='Enter Email' />
-                            <TextField variant="standard" onChange={(e) => onInputChange(e)} name='password' label='Enter Password' />
+                            <TextField 
+                            style = {{ color: 'white', marginTop:1}} 
+                            variant="standard" 
+                            onChange={(e) => onInputChange(e)} 
+                             name='email' label='Enter Email'  
+                             value={signup.email}/>
+                              <p>{errors.email}</p>
+
+
+                            <Box style={{display:'flex'}}>
+                                <TextField 
+                                 style = {{ color: 'white', marginTop:1}}
+                                variant="standard" 
+                                onChange={(e) => onInputChange(e)} 
+                                name='password'   
+                                type= {!passshow ? "password":"text"}  
+                                label='Enter Password' 
+                                value={signup.password}/>
+                                
+                                <Box>
+                                    <Button style={{marginTop: 10, marginLeft:-50, objectFit:'background', }} onClick={()=>setPassshow(!passshow)}>
+                                    {!passshow ? <VisibilityOffIcon/>:<VisibilityIcon   />}</Button></Box>
+                                </Box>
+                                <p style={{marginTop:2}}>{errors.password}</p>
+
                             <TextField variant="standard" onChange={(e) => onInputChange(e)} name='contact' label='Enter Phone' />
                             <LoginButton onClick={() => signupUser()} >Continue</LoginButton>
                             {/* <CreateAccount>Already have account? go to login</CreateAccount> */}
