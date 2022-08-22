@@ -6,6 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import {addAddress} from '../../service/addressapi'
 import { Button } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 
 const Addressinitialvalie = {
@@ -19,6 +20,14 @@ const Addressinitialvalie = {
   country:""
 
 }
+
+
+const Text  = styled(Typography)`
+    
+
+
+`;
+
 export default function AddressForm() {
 
       // const addaddressdata = (e) => {
@@ -117,13 +126,6 @@ return errors;
     if(Object.keys(errors).length === 0 && issave)
     console.log(address);
   })
-
-
-    
-
-   
-
-
 
   return (
     <React.Fragment>

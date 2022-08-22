@@ -81,19 +81,9 @@ const Image = styled(Box)`
 //     padding: 20px;
 
 // `;
-const loginInitialValues = {
-    email: '',
-    password: ''
-};
 
-const signupInitialValues = {
-    name: '',
-    // lastname: '',
-    // username: '',
-    email: '',
-    password: '',
-    contact: ''
-};
+
+
 
 const accountInitialValues = {
     login: {
@@ -109,6 +99,23 @@ const accountInitialValues = {
 }
 
 const LoginDialog = ({ open, setOpen, }) => {
+
+    const loginInitialValues = {
+        email: '',
+        password: '',
+        cpassword: '',
+    
+    };
+
+    const signupInitialValues = {
+        name: '',
+        // lastname: '',
+        // username: '',
+        email: '',
+        password: '',
+        cpassword: '',
+        contact: ''
+    };
     const [ login, setLogin ] = useState(loginInitialValues);
     const [ signup, setSignup ] = useState(signupInitialValues);
     const [ error, showError ] = useState(false);
@@ -175,7 +182,9 @@ const LoginDialog = ({ open, setOpen, }) => {
     const toggleSignup = () => {
         toggleAccount(accountInitialValues.signup);
     }
-
+    const toggleLogin = () => {
+        toggleAccount(accountInitialValues.login);
+    }
     const handleClose = () => {
         setOpen(false);
         toggleAccount(accountInitialValues.login);
@@ -184,29 +193,43 @@ const LoginDialog = ({ open, setOpen, }) => {
   
 
     const validate = (values) =>{
+        // e.preventDefault();
         const errors = {};
         const regrex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
-        if(!values.name){
+        if(values.name === ""){
             errors.name = "name is required! ";
 
         }
         
-        if(!values.email){
+        else if(values.email === ""){
             errors.email = "email is required"
         }
         else if (!regrex.test(values.email)){
-            errors.email = "This is require valid email"
-        }
-
-        if(!values.password){
+            errors.email = "This is require valid email address"
+        }     
+        else if(values.password === ""){
             errors.password = "password is required"
-        }else if (values.password.length <=6 ){
-            errors.password = "password must br more then 5 character"
+        }else if (values.password.length <=4 ){
+            errors.password = "password must be more than or equal  4 character"
         }else if (values.password.length >10 ){
             errors.password = "password must be less then 10 character"
         }
-return errors;
+       else if(values.cpassword === ""){
+            errors.cpassword = "Confirm Password require "
+        }
+       else if  (values.password !== values.cpassword){
+            errors.cpassword = " Confirm Password and Confirm Password Not Match "
+         }
+        //  else if(values.cpassword.length <=4  ){
+        //     errors.cpassword = " Confirm password must be more than or equal  4 character"
+        // }else if (values.cpassword.length >10 ){
+        //     errors.cpassword = " Confirm password must be less then 10 character"
+        // }    
+        else{
+            return errors;
+       
+        }
     }
 
 
@@ -307,9 +330,25 @@ return errors;
                                 </Box>
                                 <p style={{marginTop:2}}>{errors.password}</p>
 
+                                <Box style={{display:'flex'}}>
+                                <TextField 
+                                 style = {{ color: 'white', marginTop:1}}
+                                variant="standard" 
+                                onChange={(e) => onInputChange(e)} 
+                                name='cpassword'   
+                                type= {!passshow ? "password":"text"}  
+                                label='Conferm Password' 
+                                value={signup.cpassword}/>
+                                
+                                <Box>
+                                    <Button style={{marginTop: 10, marginLeft:-50, objectFit:'background', }} onClick={()=>setPassshow(!passshow)}>
+                                    {!passshow ? <VisibilityOffIcon/>:<VisibilityIcon   />}</Button></Box>
+                                </Box>
+                                <p style={{marginTop:2}}>{errors.cpassword}</p>
+
                             <TextField variant="standard" onChange={(e) => onInputChange(e)} name='contact' label='Enter Phone' />
                             <LoginButton onClick={() => signupUser()} >Continue</LoginButton>
-                            {/* <CreateAccount>Already have account? go to login</CreateAccount> */}
+                           <CreateAccount onClick={() => toggleLogin()}>Already have account? go to login</CreateAccount>
 
                         </Wrapper>
                     }
