@@ -19,14 +19,14 @@
 
 import { createContext, useState } from 'react';
 
-export const LoginContext = createContext(null);
+export const LoginContext = createContext("");
 
 const ContextProvider = ({children}) => {
 
     const [ accounts, setAccounts ] = useState('');
     
     return (
-        <LoginContext.Provider value={{ accounts, setAccounts }}>
+        <LoginContext.Provider value={{  accounts, setAccounts }}>
             {children}
         </LoginContext.Provider>
     )

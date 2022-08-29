@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react'
-import { Box, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react'
+import { Box, Typography, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import './detailview.css'
 import axios from 'axios';
+import { addtowishlist } from '../../../redux/actions/cartActions';
 import ProductDetail from './ProductDetail'
 import { useDispatch, useSelector } from 'react-redux';
 import {useParams} from 'react-router-dom';
 import {getProductdetails, fetchProductDetail} from '../../../redux/actions/productActions'
 import { Grid } from '@mui/material';
-import ActionItem from './ActionItem'
+import ActionItem from './ActionItem';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import {product} from '../../../redux/reducers/combineReducers'
 const Component = styled(Box)`
     margin-top: 55px;
@@ -30,9 +32,14 @@ const RightContainer = styled(Grid)`
         margin-top: 10px;
     }
 `;
+const WishlistButton = styled(Box)`
+    marginRight: 200px;
+    float:right
+`;
 
 const DetailView = () => {
 
+    const [wishshow, setWishShow] = useState(false)
 
  const {id} = useParams(); 
  const dispatch = useDispatch();
@@ -53,29 +60,36 @@ const DetailView = () => {
                 // console.log(response);
     }
 
-useEffect(()=>{
-    if (product && id !== product.id) 
-    (fetchProductDetail(id));
-    
-}, [])
+    useEffect(()=>{
+        if (product && id !== product.id) 
+        (fetchProductDetail(id));
+        
+    }, [])
 
 //   const   productt = "https://m.media-amazon.com/images/I/71-vsNgqZUL._AC_SX451_SY423_.jpg"
 
 //   const {  title, price,  description, cost } = product;
 
 // console.log(id);
+   const addTowishlist = (e)=>{    
+         dispatch(addtowishlist(e));
+        setWishShow(!wishshow)    
+    }
 
   return (
   
 
     <Component>
-    <Box></Box>
+   
     { product && Object.keys(product).length &&
         <Container container> 
             <Grid item lg={4} md={4} sm={8} xs={12}>
                 <ActionItem product={product} />
             </Grid>
             <RightContainer item lg={8} md={8} sm={8} xs={12}>
+            <WishlistButton > 
+                <Button  onClick={()=>addTowishlist(product)}> {!wishshow ?<FavoriteBorderIcon />:<FavoriteBorderIcon style= {{color:"red"}}/> }</Button>
+            </WishlistButton>
                 <Typography>{product.data.title.longTitle}</Typography>
                 <Typography style={{marginTop: 5, color: '#878787', fontSize: 14 }}>
                     8 Ratings & 1 Reviews

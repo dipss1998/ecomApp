@@ -4,10 +4,12 @@ import Alert from '@mui/material/Alert';
 import { Dialog, DialogContent, TextField, Box, Button, Typography, styled } from '@mui/material';
 
 import { userLogIn, userSignUp } from '../../service/api';
+import {addDatatoLocalStorage} from '../../service/api';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import logo from './../../imges/logo.png'
 import { LoginContext } from '../context/ContextProvider';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import axios from 'axios';
 const Component = styled(DialogContent)`
     height: 70vh;
     width: 90vh;
@@ -103,7 +105,7 @@ const LoginDialog = ({ open, setOpen, }) => {
     const loginInitialValues = {
         email: '',
         password: '',
-        cpassword: '',
+        // cpassword: '',
     
     };
 
@@ -122,7 +124,7 @@ const LoginDialog = ({ open, setOpen, }) => {
     const [ errors, showErrors ] = useState({});
      const [issubmit, setIssbumit] = useState(false)
     const [ account, toggleAccount ] = useState(accountInitialValues.login);
-    // const [accounts, setAccounts] = useState('')
+    //  const [accounts, setAccounts] = useState('')
     const [passshow, setPassshow] = useState(false)
     const {accounts, setAccounts} = useContext(LoginContext);
     // const [formValues, setFormValues] = useState(initialValues);
@@ -142,43 +144,81 @@ const LoginDialog = ({ open, setOpen, }) => {
         setSignup({ ...signup, [e.target.name]: e.target.value });
         console.log(signup);
     }
+    // const setDatatoStorage = async () => {
+    //     try{
+    //         // setLoading(true);
+    //         const d = await addDatatoLocalStorage();
+    //         localStorage.setItem('data', JSON.stringify(d));
+    //         // setLoading(false);
+    //     }catch(error) {
+    //         console.log(error);
+    //     }
+    // }
+    // const getDataFromStorage = () => {
+    //     try{
+    //         const arrayOfData =  localStorage.getItem('data');
+    //         const d = arrayOfData !== null ? JSON.parse(arrayOfData) : [];
+    //         setLogin(d);
+    //     }catch(error) {
+    //         console.log(error);
+    //     }
+    // }
+
 
     const loginUser = async() => {
         // e.preventDefault();  
-        showErrors(validate(login))
+        // showErrors(validate(login))
+
         setIssbumit(true) 
         
 
         let response = await userLogIn(login);
        
         if(!response) {
-             showError(true)
+     showError(true)
            
-        }
-        else {
+         }else {
+            // localStorage.setItem(setAccounts( login.token))
             showError(false);
             handleClose();
             setAccounts(login.name);
-        }  
-          
+            // addDatatoLocalStorage()
+        }
+                   
     }
 
+
+    // const addDatatoLocalStorage = async () => {
+    //     const url = 'http://localhost:5000';
+
+    //    await axios.get(`${url}/login`,{
+    //         email:login.email,
+    //         password: login.password
+    //     }).then((res) => localStorage.setItem("token", res.login.token))
+    //     .catch((err)=> console.log(err))
+     
+    
+    //   }
     const signupUser = async() => {
         // e.preventDefault();
-        showErrors(validate(signup))
+        // showErrors(validate(signup))
+     
         setIssbumit(true)
        
         let response = await  userSignUp(signup);
         // console.log(response);
+        // localStorage.getItem("token", signup.token)
+
         if(!response) return;
         
         handleClose();
         setAccounts(signup.name);
+        
+      
+   
+    }
       
      
-       
-    }
-    
     const toggleSignup = () => {
         toggleAccount(accountInitialValues.signup);
     }

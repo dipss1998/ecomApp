@@ -2,32 +2,15 @@ import { ListItemAvatar } from '@mui/material'
 import actionTypes from '../constants/actionTypes'
 
 
-// export const cartReducers = (state = {cartItems: []}, action) => {
+export const wishlistReducers = (state = {wishlistItems: []}, {type, payload} ) => {
+    switch(type) {
+        case actionTypes.ADD_TO_WISHLIST:
+        return {   ...state, wishlistItems:  payload  };
 
-//     switch(actionTypes) {
-
-//         case actionTypes.ADD_TO_CART:
-
-//             const item = action.payload;
-//             console.log(item);
-
-//             const existItem = state.cartItems.find(product => product.id === item.id);
-
-//             if(existItem){
-//                 return {
-//                     ...state, cartItems: state.cartItems.map(data => data.product === existItem.product ? item : data)
-//                 }
-//             } else {
-//                 return  { ...state, cartItems: [...state.cartItems, item]}
-//             }
-//         case actionTypes.REMOVE_TO_CART:
-//             return {
-//                 ...state, cartItems: state.cartItems.filter(product => product.id !== action.payload)
-//             }
-//         default:
-//             return state;
-//     }
-// }
+        default:
+            return state;
+    }
+}
 
 export const cartReducers = (state = {cartItems:[]}, action ) => {
         switch (action.type) {

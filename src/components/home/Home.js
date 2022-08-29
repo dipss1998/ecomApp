@@ -8,9 +8,10 @@ import { AppBar, Toolbar, Box, Typography } from '@mui/material';
 import BannerCate from './BannerCate';
 import LastSlider from './Sliders';
 import Footer from './Footer';
+
 import { useSelector, useDispatch, getState } from 'react-redux'; // hooks
 import { getProducts, fetchProducts  } from '../../redux/actions/productActions';
-// import {data} from '../redux/actions/productActions'
+ import {userdata} from '../../redux/actions/user'
 import store from '../../redux/Store';
 import MidSlide from './MidSlide';
 // import GET_PRODUCTS_SUCCESS from '../../redux/constants/productsuccessConstants';
@@ -41,57 +42,18 @@ const Home = () => {
 
 
 
-  // useEffect(()=>{
-  //    const {data} = store.dispatch(getProducts())
-  //     console.log(getProducts(data));
 
-  // }, [])
 
-  // const dispatch = useDispatch();
-  // const getProducts = useSelector(state => state.getProducts);
 
-  // const { products } = getProducts;
-  // console.log(products);
-  
-  // useEffect(() => {
-  //     dispatch(listProducts())
-  // }, [dispatch])
-
-  
-
-  // store.subscribe(()=>{
-  //   console.log("state change", store.getState());
-  // })
-
-// console.log(getProducts);
-//   const getProducts = store.dispatch({
-//   type: GET_PRODUCTS_SUCCESS,
-//   payload:getProducts()
-// })
-// console.log(getProducts());
-  //  const {id,  name} = products[0]
-
-  
-  const dispatch = useDispatch();
+const dispatch = useDispatch();
 const  products = useSelector((state) => state.getallProducts.products);
-//  console.log("products", products);
-//   const {id, title, discount, url} = products
- 
-  //  const fetchProducts = async () =>{
-
-  
-  //     const response = await axios
-  //     .get("http://localhost:5000/getProducts/getProducts").catch((err) => {
-  //       console.log("error", err);
-  //     });
-       
-  //     dispatch(getProducts(response.data))
-  //      console.log(response);
-      
-  // };
+  // const user = useSelector((state) =>state.userResuder.user)
 
   useEffect(()=>{
     dispatch(fetchProducts());
+    // dispatch(userdata());
+
+
   }, [])
   // console.log( "kjdsbfjhfbjf" , products)
 

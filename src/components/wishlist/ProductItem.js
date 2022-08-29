@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import {Box, Typography, Button, ButtonGroup } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import { addEllipsis } from '../utilss/common-utils';
-import ButtonGrowth from './ButtonGrowth';
-import { removefromCart } from '../../redux/actions/cartActions';
+// import ButtonGrowth from './ButtonGrowth';
+// import { removefromCart } from '../../redux/actions/cartActions';
 const Component = styled(Box)`
     display:flex;
     background-Color: #f2f2f2;
@@ -51,52 +51,35 @@ const SelletText= styled(Typography)`
 
 
 
-const CartItem = ({item}) => {
-
-
-  console.log(item);
-
-  
-  const dispatch = useDispatch();
-
-  
-
-const removeitemfromcart = ({id}) => {
-  dispatch(removefromCart(id));
-  console.log(id);
- 
-}
+const ProductItem = ({items}) => {
   return (
     <>
     <Component>
       <LeftComponent>
-        <img src={item.data.url} style={{ height: 110, width: 110 }} /> 
-        <ButtonGrowth item={item} />
+        <img src={items.data.url} style={{ height: 110, width: 110 }} /> 
+        {/* <ButtonGrowth item={items} /> */}
       </LeftComponent> 
-         <Container>
-   
-             <Typography>{addEllipsis(item.data.title.longTitle)} </Typography>
-             <Typography>{item.data.title.shortTitle} </Typography>
-
+         <Container>   
+            <Typography>{addEllipsis(items.product.data.title.longTitle)} </Typography>
+            <Typography>{items.data.title.shortTitle} </Typography>
       <SelletText>
         Seller: abc
       </SelletText>
 
-        <Typography> Quantity: {item.data.quantity}</Typography>
+        <Typography> Quantity: {items.data.quantity}</Typography>
 
        <Typography style={{margin: '20px 0'}}>
-          <Cost component="span">₹{item.data.price.cost}</Cost>&nbsp;&nbsp;&nbsp;
-          <MRP component="span"><strike>₹{item.data.price.mrp}</strike></MRP>&nbsp;&nbsp;&nbsp;
-          <Discount component="span">{item.data.price.discount} off</Discount>
+           <Cost component="span">₹{items.data.price.cost}</Cost>&nbsp;&nbsp;&nbsp;
+            <MRP component="span"><strike>₹{items.data.price.mrp}</strike></MRP>&nbsp;&nbsp;&nbsp;
+            <Discount component="span">{items.data.price.discount} off</Discount>
         </Typography>
        
-        <Button variant='contained' style={{marginTop: -10, height: 30}} onClick={()=>removeitemfromcart(item.data.id)}>REMOVE</Button>
+        {/* <Button variant='contained' style={{marginTop: -10, height: 30}} onClick={()=>removeitemsfromcart(items.data.id)}>REMOVE</Button> */}
       </Container>
 
     </Component>
     </>
   )
-
 }
 
-export default CartItem
+export default ProductItem

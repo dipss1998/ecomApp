@@ -8,8 +8,9 @@ import Profile from './Profile';
 import {useDispatch, useSelector} from 'react-redux'
 import Badge, { BadgeProps } from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
-import {Link} from 'react-router-dom'
-
+import {Link} from 'react-router-dom';
+import wishlist from '../wishlist/Wishlist';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 const StyledBadge = styled(Badge) ({
   '& .MuiBadge-badge': {
     right: 0,
@@ -99,7 +100,10 @@ const CartDesign = styled(Box)`
     fontWeight: 600,
     borderRadius: 2,
     padding: '5px 40px',
-    height: 32,
+    height: 30,
+    width:40,
+    marginTop:20,
+    marginRight:20,
     boxShadow: 'none',
     [theme.breakpoints.down('sm')]: {
         background: '#2874f0',
@@ -116,12 +120,13 @@ const cartItem = useSelector((state) => state.cart )
 console.log(cartItem);
     const openDialog = ()=>{
           setOpen(true)
+          
     }
   return (
     <Wrapper>
       {
         accounts ? <Profile accounts = {accounts} setAccounts={setAccounts}/> :
-        <LoginButton variant="contained" onClick={()=> openDialog()}>Login </LoginButton>
+       <Link to="/Login" style={{textDecoration:'none', color:'inherit'}}> <LoginButton variant="contained" >Login </LoginButton></Link>
 
       }
         {/* <Typography>My Account</Typography> */}
@@ -133,13 +138,17 @@ console.log(cartItem);
               {/* {cartItem.cart.length} */}
           </Typography>
         <IconButton aria-label="cart">
-       <StyledBadge badgeContent={cartItem.cartItems.length} color="secondary">
-        <ShoppingCartIcon style={{color:"white", marginTop:-5}} />
-       </StyledBadge>
+          <StyledBadge badgeContent={cartItem.cartItems.length} color="secondary">
+            <ShoppingCartIcon style={{color:"white", marginTop:-5}} />
+          </StyledBadge>
         </IconButton>            
-          
-        </CartDesign>
-        </Link>
+         
+          </CartDesign>
+        </Link> 
+         <Box>
+         <Link to ="/wishlist" cartItem ={cartItem}><FavoriteBorderIcon/></Link>
+        </Box>
+       
         <Typography>More</Typography>
         <LoginDialog open= {open} setOpen={setOpen} />
     </Wrapper>

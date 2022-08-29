@@ -40,9 +40,24 @@ export const removefromCart = (id, quantity ) => {
         type:actionTypes.REMOVE_TO_CART,
         payload:{id, quantity}
     }
-  
-       
-       
-    
-
 }
+//ADD TO WISLIT
+export const addtowishlist = (product) =>{
+    return {
+        type:actionTypes.ADD_TO_WISHLIST,
+        payload:{product}
+    }
+}
+// export const addtowishlist = (id, product) => async (dispatch) => {
+//     try { 
+//         const  response  = await axios.get(`http://localhost:5000/product/${id}`);
+
+//         dispatch({ type:actionTypes.ADD_TO_WISHLIST, payload: response });
+        
+//         console.log(response);
+
+//     } catch (error) {
+//         console.log('Error while calling wishlist API');
+//     }
+// };
+
