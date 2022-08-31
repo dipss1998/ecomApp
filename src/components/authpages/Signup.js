@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
-import { NavLink } from "react-router-dom"
+import React, { useState, useContext } from 'react'
+import { NavLink, useNavigate } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./mix.css"
+import { LoginContext } from '../context/ContextProvider';
 
 const Register = () => {
 
     const [passShow, setPassShow] = useState(false);
     const [cpassShow, setCPassShow] = useState(false);
-
+    const {accounts, setAccounts} = useContext(LoginContext);
+    const history = useNavigate()
     const [inpval, setInpval] = useState({
         name: "",
         email: "",
@@ -95,6 +97,8 @@ const Register = () => {
                     position: "top-center"
                 });
                 setInpval({ ...inpval, name: "", email: "", contact:"", password: "", cpassword: "" });
+                setAccounts(res.name);
+                 history.push('/')
             }
         }
     }

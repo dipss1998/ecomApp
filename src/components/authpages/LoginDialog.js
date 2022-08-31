@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Alert from '@mui/material/Alert';
 import { Dialog, DialogContent, TextField, Box, Button, Typography, styled } from '@mui/material';
-
 import { userLogIn, userSignUp } from '../../service/api';
 import {addDatatoLocalStorage} from '../../service/api';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -83,9 +82,6 @@ const Image = styled(Box)`
 //     padding: 20px;
 
 // `;
-
-
-
 
 const accountInitialValues = {
     login: {

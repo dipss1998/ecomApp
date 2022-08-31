@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
 import { NavLink ,useNavigate} from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
+import { LoginContext } from '../context/ContextProvider';
+
 import Signup from './Signup'
 import "./mix.css"
 import { useDispatch } from 'react-redux';
@@ -8,13 +10,14 @@ import { useDispatch } from 'react-redux';
 const Login = () => {
 
     const [passShow, setPassShow] = useState(false);
+    const {accounts, setAccounts} = useContext(LoginContext);
 
     const [inpval, setInpval] = useState({
         email: "",
         password: "",
     });
 
-    const history = useNavigate();
+    const navidate= useNavigate();
 
     const setVal = (e) => {
         // console.log(e.target.value);
@@ -31,10 +34,12 @@ const Login = () => {
      const dispatch = useDispatch()
     
 
-
-
+    //  const userdata = JSON.parse(localStorage.getItem("user"))
+    //  console.log(userdata) 
+   
     const loginuser = async(e) => {
         e.preventDefault();
+       
 
         const { email, password } = inpval;
 
@@ -77,8 +82,8 @@ const Login = () => {
                 localStorage.setItem("token", res.Token);
                  localStorage.setItem("user",JSON.stringify(res));
                 setInpval({...inpval,email:"",password:""});
-
-                history("/")
+                 setAccounts(res.name);
+                 navidate('/')
             }
         }
     }
