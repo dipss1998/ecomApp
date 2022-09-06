@@ -77,11 +77,6 @@ const Image = styled(Box)`
         font-weight: 600
     }
 `;
-// const passwordButton = styled(Button)`
-//     margin-top: 80px;
-//     padding: 20px;
-
-// `;
 
 const accountInitialValues = {
     login: {

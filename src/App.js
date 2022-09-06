@@ -1,9 +1,7 @@
 import React, {useEffect,createContext,useReducer,useContext, useHistory, useState}  from 'react'
-import Header from './components/header/Header';
-import Home from './components/home/Home';
-import NavBar from './components/home/NavBar';
+import {BrowserRouter as Router, Routes, Route,useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, Box, Typography } from '@mui/material';
- import {BrowserRouter as Router, Routes, Route,useNavigate } from 'react-router-dom';
+ 
  import KitchenCategory from './components/CategoryProducts/KitchenCategory'
  import ElectronicCategory from './components/CategoryProducts/ElectronicCategory'
 import DetailView from './components/CategoryProducts/Prodcutsdetail/DetailView';
@@ -19,7 +17,9 @@ import Signup from './components/authpages/Signup';
  import { LoginContext } from './components/context/ContextProvider';
 import Wishlist from './components/wishlist/Wishlist';
 import AddressForm from './../src/components/checkout/AddressForm'
-
+import Header from './components/header/Header';
+import Home from './components/home/Home';
+import NavBar from './components/home/NavBar';
 
 function App() {
   
@@ -27,7 +27,7 @@ function App() {
   const {accounts, setAccounts} = useContext(LoginContext);
   const [data, setData] = useState("")
      const userdata = localStorage.getItem("user")
-      console.log(userdata) 
+      console.log("logged in user Data:",userdata) 
   // const history = useNavigate()
     // const homepagevalid = async () =>{
     //   let token = localStorage.getItem("token");
@@ -100,7 +100,7 @@ function App() {
       <Route path= '/ManageAddress' element={< ManageAddress/>} /> 
       <Route path= '/Login' element={<Login />} />    
       <Route path= '/Signup' element={<Signup />} />    
-      <Route path= '/Cart' element={<Cart />} />  
+      {/* <Route path= '/Cart' element={<Cart />} />   */}
       <Route path= '/Wishlist' element={<Wishlist />} />  
     
         <Route path= '/KitchenCategory' element={<KitchenCategory/>} />

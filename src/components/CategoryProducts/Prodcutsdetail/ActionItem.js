@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+// import { useState, useEffect } from 'react';
+// import axios from 'axios';
 import { Button, Box, styled } from '@mui/material';
 import { ShoppingCart as Cart, FlashOn as Flash } from '@mui/icons-material';
 
 import { useNavigate, Link, useParams } from 'react-router-dom';
  import { payUsingPayTm } from '../../../service/api';
 import { post } from '../../utils/paytm';
-  import { addToCart } from '../../../redux/actions/cartActions';
+  import { addToCart, addedToCart } from '../../../redux/actions/cartActions';
 import { useDispatch, useSelector } from 'react-redux';
 
 const LeftContainer = styled(Box)(({ theme }) => ({
@@ -39,7 +39,7 @@ const ActionItem = ({ product }) => {
     // const [title, setTitle] = useState("")
     // const [url , setUrl] = useState('')
     // const [price , setPrice ] = useState("")
-const [quantity, setQuantity ] = useState(0)
+
  const dispatch = useDispatch();
  const navigate = useNavigate();
      
@@ -85,11 +85,33 @@ const [quantity, setQuantity ] = useState(0)
   
 //   })
 // }
+
+
+    // const [inpval, setInpval] = useState({
+    //   id:"", quantity:""
+    // });
+    // setInpval({id:item.data.id, quantity:item.data.quantity})
+    // console.log(item);
+    // const addToCart = async (e) => {
+    //     const { id, quantity} = inpval;
+    //     const data = await fetch("http://localhost:5000/carts/cart", {
+    //       method: "POST",
+    //       headers: {
+    //           "Content-Type": "application/json"
+    //       },
+    //       body: JSON.stringify({
+    //           id, quantity
+    //       })
+    //   })
+    //   const res = await data.json();
+    //                 console.log(res);
+    //   }
       
 
-            const addItemToCart = (e) => {   
+            const addItemToCart = async (e) => {   
                 dispatch(addToCart(e));
-            
+                console.log("action items:", e.data)
+                await addedToCart(e)
                 navigate('/Cart');
             }
 
@@ -99,7 +121,7 @@ const [quantity, setQuantity ] = useState(0)
     return (
         <LeftContainer>
             <Image src={product.data.detailUrl} /><br />
-             <StyledButton onClick={() => addItemToCart(product)} style={{marginRight: 10, background: '#ff9f00'}} variant="contained"><Cart />Add to Cart</StyledButton>
+             <StyledButton onClick={() => addItemToCart(product)} style={{marginRight: 10, background: '#ff9f00'}} variant="contained">Add to Cart</StyledButton>
             {/* <Link to="/Checkout" style={{textDecoration:'none'}}>   */}
            <StyledButton onClick={()=>buyNow()}  style={{background: '#fb641b'}} variant="contained"><Flash /> Buy Now</StyledButton> 
            {/* </Link> */}

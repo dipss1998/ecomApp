@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import {Box, Typography, Button, ButtonGroup } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import { addEllipsis } from '../utilss/common-utils';
 import ButtonGrowth from './ButtonGrowth';
-import { removefromCart } from '../../redux/actions/cartActions';
+import { removedfromCart, removefromCart } from '../../redux/actions/cartActions';
 const Component = styled(Box)`
     display:flex;
     background-Color: #f2f2f2;
@@ -52,18 +52,17 @@ const SelletText= styled(Typography)`
 
 
 const CartItem = ({item}) => {
-
-
-  console.log(item);
-
   
   const dispatch = useDispatch();
-
   
+  
+//const [itemId, setItemId] = useState('')
+
 
 const removeitemfromcart = ({id}) => {
+ // await removedfromCart(id, quantity);
   dispatch(removefromCart(id));
-  console.log(id);
+  console.log("this is item removed from cart:", id);
  
 }
   return (

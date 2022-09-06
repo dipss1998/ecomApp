@@ -1,11 +1,9 @@
 import actionTypes from '../constants/actionTypes'
-import axios from 'axios';
 
 export const userdata =  (user) => {
+    console.log(user);
     return{
         type:actionTypes.USER,
         payload:user
     }
-    console.log(user);
-
 }

@@ -4,8 +4,8 @@ const url = 'http://localhost:5000';
 
 export const userLogIn = async (users) => {
     try {
+        console.log("url",url)
        return await axios.post(`${url}/login`, users)
-       console.log("url",url)
     } catch (error) {
         console.log('error while calling login API: ', error);
     }

@@ -53,9 +53,25 @@ const RightContainer = styled(Grid)`
 `;
 
 const Cart = () => {
-
+     const Items = async () => {
+        const user =  JSON.parse(window.localStorage.getItem('user'));
+        const userId = user._id
+        console.log("e", userId)
+        const data = await fetch("http://localhost:5000/carts/getcart", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+             id:userId
+            })
+        })
+       const res = await data.json();
+                      console.log("this is data",res);
+       }
+       Items()
     const cartItems = useSelector((state) => state.cart.cartItems)
-    console.log(cartItems);
+    console.log("these are cart items: ",cartItems);
   return (
     <>
   
