@@ -48,28 +48,28 @@ const SelletText= styled(Typography)`
 `;
 
 const CartItem = ({item}) => {
-
-  const [data, setData] = useState([]); 
+console.log("inside cartItem component:", item)
+ // const [data, setData] = useState([]); 
   const dispatch = useDispatch();
   const cartItem = useSelector((state) => state.cart.cartItems)
-  const {id } = useParams();
-  console.log(cartItem);
+//  const {id } = useParams();
+ // console.log(cartItem);
 
 const removeitemfromcart = (e) => {
   dispatch(removefromCart(e));
   console.log(e); 
 }
 
-const compare = () =>{
-  let comparedata = cartItem.filter((e)=>{
-    return e.id == id
-  })
-  console.log('comparedata', comparedata)
-  setData(comparedata)
-}
-useEffect(()=>{
-  compare()
-}, [id])
+// const compare = () =>{
+//   let comparedata = cartItem.filter((e)=>{
+//     return e.id == id
+//   })
+//   console.log('comparedata', comparedata)
+//   setData(comparedata)
+// }
+// useEffect(()=>{
+//   compare()
+// }, [id])
 
 
   return (
@@ -77,24 +77,24 @@ useEffect(()=>{
      
           <Component>
             <LeftComponent>
-              <img src={item.data.url} style={{ height: 110, width: 110 }} /> 
+              <img src={item.url} style={{ height: 110, width: 110 }} /> 
               <ButtonGrowth item={item} />
             </LeftComponent> 
                <Container>
          
-                   <Typography>{addEllipsis(item.data.title.longTitle)} </Typography>
-                   <Typography>{item.data.title.shortTitle} </Typography>
+                   <Typography>{addEllipsis(item.title.longTitle)} </Typography>
+                   <Typography>{item.title.shortTitle} </Typography>
       
             <SelletText>
               Seller: abc
             </SelletText>
       
-              <Typography> Quantity: {item.data.quantity}</Typography>
+              <Typography> Quantity: {item.quantity}</Typography>
       
              <Typography style={{margin: '20px 0'}}>
-                <Cost component="span">₹{item.data.price.cost}</Cost>&nbsp;&nbsp;&nbsp;
-                <MRP component="span"><strike>₹{item.data.price.mrp}</strike></MRP>&nbsp;&nbsp;&nbsp;
-                <Discount component="span">{item.data.price.discount} off</Discount>
+                <Cost component="span">₹{item.price.cost}</Cost>&nbsp;&nbsp;&nbsp;
+                <MRP component="span"><strike>₹{item.price.mrp}</strike></MRP>&nbsp;&nbsp;&nbsp;
+                <Discount component="span">{item.price.discount} off</Discount>
               </Typography>
              
               <Button variant='contained' style={{marginTop: -10, height: 30}} onClick={()=>removeitemfromcart(cartItem)}>REMOVE</Button>

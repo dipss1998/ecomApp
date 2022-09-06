@@ -39,16 +39,17 @@ export const addToCart =  (item) => {
  export const addedToCart = async (e) => {
     const user =  JSON.parse(window.localStorage.getItem('user'));
     const userId = user._id
-    console.log("e", userId)
       const { _id, quantity} = e.data;
-      
+      console.log('_id', _id)
       await fetch("http://localhost:5000/carts/cart", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-         userId, _id, quantity
+         userId,
+         productId:_id,
+           quantity
         })
     })
    // const res = await data.json();

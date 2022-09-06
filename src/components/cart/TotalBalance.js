@@ -51,8 +51,8 @@ const TotalBalance = ({cartItems}) => {
         let price = 0, discount = 0;
 
         cartItems.map(item =>{
-          price = price + item.data.price.mrp;
-          discount = discount + (item.data.price.mrp - item.data.price.cost);
+          price = price + item.price.mrp;
+          discount = discount + (item.price.mrp - item.price.cost);
         })
         setPrice(price);
         setDiscount(discount)

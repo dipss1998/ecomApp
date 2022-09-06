@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {useSelector} from 'react-redux'
 import {Box, Grid, Typography, Button} from '@mui/material'
 import CartItem from './CartItem';
@@ -53,6 +53,7 @@ const RightContainer = styled(Grid)`
 `;
 
 const Cart = () => {
+    const [cartProducts, setCartProducts] = useState([]);
      const Items = async () => {
         const user =  JSON.parse(window.localStorage.getItem('user'));
         const userId = user._id
@@ -63,13 +64,17 @@ const Cart = () => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-             id:userId
+             userId
             })
         })
        const res = await data.json();
-                      console.log("this is data",res);
+       setCartProducts(res);
+                      console.log("this is api data",res);
        }
-       Items()
+     //  Items()
+     useEffect(()=>{
+
+     },[Items()])
     const cartItems = useSelector((state) => state.cart.cartItems)
     console.log("these are cart items: ",cartItems);
 
@@ -78,13 +83,13 @@ const Cart = () => {
   return (
     <>
   
-    { cartItems.length ? 
+    { cartProducts.length ? 
         <Component container>
             <LeftComponent item lg={9} md={9} sm={12} xs={12}>
                 <Header>
                     <Typography style={{fontWeight: 600, fontSize: 18}}>My Cart ({cartItems?.length})</Typography>
                 </Header>
-                    {   cartItems.map(item => (
+                    {   cartProducts.map(item => (
                             <CartItem item={item} />
                         ))
                     }
