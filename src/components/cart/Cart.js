@@ -52,10 +52,12 @@ const RightContainer = styled(Grid)`
     height: 1000px
 `;
 
-const Cart = () => {
-
+const Cart = (e) => {
+   
     const cartItems = useSelector((state) => state.cart.cartItems)
     console.log(cartItems);
+
+  
   return (
     <>
   

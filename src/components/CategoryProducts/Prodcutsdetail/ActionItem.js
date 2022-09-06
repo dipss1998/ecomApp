@@ -35,7 +35,7 @@ const StyledButton = styled(Button)`
 `;
 
 const ActionItem = ({ product }) => {
-
+// const [sdkReady, setSdkReady] = useState(false)
     // const [title, setTitle] = useState("")
     // const [url , setUrl] = useState('')
     // const [price , setPrice ] = useState("")
@@ -46,45 +46,58 @@ const [quantity, setQuantity ] = useState(0)
 // const cartItem = useSelector((state) => state.product.product )
  
 
-    const buyNow = async()=>{
-        // const Amount = JSON.stringify(amount:"100")
-        let response=  await payUsingPayTm({amount:"100",email:"malakardipy1998@gmail.com"})
-        var information ={
-            action: 'https://securegw-stage.paytm.in/order/process',
-            params: response
-        }
+    // const buyNow = async()=>{
+    //     // const Amount = JSON.stringify(amount:"100")
+    //     let response=  await payUsingPayTm({amount:"100",email:"malakardipy1998@gmail.com"})
+    //     var information ={
+    //         action: 'https://securegw-stage.paytm.in/order/process',
+    //         params: response
+    //     }
 
-        post(JSON.stringify(information));
-    }
-
+    //     post(JSON.stringify(information));
+    // }
+    // useEffect(()=>{
+    //     const buyNow = async ()=>{
+    //         const {data:client_id}  = await axios.get()
+    //         const script = document.createElement("script")
+    //         script.type = 'text/javascript'
+    //         script.src = `https://www.paypal.com/sdk/js?client-id=${client_id}`
+    //         script.async = true
+    //         scriptonload =()=>{
+    //             setSdkReady(true)
+    //         }  
+    //         document.body.append(script) 
+    //        }
+    // })
+ 
     
-//     const getData=(data)=>
-//     {
+    const getData=(data)=>
+    {
   
-//       return fetch(`http://localhost:5000/paytmpayment/paytmpayment`,{
-//           method:"POST",
-//           headers:{
-//               Accept:"application/json",
-//               "Content-Type":"application/json"
-//           },
-//           body:JSON.stringify(data)
-//       }).then(response=>response.json()).catch(err=>console.log(err))
-//     }
+      return fetch(`http://localhost:5000/paytmpayment/paytmpayment`,{
+          method:"POST",
+          headers:{
+              Accept:"application/json",
+              "Content-Type":"application/json"
+          },
+          body:JSON.stringify(data)
+      }).then(response=>response.json()).catch(err=>console.log(err))
+    }
   
   
   
-//       const buyNow=()=>
-//       {
-//   getData({amount:500,email:'abc@gmail.com'}).then(response=>{
+      const buyNow=()=>
+      {
+          getData({amount:500,email:'abc@gmail.com'}).then(response=>{
    
-//       var information={
-//           action:"https://securegw-stage.paytm.in/order/process",
-//           params:response
-//       }
-//     post(information)
+      var information={
+          action:"https://securegw-stage.paytm.in/order/process",
+          params:response
+      }
+    post(information)
   
-//   })
-// }
+  })
+ }
       
 
             const addItemToCart = (e) => {   

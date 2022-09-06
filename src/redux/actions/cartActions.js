@@ -35,9 +35,17 @@ console.log(item);
 
 
 //remove to cart
-export const removefromCart = (id, quantity ) => {
+export const removefromCart = (item ,id, quantity ) => {
     return{
         type:actionTypes.REMOVE_TO_CART,
+        payload:item
+        // {id, quantity}
+    }
+}
+
+export const removefromCartAllProducts = (id, quantity ) => {
+    return{
+        type:actionTypes.REMOVE_ALL_TO_CART,
         payload:{id, quantity}
     }
 }
