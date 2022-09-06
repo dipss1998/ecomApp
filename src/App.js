@@ -20,44 +20,20 @@ import AddressForm from './../src/components/checkout/AddressForm'
 import Header from './components/header/Header';
 import Home from './components/home/Home';
 import NavBar from './components/home/NavBar';
+import ForgetPass from './components/authpages/ForgetPass';
+import ChangePass from './components/authpages/ChangePass'
 
 function App() {
   
   // const [state,dispatch] = useReducer(reducer,initialState)
   const {accounts, setAccounts} = useContext(LoginContext);
   const [data, setData] = useState("")
-     const userdata = localStorage.getItem("user")
-      console.log("logged in user Data:",userdata) 
-  // const history = useNavigate()
-    // const homepagevalid = async () =>{
-    //   let token = localStorage.getItem("token");
+  
+  const userdata = JSON.parse(localStorage.getItem("user"))
 
-    //   const res = await fetch("/loggedUser/loggedUser", {
-    //     method:"GET",
-    //     headers:{
-    //       "Content-Type":"application/json",
-    //       "Authorization": token
-    //     }
-    //   })
-    //   const data = await res.json();
-    //   if(!data){
-    //     // history("*")log
-    //     console.log("error in data");
-    //   }
-    //     console.log(data);
-    //     // setAccounts(data)
-    //     // history("/")
-    // }
-  //   useEffect(() => {
-  //     setTimeout(() => {
-  //       homepagevalid();
-  //         setData(true)
-         
-  //     }, 1000)
-
-  // }, [])
-
-
+    
+    
+    
 
 
   return (
@@ -68,7 +44,7 @@ function App() {
   <Router style = {{position:'fixed'}}>    
     <Header  style = {{height:55}} />
   
-    <NavBar  />
+    <NavBar/>
     <Routes>
     <Route path= '/' element={<Home />} /> 
     </Routes>
@@ -90,6 +66,7 @@ function App() {
         <Route path= '/KitchenCategory' element={<KitchenCategory/>} />
       <Route path= '/ElectronicCategory' element={<ElectronicCategory/>} />
       <Route path= '/product/:id'  element={<DetailView />} /> 
+
       </Routes>
       </Box>
       :
@@ -106,20 +83,14 @@ function App() {
         <Route path= '/KitchenCategory' element={<KitchenCategory/>} />
       <Route path= '/ElectronicCategory' element={<ElectronicCategory/>} />
       <Route path= '/product/:id'  element={<DetailView />} />
-      </Routes>
-      </Box>
+      <Route path= '/ForgetPass'  element={<ForgetPass />} />
+      <Route path= '/ForgetPass/:id/:token'  element={<ChangePass />} />
 
-          // {/* <Routing/> */}
-       
-    }
-    
-  
- 
-   
+      </Routes>
+      </Box>    } 
   </Router>
   {/* </UserContext.Provider> */}
   </ContextProvider>
- 
   </TemplateProvider>
   
   );

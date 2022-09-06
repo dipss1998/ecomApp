@@ -1,54 +1,3 @@
-// import React from 'react'
-// import Avatar from '@mui/material/Avatar';
-// import Stack from '@mui/material/Stack';
-// import { AppBar, Toolbar, Box, Typography } from '@mui/material';
-// import Grid from '@mui/material/Grid';
-
-// import { styled } from '@mui/material/styles';
-// import Paper from '@mui/material/Paper';
-// const Item = styled(Paper)(({ theme }) => ({
-//     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-//     ...theme.typography.body2,
-//     padding: theme.spacing(1),
-//     textAlign: 'center',
-//     color: theme.palette.text.secondary,
-//   }));
-  
-
-// const ProfileSceen = () => {
-//   return (
-//     <>
-//     <Box>
-//         <Box>
-//             <Box>
-//             <Stack direction="row" spacing={2}>
-//                 <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />    
-//             </Stack>
-//             <Typography>User name</Typography>
-
-//             </Box>
-//             {/* <Box>
-//                 <Typography>Your orders</Typography>
-//                 <Typography>Login&Sicurity</Typography>
-//                 <Typography>Manage Address</Typography>
-
-//             <Typography>Mnagae your Peofilw</Typography>
-//                 <Typography>Contact us</Typography>
-//                 <Typography>Buy</Typography>
-//                 <Typography>wishlist</Typography>
-
-//             </Box> */}
-//              
-//         <Box>
-            
-//         </Box>
-//     </Box>
-//     </>
-//   )
-// }
-
-// export default ProfileSceen
-
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -59,17 +8,7 @@ import Drawer from '@mui/material/Drawer';
 import { styled } from '@mui/material/styles';
 import logo from './../../imges/logo.png'
 import ProfileInformation from './ProfileInformation'
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+
 import Paper from '@mui/material/Paper';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';

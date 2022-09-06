@@ -1,22 +1,38 @@
-import React, { useState,useContext } from 'react'
-import { NavLink ,useNavigate} from "react-router-dom"
+import React, { useState,useContext, useEffect } from 'react'
+import {Link, NavLink ,useNavigate} from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import { LoginContext } from '../context/ContextProvider';
+import { Box, Button, Typography} from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 import Signup from './Signup'
 import "./mix.css"
 import { useDispatch } from 'react-redux';
 
+const ForgetPass = styled(Typography)`
+    margin:10px 0 30px 10px;
+    float:left;
+    top:-10px;
+    line-height:0;
+    paddingTop:10;
+    text-decoration:underline
+
+`;
+
+
 const Login = () => {
 
     const [passShow, setPassShow] = useState(false);
     const {accounts, setAccounts} = useContext(LoginContext);
+    const userdata = JSON.parse(localStorage.getItem("user"))
 
     const [inpval, setInpval] = useState({
         email: "",
         password: "",
     });
-
+    function refreshPage(){ 
+        window.location.reload(); 
+    }
     const navidate= useNavigate();
 
     const setVal = (e) => {
@@ -32,10 +48,6 @@ const Login = () => {
     };
 
      const dispatch = useDispatch()
-    
-
-    //  const userdata = JSON.parse(localStorage.getItem("user"))
-    //  console.log(userdata) 
    
     const loginuser = async(e) => {
         e.preventDefault();
@@ -59,7 +71,11 @@ const Login = () => {
             toast.error("password must be 6 char!", {
                 position: "top-center"
             });
-        } else {
+        // } else if (userdata) {
+
+        //    setAccounts(userdata.name)
+        //     ;
+        }  else {
             // console.log("user login succesfully done");
 
 
@@ -80,10 +96,12 @@ const Login = () => {
             if(res){
                 console.log("hey");
                 localStorage.setItem("token", res.Token);
-                 localStorage.setItem("user",JSON.stringify(res));
+                localStorage.setItem("user",JSON.stringify(res));
                 setInpval({...inpval,email:"",password:""});
+                navidate('/')
+                refreshPage()
                  setAccounts(res.name);
-                 navidate('/')
+               
             }
         }
     }
@@ -102,17 +120,23 @@ const Login = () => {
                             <label htmlFor="email">Email</label>
                             <input type="email" value={inpval.email} onChange={setVal} name="email" id="email" placeholder='Enter Your Email Address' />
                         </div>
-                        <div className="form_input">
+                        <div className="form_input" style={{marginBottom:0, paddingBottom:0}}>
                             <label htmlFor="password">Password</label>
                             <div className="two">
                                 <input type={!passShow ? "password" : "text"} onChange={setVal} value={inpval.password} name="password" id="password" placeholder='Enter Your password' />
                                 <div className="showpass" onClick={() => setPassShow(!passShow)}>
                                     {!passShow ? "Show" : "Hide"}
                                 </div>
+
                             </div>
+                            <Link to="/ForgetPass"> <ForgetPass > forget your password</ForgetPass></Link>
+
                         </div>
 
-                        <button className='btn' onClick={loginuser}>Login</button>
+
+                        {/* <Link to="" refresh="true"> */}
+                             <button className='btn' onClick={loginuser}>Login</button>
+                             {/* </Link> */}
                         <p>Don't have an Account? <NavLink to="/Signup">Sign Up</NavLink> </p>
                     </form>
                     <ToastContainer />

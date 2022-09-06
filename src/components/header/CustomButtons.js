@@ -10,6 +10,8 @@ import Badge, { BadgeProps } from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import {Link} from 'react-router-dom';
 import wishlist from '../wishlist/Wishlist';
+import Avatar from '@mui/material/Avatar';
+import ProfileScreen from '../profile/DefaultProfileScreen';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 const StyledBadge = styled(Badge) ({
   '& .MuiBadge-badge': {
@@ -115,43 +117,60 @@ const CustomButtons = () => {
     const [open, setOpen ]= useState(false);
     const {accounts, setAccounts} = useContext(LoginContext);
     const dispatch = useDispatch()
-
-const cartItem = useSelector((state) => state.cart )
-console.log(cartItem);
-    const openDialog = ()=>{
-          setOpen(true)
-          
+          const userdata = JSON.parse(localStorage.getItem("user"))
+         
+    const cartItem = useSelector((state) => state.cart )
+    console.log(cartItem);
+    const reloadstop =()=>{
+      window.stop();
     }
+
+   
+    
   return (
+   
     <Wrapper>
       {
-        accounts ? <Profile accounts = {accounts} setAccounts={setAccounts}/> :
+        // accounts ? 
+        userdata ?
+         <Profile accounts = {accounts} setAccounts={setAccounts 
+          (userdata.name)
+        }/>
+          :
+          //  setAccounts(userdata.name)
+          //  :
+       
        <Link to="/Login" style={{textDecoration:'none', color:'inherit'}}> <LoginButton variant="contained" >Login </LoginButton></Link>
-
       }
         {/* <Typography>My Account</Typography> */}
         <Typography>Return</Typography>
         <Typography>&Orders</Typography>
+       
        <Link to="/Cart" style = {{textDecoration: 'none', color:'inherit',}} >
-         <CartDesign >
+         <CartDesign  >
         <Typography >Cart 
               {/* {cartItem.cart.length} */}
           </Typography>
-        <IconButton aria-label="cart">
+         
+        <IconButton aria-label="cart" >
           <StyledBadge badgeContent={cartItem.cartItems.length} color="secondary">
             <ShoppingCartIcon style={{color:"white", marginTop:-5}} />
           </StyledBadge>
-        </IconButton>            
+        </IconButton>    
+                
          
           </CartDesign>
         </Link> 
          <Box>
          <Link to ="/wishlist" cartItem ={cartItem}><FavoriteBorderIcon/></Link>
         </Box>
-       
-        <Typography>More</Typography>
-        <LoginDialog open= {open} setOpen={setOpen} />
+        {/* {
+         accounts ? <MyProfile accounts = {accounts} setAccounts={setAccounts}/> : */}
+       <Link to="/ProfileScreen"> <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /></Link>
+         {/* } */}
+        {/* <LoginDialog open= {open} setOpen={setOpen} /> */}
     </Wrapper>
+   
   )
 }
 

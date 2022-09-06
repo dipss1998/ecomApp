@@ -72,6 +72,9 @@ const Cart = () => {
        Items()
     const cartItems = useSelector((state) => state.cart.cartItems)
     console.log("these are cart items: ",cartItems);
+
+
+
   return (
     <>
   
