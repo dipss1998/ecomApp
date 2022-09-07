@@ -48,7 +48,7 @@ const SelletText= styled(Typography)`
 `;
 
 const CartItem = ({item}) => {
-console.log("inside cartItem component:", item)
+// console.log("inside cartItem component:", item)
  // const [data, setData] = useState([]); 
   const dispatch = useDispatch();
   const cartItem = useSelector((state) => state.cart.cartItems)

@@ -119,7 +119,7 @@ const CustomButtons = () => {
     const dispatch = useDispatch()
           const userdata = JSON.parse(localStorage.getItem("user"))
          
-    const cartItem = useSelector((state) => state.cart )
+    const cartItem = useSelector((state) => state.cart.cartItems )
     console.log(cartItem);
     const reloadstop =()=>{
       window.stop();
@@ -153,7 +153,7 @@ const CustomButtons = () => {
           </Typography>
          
         <IconButton aria-label="cart" >
-          <StyledBadge badgeContent={cartItem.cartItems.length} color="secondary">
+          <StyledBadge badgeContent={cartItem.length} color="secondary">
             <ShoppingCartIcon style={{color:"white", marginTop:-5}} />
           </StyledBadge>
         </IconButton>    

@@ -53,28 +53,29 @@ const RightContainer = styled(Grid)`
 `;
 
 const Cart = () => {
-    const [cartProducts, setCartProducts] = useState([]);
-     const Items = async () => {
-        const user =  JSON.parse(window.localStorage.getItem('user'));
-        const userId = user._id
-        console.log("e", userId)
-        const data = await fetch("http://localhost:5000/carts/getcart", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-             userId
-            })
-        })
-       const res = await data.json();
-       setCartProducts(res);
-                      console.log("this is api data",res);
-       }
-     //  Items()
-     useEffect(()=>{
+    // const [cartProducts, setCartProducts] = useState([]);
+    //  const Items = async () => {
+    //     const user =  JSON.parse(window.localStorage.getItem('user'));
+    //     const userId = user._id
+    //     console.log("e", userId)
+    //     const data = await fetch("http://localhost:5000/carts/getcart", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify({
+    //          userId
+    //         })
+    //     })
+    //    const res = await data.json();
+    // //    setCartProducts(res);
+    //    console.log("this is api data",res);
 
-     },[Items()])
+    //    }
+     //  Items()
+    //  useEffect(()=>{
+
+    //  },[])
     const cartItems = useSelector((state) => state.cart.cartItems)
     console.log("these are cart items: ",cartItems);
 
@@ -83,13 +84,13 @@ const Cart = () => {
   return (
     <>
   
-    { cartProducts.length ? 
+    { cartItems.length ? 
         <Component container>
             <LeftComponent item lg={9} md={9} sm={12} xs={12}>
                 <Header>
                     <Typography style={{fontWeight: 600, fontSize: 18}}>My Cart ({cartItems?.length})</Typography>
                 </Header>
-                    {   cartProducts.map(item => (
+                    {   cartItems.map(item => (
                             <CartItem item={item} />
                         ))
                     }

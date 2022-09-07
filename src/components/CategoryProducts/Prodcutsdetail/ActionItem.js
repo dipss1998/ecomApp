@@ -1,5 +1,5 @@
-// import { useState, useEffect } from 'react';
-// import axios from 'axios';
+import React, { useState,useEffect } from 'react';
+import axios from 'axios';
 import { Button, Box, styled } from '@mui/material';
 import { ShoppingCart as Cart, FlashOn as Flash } from '@mui/icons-material';
 
@@ -42,6 +42,24 @@ const ActionItem = ({ product }) => {
 
  const dispatch = useDispatch();
  const navigate = useNavigate();
+ const fetchCarts = async () =>{
+
+
+   
+    // console.log(response);
+    // dispatch(addToCart(response.data))
+    // console.log(response);
+    
+};
+
+
+
+// useEffect(()=>{
+//     fetchCarts();
+
+// }, [dispatch])
+
+
      
 // const cartItem = useSelector((state) => state.product.product )
  
@@ -100,10 +118,26 @@ const ActionItem = ({ product }) => {
  }
       
 
-            const addItemToCart = async (e) => {   
-                dispatch(addToCart(e));
+ const fetchCart = async()=>{
+    const user =  JSON.parse(window.localStorage.getItem('user'));
+    const userId = user._id
+    console.log('userId', userId)
+    try {
+        const  response  = await axios.post('http://localhost:5000/carts/getcart', {userId})
+        console.log('response', response)
+    } catch (error) {
+        console.log('error', error)
+    }
+          
+    // dispatch(addToCart(response))
+    // console.log('response', response)
+}
+
+            const addItemToCart =  (e) => { 
+                // addToCart(e);
+                fetchCart()
                 console.log("action items:", e.data)
-                await addedToCart(e)
+                // await addToCart(e)
                 navigate('/Cart');
             }
 

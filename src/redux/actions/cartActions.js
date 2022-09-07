@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-import actionTypes from '../constants/actionTypes'
+import actionTypes from '../constants/actionTypes';
+import axios from 'axios';
+
 // export const addToCart = (id) => async (dispatch) => {
 //     try { 
 //         const  response  = await axios.get(`http://localhost:5000/product/${id}`);
@@ -13,21 +15,21 @@ import actionTypes from '../constants/actionTypes'
 //     }
 // };
 
-// export const removeFromCart = (id) => (dispatch) => {
-//     dispatch({
-//         type: actionTypes.REMOVE_TO_CART,
-//         payload: id
-//     })
+export const removeFromCart = (id) => (dispatch) => {
+    dispatch({
+        type: actionTypes.REMOVE_TO_CART,
+        payload: id
+    })
 
-// };
+};
 
 //const [quantity, setQuantity ] = useState(0)
 //add to cart
-export const addToCart =  (item) => {
-    console.log(item);
+export const addToCart =  (productId, quantity,userId) => {
+    console.log(productId);
         return{
             type:actionTypes.ADD_TO_CART,
-            payload:item
+            payload:{productId, quantity, userId}
         }
 }
 
@@ -36,25 +38,37 @@ export const addToCart =  (item) => {
 //   });
   //setInpval({id:item.data.id, quantity:item.data.quantity})
  // console.log(item);
- export const addedToCart = async (e) => {
-    const user =  JSON.parse(window.localStorage.getItem('user'));
-    const userId = user._id
-      const { _id, quantity} = e.data;
-      console.log('_id', _id)
-      await fetch("http://localhost:5000/carts/cart", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-         userId,
-         productId:_id,
-           quantity
-        })
-    })
-   // const res = await data.json();
-                //  console.log("this is data",data);
-    }
+
+
+//  export const addToCart = async (item) => {
+//     const user =  JSON.parse(window.localStorage.getItem('user'));
+//     const userId = user._id
+//       const { _id, quantity} = e.data;
+//       console.log('_id', _id)
+//       await fetch("http://localhost:5000/carts/cart", {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify({
+//          userId,
+//          productId:_id,
+//         quantity
+//         })
+//     })
+//     const res = await data.json();
+//    console.log("this is res data",res);
+// const response = await axios
+// .get("http://localhost:5000/carts/cart").catch((err) => {
+//   console.log("error", err);
+// });
+
+//    return{
+//                 type:actionTypes.ADD_TO_CART,
+//                 payload:item
+//             }
+//     }
+       
 
 //remove to cart
 export const removefromCart = (item ,id, quantity ) => {
@@ -93,16 +107,16 @@ export const addtowishlist = (product) =>{
         payload:{product}
     }
 }
-// export const addtowishlist = (id, product) => async (dispatch) => {
+// export const addToCart = (item) => async (dispatch) => {
 //     try { 
-//         const  response  = await axios.get(`http://localhost:5000/product/${id}`);
+//         const  response  = await axios.get(`http://localhost:5000/carts/cart`);
 
-//         dispatch({ type:actionTypes.ADD_TO_WISHLIST, payload: response });
+//         dispatch({ type:actionTypes.ADD_TO_CART, payload: response });
         
 //         console.log(response);
 
 //     } catch (error) {
-//         console.log('Error while calling wishlist API');
+//         console.log('Error while calling addToCart API');
 //     }
 // };
 
