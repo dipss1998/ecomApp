@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 import {Box, Grid, Typography, Button} from '@mui/material'
 import CartItem from '../cart/CartItem';
@@ -58,25 +58,30 @@ const Wishlist = () => {
 
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.wishlist.wishlistItems)
-  const {id} = useParams(); 
-  const url = `http://localhost:5000`
+  const [wishItems, setWishItems] = useState([])
+  // const {id} = useParams(); 
+  // const url = `http://localhost:5000`
 
-
-    const fetchProductWishlist = async (id) =>{
-        const response = await axios
-       // console.log("wishlist id:", id)
-        .get(`http://localhost:5000/product/${id}`)
-        .catch((err)=>{
-            console.log("err", err);
+    const fetchProductWishlist = async () =>{
+      const user =  JSON.parse(window.localStorage.getItem('user'));
+      const userId = user._id
+      const data = await fetch("http://localhost:5000/favourites/getfavourite", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+        userId
         })
-                dispatch(addtowishlist(response))
-                 console.log("product response whishlist:",response);
+    })
+    const res = await data.json();
+    setWishItems(res);
+                  console.log("this is response:",res);
     }
 
     useEffect(()=>{
       //if (cartItems && id !== cartItems.id) 
-        (fetchProductWishlist(id));
-        
+        (fetchProductWishlist());   
     }, [])
   console.log(cartItems);
   // useEffect(()=>{
@@ -84,13 +89,13 @@ const Wishlist = () => {
   // })
   return (
     <>
-     { cartItems.length ? 
+     { wishItems.length ? 
      <Component container>
         <LeftComponent item lg={9} md={9} sm={12} xs={12}>
           <Header>
-              <Typography style={{fontWeight: 600, fontSize: 18}}>My Cart ({cartItems?.length})</Typography>
+              <Typography style={{fontWeight: 600, fontSize: 18}}>My Cart ({wishItems?.length})</Typography>
             </Header>
-                    {   cartItems.map(items => (
+                    {   wishItems.map(items => (
                             <ProductItem items={items} />
                         ))
                     }

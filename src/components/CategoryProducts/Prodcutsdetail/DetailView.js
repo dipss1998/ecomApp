@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import './detailview.css'
 import axios from 'axios';
-import { addtowishlist } from '../../../redux/actions/cartActions';
+import { addtowishlist, addedtowishlist } from '../../../redux/actions/cartActions';
 import ProductDetail from './ProductDetail'
 import { useDispatch, useSelector } from 'react-redux';
 import {useParams} from 'react-router-dom';
@@ -70,7 +70,9 @@ const DetailView = () => {
 //   const {  title, price,  description, cost } = product;
 
 // console.log(id);
-   const addTowishlist = (e)=>{    
+   const addTowishlist = async(e)=>{ 
+    console.log("wishlist data", e)  
+    await addedtowishlist(e.data._id) 
          dispatch(addtowishlist(e));
         setWishShow(!wishshow)    
     }

@@ -95,16 +95,22 @@ export const addtowishlist = (userId, productId) =>{
         payload:{userId, productId}
     }
 }
-// export const addtowishlist = (id, product) => async (dispatch) => {
-//     try { 
-//         const  response  = await axios.get(`http://localhost:5000/product/${id}`);
-
-//         dispatch({ type:actionTypes.ADD_TO_WISHLIST, payload: response });
-        
-//         console.log(response);
-
-//     } catch (error) {
-//         console.log('Error while calling wishlist API');
-//     }
-// };
+//whishlist api
+export const addedtowishlist = async (productId) => {
+    const user =  JSON.parse(window.localStorage.getItem('user'));
+    const userId = user._id
+    console.log("productId and userId in addWishlist api:",productId, userId)
+    //   const { id, quantity} = inpval;
+      const data = await fetch("http://localhost:5000/favourites/favourite", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          productId, userId
+        })
+    })
+    const res = await data.json();
+                  console.log("this is response:",res);
+};
 
