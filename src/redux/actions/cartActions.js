@@ -71,26 +71,28 @@ export const removefromCartAllProducts = (id, quantity ) => {
         payload:{id, quantity}
     }
 }
-// export const removedfromCart = async (id, quantity) => {
-//     console.log("id and quantity:",id, quantity)
-//     //   const { id, quantity} = inpval;
-//       const data = await fetch("http://localhost:5000/carts/deletecart", {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({
-//             "id":id
-//         })
-//     })
-//     const res = await data.json();
-//                   console.log("this is response:",res);
-//     }
+export const removedfromCart = async (productId) => {
+    const user =  JSON.parse(window.localStorage.getItem('user'));
+    const userId = user._id
+    console.log("productId and userId in delete api:",productId, userId)
+    //   const { id, quantity} = inpval;
+      const data = await fetch("http://localhost:5000/carts/deletecart", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          productId, userId
+        })
+    })
+    const res = await data.json();
+                  console.log("this is response:",res);
+    }
 //ADD TO WISLIT
-export const addtowishlist = (product) =>{
+export const addtowishlist = (userId, productId) =>{
     return {
         type:actionTypes.ADD_TO_WISHLIST,
-        payload:{product}
+        payload:{userId, productId}
     }
 }
 // export const addtowishlist = (id, product) => async (dispatch) => {

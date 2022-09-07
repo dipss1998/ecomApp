@@ -64,16 +64,17 @@ const Wishlist = () => {
 
     const fetchProductWishlist = async (id) =>{
         const response = await axios
+       // console.log("wishlist id:", id)
         .get(`http://localhost:5000/product/${id}`)
         .catch((err)=>{
             console.log("err", err);
         })
                 dispatch(addtowishlist(response))
-                 console.log(response);
+                 console.log("product response whishlist:",response);
     }
 
     useEffect(()=>{
-      if (cartItems && id !== cartItems.id) 
+      //if (cartItems && id !== cartItems.id) 
         (fetchProductWishlist(id));
         
     }, [])

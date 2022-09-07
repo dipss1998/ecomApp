@@ -42,26 +42,25 @@ const DetailView = () => {
     const [wishshow, setWishShow] = useState(false)
 
  const {id} = useParams(); 
+ console.log("product ID", id)
  const dispatch = useDispatch();
  const product = useSelector((state)=>state.product.product)
 
-
-
  const url = `http://localhost:5000`
 
-
     const fetchProductDetail = async (id) =>{
+        console.log("product id:", id)
         const response = await axios
         .get(`http://localhost:5000/product/${id}`)
         .catch((err)=>{
             console.log("err", err);
         })
                 dispatch(getProductdetails(response))
-                // console.log(response);
+                 console.log("product details:",response);
     }
 
     useEffect(()=>{
-        if (product && id !== product.id) 
+       // if (product && id !== product.id) 
         (fetchProductDetail(id));
         
     }, [])
