@@ -1,10 +1,10 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {Box, Typography, Button, ButtonGroup } from '@mui/material'
+import { Box, Typography, Button, ButtonGroup } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import { addEllipsis } from '../utilss/common-utils';
 import ButtonGrowth from './ButtonGrowth';
-import { removefromCart } from '../../redux/actions/cartActions';
+import { removefromCart, removedfromCart } from '../../redux/actions/cartActions';
 import { useParams } from 'react-router-dom';
 const Component = styled(Box)`
     display:flex;
@@ -42,67 +42,69 @@ const Remove = styled(Button)`
     font-size: 16px;
 `;
 
-const SelletText= styled(Typography)`
+const SelletText = styled(Typography)`
     text-Size: 14px;
     font-weight: 600;
 `;
 
-const CartItem = ({item}) => {
-// console.log("inside cartItem component:", item)
- // const [data, setData] = useState([]); 
-  const dispatch = useDispatch();
+const CartItem = ({ item }) => {
+  console.log("inside cartItem component:", item)
+  // const [data, setData] = useState([]); 
+   const dispatch = useDispatch();
   const cartItem = useSelector((state) => state.cart.cartItems)
-//  const {id } = useParams();
- // console.log(cartItem);
+  //  const {id } = useParams();
+  // console.log(cartItem);
 
-const removeitemfromcart = (e) => {
-  dispatch(removefromCart(e));
-  console.log(e); 
-}
+  const removeitemfromcart = async (e) => {
+    console.log("clicked on remove button:", e);
+    await removefromCart(e._id)
+    dispatch(removefromCart(e));
+    console.log("clicked on remove button:", e);
+  }
 
-// const compare = () =>{
-//   let comparedata = cartItem.filter((e)=>{
-//     return e.id == id
-//   })
-//   console.log('comparedata', comparedata)
-//   setData(comparedata)
-// }
-// useEffect(()=>{
-//   compare()
-// }, [id])
+  // const compare = () =>{
+  //   let comparedata = cartItem.filter((e)=>{
+  //     return e.id == id
+  //   })
+  //   console.log('comparedata', comparedata)
+  //   setData(comparedata)
+  // }
+  // useEffect(() => {
+  //  // compare()
+  // }[])
 
 
   return (
     <>
-     
-          <Component>
-            <LeftComponent>
-              <img src={item.url} style={{ height: 110, width: 110 }} /> 
-              <ButtonGrowth item={item} />
-            </LeftComponent> 
-               <Container>
-         
-                   <Typography>{addEllipsis(item.title.longTitle)} </Typography>
-                   <Typography>{item.title.shortTitle} </Typography>
-      
-            <SelletText>
-              Seller: abc
-            </SelletText>
-      
-              <Typography> Quantity: {item.quantity}</Typography>
-      
-             <Typography style={{margin: '20px 0'}}>
-                <Cost component="span">₹{item.price.cost}</Cost>&nbsp;&nbsp;&nbsp;
-                <MRP component="span"><strike>₹{item.price.mrp}</strike></MRP>&nbsp;&nbsp;&nbsp;
-                <Discount component="span">{item.price.discount} off</Discount>
-              </Typography>
-             
-              <Button variant='contained' style={{marginTop: -10, height: 30}} onClick={()=>removeitemfromcart(cartItem)}>REMOVE</Button>
-            </Container>
-      
-          </Component>
-        
-      
+
+      <Component>
+        <LeftComponent>
+          <img src={item.url} style={{ height: 110, width: 110 }} />
+          <ButtonGrowth item={item} />
+        </LeftComponent>
+        <Container>
+
+          <Typography>{addEllipsis(item.title.longTitle)} </Typography>
+          <Typography>{item.title.shortTitle} </Typography>
+
+          <SelletText>
+            Seller: abc
+          </SelletText>
+
+          <Typography> Quantity: {item.quantity}</Typography>
+
+          <Typography style={{ margin: '20px 0' }}>
+            <Cost component="span">₹{item.price.cost}</Cost>&nbsp;&nbsp;&nbsp;
+            <MRP component="span"><strike>₹{item.price.mrp}</strike></MRP>&nbsp;&nbsp;&nbsp;
+            <Discount component="span">{item.price.discount} off</Discount>
+          </Typography>
+
+          <Button variant='contained' style={{ marginTop: -10, height: 30 }} onClick={() => removeitemfromcart(item)}>REMOVE</Button>
+        </Container>
+
+      </Component>
+
+
     </>
   )
 

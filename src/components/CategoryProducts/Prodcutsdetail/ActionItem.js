@@ -116,33 +116,49 @@ const ActionItem = ({ product }) => {
   
   })
  }
-      
 
+ const url = `http://localhost:5000`
+
+    const fetchProductDetail = async (id) =>{
+
+        console.log("product id:", id)
+        const response = await axios
+        .get(`http://localhost:5000/product/${id}`)
+        .catch((err)=>{
+            console.log("err", err);
+        })
+                dispatch(addToCart(response))
+                 console.log("product details:",response);
+    }
+      
+// const product = useSelector((state)=> state.product.data)
+// console.log('product', product)
  const fetchCart = async()=>{
     const user =  JSON.parse(window.localStorage.getItem('user'));
-    const userId = user._id
+    const userId = user.id;
+    const productId = product.data._id;
+    const quantity = product.data.quantity
     console.log('userId', userId)
     try {
-        const  response  = await axios.post('http://localhost:5000/carts/getcart', {userId})
+        const  response  = await axios.get('http://localhost:5000/carts/cart', 
+        // {userId, productId, quantity}
+        )
         console.log('response', response)
+        // dispatch(addToCart(response))
+
     } catch (error) {
         console.log('error', error)
     }
           
-    // dispatch(addToCart(response))
-    // console.log('response', response)
 }
-
-            const addItemToCart =  (e) => { 
-                // addToCart(e);
-                fetchCart()
-                console.log("action items:", e.data)
-                // await addToCart(e)
-                navigate('/Cart');
-            }
-
-
-
+ const addItemToCart =  (e) => { 
+     // addToCart(e);
+     fetchCart(e)
+     fetchProductDetail(e)
+     // console.log("action items:", e.data)
+     // await addToCart(e)
+    navigate('/Cart');
+ }
 
     return (
         <LeftContainer>

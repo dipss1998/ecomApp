@@ -53,29 +53,28 @@ const RightContainer = styled(Grid)`
 `;
 
 const Cart = () => {
-    // const [cartProducts, setCartProducts] = useState([]);
-    //  const Items = async () => {
-    //     const user =  JSON.parse(window.localStorage.getItem('user'));
-    //     const userId = user._id
-    //     console.log("e", userId)
-    //     const data = await fetch("http://localhost:5000/carts/getcart", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify({
-    //          userId
-    //         })
-    //     })
-    //    const res = await data.json();
-    // //    setCartProducts(res);
-    //    console.log("this is api data",res);
-
-    //    }
+    const [cartProducts, setCartProducts] = useState([]);
+     const Items = async () => {
+        const user =  JSON.parse(window.localStorage.getItem('user'));
+        const userId = user._id
+        console.log("e", userId)
+        const data = await fetch("http://localhost:5000/carts/getcart", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+             userId
+            })
+        })
+       const res = await data.json();
+       setCartProducts(res);
+                      console.log("this is api data",res);
+       }
      //  Items()
-    //  useEffect(()=>{
-
-    //  },[])
+     useEffect(()=>{
+        Items()
+     },[])
     const cartItems = useSelector((state) => state.cart.cartItems)
     console.log("these are cart items: ",cartItems);
 
@@ -88,7 +87,7 @@ const Cart = () => {
         <Component container>
             <LeftComponent item lg={9} md={9} sm={12} xs={12}>
                 <Header>
-                    <Typography style={{fontWeight: 600, fontSize: 18}}>My Cart ({cartItems?.length})</Typography>
+                    <Typography style={{fontWeight: 600, fontSize: 18}}>My Cart ({cartProducts?.length})</Typography>
                 </Header>
                     {   cartItems.map(item => (
                             <CartItem item={item} />
@@ -99,7 +98,7 @@ const Cart = () => {
                 </BottomWrapper>
             </LeftComponent>
             <RightContainer item lg={3} md={3} sm={12} xs={12}>
-                <TotalBalance cartItems={cartItems} />
+                <TotalBalance cartItems={cartProducts} />
             </RightContainer>
         </Component> : <Box><EmptyCart/></Box>
     }

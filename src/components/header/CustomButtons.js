@@ -66,28 +66,6 @@ const Wrapper = styled(Box)(({theme}) => ({
 
   }));
 
-// const Wrapper = styled(Box)(({ theme }) => ({
-//   margin: '0 3% 0 auto',
-//   display: 'flex',
-//   '& > *': {
-//       marginRight: '40px !important',
-//       textDecoration: 'none',
-//       color: '#FFFFFF',
-//       fontSize: 12,
-//       alignItems: 'center',
-//       [theme.breakpoints.down('sm')]: {
-//           color: '#2874f0',
-//           alignItems: 'center',
-//           display: 'flex',
-//           flexDirection: 'column',
-//           marginTop: 10
-//       }
-//   },
-//   [theme.breakpoints.down('sm')]: {
-//       display: 'block'
-//   }
-// }));
-
 const CartDesign = styled(Box)`
   display:flex;
  flex-direction: row;
@@ -116,6 +94,7 @@ const CartDesign = styled(Box)`
 const CustomButtons = () => {
     const [open, setOpen ]= useState(false);
     const {accounts, setAccounts} = useContext(LoginContext);
+    
     const dispatch = useDispatch()
           const userdata = JSON.parse(localStorage.getItem("user"))
          
@@ -152,11 +131,11 @@ const CustomButtons = () => {
               {/* {cartItem.cart.length} */}
           </Typography>
          
-        <IconButton aria-label="cart" >
+        {/* <IconButton aria-label="cart" >
           <StyledBadge badgeContent={cartItem.length} color="secondary">
             <ShoppingCartIcon style={{color:"white", marginTop:-5}} />
           </StyledBadge>
-        </IconButton>    
+        </IconButton>     */}
                 
          
           </CartDesign>
