@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import {Box, Typography, Button, ButtonGroup } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import { addEllipsis } from '../utilss/common-utils';
-// import ButtonGrowth from './ButtonGrowth';
 // import { removefromCart } from '../../redux/actions/cartActions';
 const Component = styled(Box)`
     display:flex;
@@ -58,7 +57,6 @@ const ProductItem = ({items}) => {
     <Component>
       <LeftComponent>
         <img src={items.url} style={{ height: 110, width: 110 }} /> 
-        {/* <ButtonGrowth item={items} /> */}
       </LeftComponent> 
          <Container>   
             <Typography>{addEllipsis(items.title.longTitle)} </Typography>

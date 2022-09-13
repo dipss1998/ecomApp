@@ -6,6 +6,7 @@ import Register from '../authpages/Signup';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { PowerSettingsNew } from '@mui/icons-material';
+import Avatar from '@mui/material/Avatar';
 import { useNavigate , Link} from "react-router-dom";
 import { removefromCartAllProducts } from '../../redux/actions/cartActions';
 const Component = styled(Menu)`
@@ -55,6 +56,9 @@ const Profile = ({accounts, setAccounts}) => {
 }}>
                         <PowerSettingsNew fontSize='small' color='primary'/> 
                         <Link to="" refresh="true"> <Logout>Logout</Logout></Link>
+                    </MenuItem>
+                    <MenuItem onClick={() => { handleClose();}}>
+                    <Link to={`/ProfileScreen/${userdata._id}`}>Profile Settings</Link>
                     </MenuItem>
                 </Component>
             </>

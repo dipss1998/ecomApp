@@ -137,8 +137,6 @@ const CustomButtons = () => {
           (userdata.name)
         }/>
           :
-          //  setAccounts(userdata.name)
-          //  :
        
        <Link to="/Login" style={{textDecoration:'none', color:'inherit'}}> <LoginButton variant="contained" >Login </LoginButton></Link>
       }
@@ -166,7 +164,7 @@ const CustomButtons = () => {
         </Box>
         {/* {
          accounts ? <MyProfile accounts = {accounts} setAccounts={setAccounts}/> : */}
-       <Link to="/ProfileScreen"> <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /></Link>
+       {/* <Link to="/ProfileScreen"> <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /></Link> */}
          {/* } */}
         {/* <LoginDialog open= {open} setOpen={setOpen} /> */}
     </Wrapper>

@@ -9,9 +9,9 @@ import Checkout from './components/checkout/Checkout';
 import PaymentForm from './components/checkout/PaymentForm';
 import TemplateProvider from './templates/TemplateProvider';
 import ContextProvider from './components/context/ContextProvider';
-import ProfileScreen from './components/profile/ProfileSceen';
+import ProfileScreen from './components/profile/ProfileScreen';
 import Cart from './components/cart/Cart';
-import ManageAddress from './components/profile/ManageAddress'
+//import ManageAddress from './components/profile/ManageAddress'
 import Login from './components/authpages/Login';
 import Signup from './components/authpages/Signup';
  import { LoginContext } from './components/context/ContextProvider';
@@ -56,8 +56,8 @@ function App() {
       <Route path= '/Checkout' element={<Checkout/>} /> 
       <Route path= '/AddressForm' element={<AddressForm/>} /> 
       <Route path= '/PaymentForm' element={< PaymentForm/>} />
-      <Route path= '/ProfileScreen' element={< ProfileScreen/>} /> 
-      <Route path= '/ManageAddress' element={< ManageAddress/>} /> 
+      <Route path= '/ProfileScreen/:id' element={< ProfileScreen/>} /> 
+     
       <Route path= '/Login' element={<Login />} />    
       <Route path= '/Signup' element={<Signup />} />    
       <Route path= '/Cart' element={<Cart />} />  
@@ -72,13 +72,10 @@ function App() {
       :
       <Box>
       <Routes>
-      
-      <Route path= '/ProfileScreen' element={< ProfileScreen/>} /> 
-      <Route path= '/ManageAddress' element={< ManageAddress/>} /> 
       <Route path= '/Login' element={<Login />} />    
       <Route path= '/Signup' element={<Signup />} />    
       {/* <Route path= '/Cart' element={<Cart />} />   */}
-      <Route path= '/Wishlist' element={<Wishlist />} />  
+      {/* <Route path= '/Wishlist' element={<Wishlist />} />   */}
     
         <Route path= '/KitchenCategory' element={<KitchenCategory/>} />
       <Route path= '/ElectronicCategory' element={<ElectronicCategory/>} />

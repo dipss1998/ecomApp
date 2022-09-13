@@ -4,11 +4,11 @@ import { styled } from '@mui/material/styles';
 import Search from './Search';
 import logo from './../../imges/logo.png'
 import CustomButtons from './CustomButtons';
-import Home from '../home/Home';
-import MenuIcon from '@mui/icons-material/Menu';
-import NavBar from '../home/NavBar';
+// import Home from '../home/Home';
+// import MenuIcon from '@mui/icons-material/Menu';
+// import NavBar from '../home/NavBar';
 import { Link } from 'react-router-dom';
-import { Menu } from '@mui/icons-material';
+//import { Menu } from '@mui/icons-material';
 
 const StyledHeader = styled(AppBar)`
     background:#808000;
@@ -25,12 +25,12 @@ const SubHeading = styled(Typography)`
     font-size:10px;
     font-style:italic;
 `;
-const CustomButton = styled('span')(({ theme }) => ({ 
-    margin: '0 5% 0 auto', 
-    [theme.breakpoints.down('sm')]: {
-        display: 'none'
-    }
-}));
+// const CustomButton = styled('span')(({ theme }) => ({ 
+//     margin: '0 5% 0 auto', 
+//     [theme.breakpoints.down('sm')]: {
+//         display: 'none'
+//     }
+// }));
 
 
 const PlusImage = styled('img')({
@@ -40,46 +40,46 @@ const PlusImage = styled('img')({
 }
 );
 
-const MenuButton = styled(IconButton)(({ theme }) => ({
-    display: 'none',
-    [theme.breakpoints.down('sm')]: {
-        display: 'block'
-    }
-}));
+// const MenuButton = styled(IconButton)(({ theme }) => ({
+//     display: 'none',
+//     [theme.breakpoints.down('sm')]: {
+//         display: 'block'
+//     }
+// }));
 
 const Header = () => {
     const subURL = 'https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/plus_aef861.png';
    
-    const handleClose = () => {
-        setOpen(false);
-    }
+    // const handleClose = () => {
+    //     setOpen(false);
+    // }
 
-    const handleOpen = () => {
-        setOpen(true);
-    }
+    // const handleOpen = () => {
+    //     setOpen(true);
+    // }
   
-    const [open, setOpen] = useState(false);
+    // const [open, setOpen] = useState(false);
 
-    const list = () =>(
-        <Box style = {{width:200, }} onClick= {handleClose}>
-            <List>
-                <ListItem button>
-                <CustomButtons/>
-               <NavBar/>
+//     const list = () =>(
+//         <Box style = {{width:200, }} onClick= {handleClose}>
+//             <List>
+//                 <ListItem button>
+//                 <CustomButtons/>
+//                <NavBar/>
                     
-                </ListItem>
+//                 </ListItem>
                
-            </List>
-{/* <List>
-            <ListItem button>
+//             </List>
+// {/* <List>
+//             <ListItem button>
                
-               <NavBar />
+//                <NavBar />
                    
-               </ListItem>
+//                </ListItem>
 
-               </List> */}
-        </Box>
-    )
+//                </List> */}
+//         </Box>
+//     )
 // const listt = ()=>(
 
 //     <Box style = {{width:200, }} onClick= {handleClose}>
@@ -103,20 +103,19 @@ const Header = () => {
         <StyledHeader>
         {/* <AppBar> */}
             <Toolbar style= {{minHeight:55}}>
-            <MenuButton
+            {/* <MenuButton
                     color="inherit"
                     onClick={handleOpen}
                 >
                     <Menu />
-            </MenuButton>
-
+            </MenuButton> */}
+{/* 
     <Drawer
        open = {open}
        onClose={handleClose}
     >
         {list()} 
-        {/* {listt()} */}
-    </Drawer>
+    </Drawer> */}
                 <Component to="/">
                 {/* <Box> */}
                     <img src={logo} alt= "logo" style={{width: 75}}/>
@@ -131,10 +130,10 @@ const Header = () => {
                     </Box>
                 </Component>
                 <Search/>
-                <CustomButton>
+                {/* <CustomButton> */}
                     <CustomButtons/>
                     
-                </CustomButton>
+                {/* </CustomButton> */}
                
             </Toolbar>
         {/* </AppBar> */}
