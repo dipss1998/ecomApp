@@ -19,6 +19,7 @@ import Wishlist from './components/wishlist/Wishlist';
 import AddressForm from './../src/components/checkout/AddressForm'
 import Header from './components/header/Header';
 import Home from './components/home/Home';
+import History from './components/History';
 import NavBar from './components/home/NavBar';
 import ForgetPass from './components/authpages/ForgetPass';
 import ChangePass from './components/authpages/ChangePass'
@@ -42,7 +43,8 @@ function App() {
   <ContextProvider  >
   {/* <UserContext.Provider > */}
   <Router style = {{position:'fixed'}}>    
-    <Header  style = {{height:55}} />
+   
+  <Header  style = {{height:55}} />
   
     <NavBar/>
     <Routes>
@@ -51,19 +53,18 @@ function App() {
 
     {
       userdata ?
-      <Box style={{marginTop: -15}}>
+      <Box style={{marginTop: 15}}>
       <Routes>
-      <Route path= '/Checkout' element={<Checkout/>} /> 
+      {/* <Route path= '/Checkout' element={<Checkout/>} /> 
       <Route path= '/AddressForm' element={<AddressForm/>} /> 
       <Route path= '/PaymentForm' element={< PaymentForm/>} />
       <Route path= '/ProfileScreen/:id' element={< ProfileScreen/>} /> 
-     
+      <Route path= '/History' element={< History/>} />  */}
       <Route path= '/Login' element={<Login />} />    
       <Route path= '/Signup' element={<Signup />} />    
       <Route path= '/Cart' element={<Cart />} />  
       <Route path= '/Wishlist' element={<Wishlist />} />  
-    
-        <Route path= '/KitchenCategory' element={<KitchenCategory/>} />
+      <Route path= '/KitchenCategory' element={<KitchenCategory/>} />
       <Route path= '/ElectronicCategory' element={<ElectronicCategory/>} />
       <Route path= '/product/:id'  element={<DetailView />} /> 
 

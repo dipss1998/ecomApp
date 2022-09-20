@@ -7,8 +7,6 @@ import { addEllipsis } from '../utilss/common-utils';
 const Component = styled(Box)`
     display:flex;
     background-Color: #f2f2f2;
-    
-
 `;
 
 const Container = styled(Box)`
@@ -51,7 +49,21 @@ const SelletText= styled(Typography)`
 
 
 const ProductItem = ({items}) => {
-  console.log("---------------------", items)
+  const removeitemsfromWishlist = async(productId)=>{
+    const user =  JSON.parse(window.localStorage.getItem('user'));
+    const userId =user._id
+    const data = await fetch("http://localhost:5000/favourites/deletefavourite",{
+      method:"POST",
+      headers:{
+          "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+           productId,  userId
+      })
+  });
+console.log("data in favourites deleted:", data);
+  }
+  console.log("---++++----------------", items)
   return (
     <>
     <Component>
@@ -73,9 +85,9 @@ const ProductItem = ({items}) => {
             <Discount component="span">{items.price.discount} off</Discount>
         </Typography>
        
-        {/* <Button variant='contained' style={{marginTop: -10, height: 30}} onClick={()=>removeitemsfromcart(items.data.id)}>REMOVE</Button> */}
+        <Button variant='contained' style={{marginTop: -10, height: 30}} onClick={()=>removeitemsfromWishlist(items._id)}>REMOVE</Button>
       </Container>
-
+      {/*  */}
     </Component>
     </>
   )

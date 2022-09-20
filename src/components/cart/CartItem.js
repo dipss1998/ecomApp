@@ -48,25 +48,25 @@ const SelletText = styled(Typography)`
 `;
 
 const CartItem = ({ item }) => {
-  console.log("inside cartItem component:", item)
+ 
   // const [data, setData] = useState([]); 
    const dispatch = useDispatch();
   const cartItem = useSelector((state) => state.cart.cartItems)
   //  const {id } = useParams();
-  // console.log(cartItem);
+ 
 
   const removeitemfromcart = async (e) => {
-    console.log("clicked on remove button:", e);
+    //console.log("clicked on remove button:", e);
     await removedfromCart(e._id)
     dispatch(removefromCart(e));
-    console.log("clicked on remove button:", e);
+    //console.log("clicked on remove button:", e);
   }
 
   // const compare = () =>{
   //   let comparedata = cartItem.filter((e)=>{
   //     return e.id == id
   //   })
-  //   console.log('comparedata', comparedata)
+  
   //   setData(comparedata)
   // }
   // useEffect(() => {

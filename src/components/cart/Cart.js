@@ -57,7 +57,7 @@ const Cart = () => {
      const Items = async () => {
         const user =  JSON.parse(window.localStorage.getItem('user'));
         const userId = user._id
-        console.log("e", userId)
+      
         const data = await fetch("http://localhost:5000/carts/getcart", {
             method: "POST",
             headers: {
@@ -69,14 +69,14 @@ const Cart = () => {
         })
        const res = await data.json();
        setCartProducts(res);
-                      console.log("this is api data",res);
+                     
        }
      //  Items()
      useEffect(()=>{
         Items()
      },[])
     const cartItems = useSelector((state) => state.cart.cartItems)
-    console.log("these are cart items: ",cartItems);
+    
 
 
 

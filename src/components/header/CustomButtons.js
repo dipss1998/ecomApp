@@ -120,7 +120,7 @@ const CustomButtons = () => {
           const userdata = JSON.parse(localStorage.getItem("user"))
          
     const cartItem = useSelector((state) => state.cart )
-    console.log(cartItem);
+    //console.log(cartItem);
     const reloadstop =()=>{
       window.stop();
     }
@@ -141,8 +141,9 @@ const CustomButtons = () => {
        <Link to="/Login" style={{textDecoration:'none', color:'inherit'}}> <LoginButton variant="contained" >Login </LoginButton></Link>
       }
         {/* <Typography>My Account</Typography> */}
-        <Typography>Return</Typography>
-        <Typography>&Orders</Typography>
+        {/* <Typography>Return&Orders</Typography> */}
+        <Link to="/History" style={{textDecoration:'none', color:'inherit', marginTop:20}}>Return&Orders </Link>
+       
        
        <Link to="/Cart" style = {{textDecoration: 'none', color:'inherit',}} >
          <CartDesign  >

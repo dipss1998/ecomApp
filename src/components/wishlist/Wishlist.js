@@ -93,7 +93,7 @@ const Wishlist = () => {
      <Component container>
         <LeftComponent item lg={9} md={9} sm={12} xs={12}>
           <Header>
-              <Typography style={{fontWeight: 600, fontSize: 18}}>My Cart ({wishItems?.length})</Typography>
+              <Typography style={{fontWeight: 600, fontSize: 18}}>My Favourites ({wishItems?.length})</Typography>
             </Header>
                     {   wishItems.map(items => (
                             <ProductItem items={items} />
