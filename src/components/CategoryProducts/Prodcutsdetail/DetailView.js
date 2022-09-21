@@ -63,14 +63,9 @@ const DetailView = () => {
         
     }, [])
 
-//   const   productt = "https://m.media-amazon.com/images/I/71-vsNgqZUL._AC_SX451_SY423_.jpg"
-
-//   const {  title, price,  description, cost } = product;
-
-// console.log(id);
    const addTowishlist = async(e)=>{ 
-    console.log("wishlist data", e)  
-    await addedtowishlist(e.data._id) 
+    console.log("wishlist data", e._id)  
+    await addedtowishlist(e._id) 
          dispatch(addtowishlist(e));
         setWishShow(!wishshow)    
     }

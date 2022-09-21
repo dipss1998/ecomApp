@@ -76,14 +76,9 @@ const Cart = () => {
         await removedfromCart(e._id)
         Items()
     }
-    //  Items()
     useEffect(() => {
         Items()
     }, [])
-  
-    // const cartItems = useSelector((state) => state.cart.cartItems)
-
-
     return (
         <>
 

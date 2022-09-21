@@ -78,10 +78,23 @@ const Wishlist = () => {
     setWishItems(res);
                   console.log("this is response:",res);
     }
-
+    const removeitemsfromWishlist = async(productId)=>{
+      const user =  JSON.parse(window.localStorage.getItem('user'));
+      const userId =user._id
+      const data = await fetch("http://localhost:5000/favourites/deletefavourite",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+             productId,  userId
+        })
+    });
+  console.log("data in favourites deleted:", data);
+  fetchProductWishlist()
+    }
     useEffect(()=>{
-      //if (cartItems && id !== cartItems.id) 
-        (fetchProductWishlist());   
+        fetchProductWishlist();   
     }, [])
   console.log(cartItems);
   // useEffect(()=>{
@@ -96,7 +109,7 @@ const Wishlist = () => {
               <Typography style={{fontWeight: 600, fontSize: 18}}>My Favourites ({wishItems?.length})</Typography>
             </Header>
                     {   wishItems.map(items => (
-                            <ProductItem items={items} />
+                            <ProductItem items={items} removeitemsfromWishlist={removeitemsfromWishlist}/>
                         ))
                     }
                 <BottomWrapper>

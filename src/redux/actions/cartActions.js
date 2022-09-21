@@ -96,10 +96,9 @@ export const addtowishlist = (userId, productId) =>{
 }
 //whishlist api
 export const addedtowishlist = async (productId) => {
+    console.log("wishlist api:", productId)
     const user =  JSON.parse(window.localStorage.getItem('user'));
     const userId = user._id
-   
-    //   const { id, quantity} = inpval;
       const data = await fetch("http://localhost:5000/favourites/favourite", {
         method: "POST",
         headers: {
@@ -110,6 +109,6 @@ export const addedtowishlist = async (productId) => {
         })
     })
     const res = await data.json();
-                
+               // console.log("favourite response:", res)
 };
 
