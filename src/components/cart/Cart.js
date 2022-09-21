@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react'
-import {useSelector} from 'react-redux'
-import {Box, Grid, Typography, Button} from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { Box, Grid, Typography, Button } from '@mui/material'
+import { removefromCart, removedfromCart } from '../../redux/actions/cartActions';
 import CartItem from './CartItem';
 import TotalBalance from './TotalBalance';
 import { styled } from '@mui/material/styles';
@@ -10,13 +11,13 @@ import { Link } from 'react-router-dom';
 
 
 const Component = styled(Grid)(({ theme }) => ({
-  padding: '30px 135px',
-  display: 'flex',
-  [theme.breakpoints.down('sm')]: {
-      padding: '15px 0'
-  }
+    padding: '30px 135px',
+    display: 'flex',
+    [theme.breakpoints.down('sm')]: {
+        padding: '15px 0'
+    }
 }));
-  const LeftComponent = styled(Grid)(({ theme }) => ({
+const LeftComponent = styled(Grid)(({ theme }) => ({
     paddingRight: 15,
     [theme.breakpoints.down('sm')]: {
         marginBottom: 15
@@ -54,56 +55,59 @@ const RightContainer = styled(Grid)`
 
 const Cart = () => {
     const [cartProducts, setCartProducts] = useState([]);
-     const Items = async () => {
-        const user =  JSON.parse(window.localStorage.getItem('user'));
+    const Items = async () => {
+        const user = JSON.parse(window.localStorage.getItem('user'));
         const userId = user._id
-      
+
         const data = await fetch("http://localhost:5000/carts/getcart", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-             userId
+                userId
             })
         })
-       const res = await data.json();
-       setCartProducts(res);
-                     
-       }
-     //  Items()
-     useEffect(()=>{
-        Items()
-     },[])
-    const cartItems = useSelector((state) => state.cart.cartItems)
-    
+        const res = await data.json();
+        setCartProducts(res);
 
-
-
-  return (
-    <>
-  
-    { cartProducts.length ? 
-        <Component container>
-            <LeftComponent item lg={9} md={9} sm={12} xs={12}>
-                <Header>
-                    <Typography style={{fontWeight: 600, fontSize: 18}}>My Cart ({cartProducts?.length})</Typography>
-                </Header>
-                    {   cartProducts.map(item => (
-                            <CartItem item={item} />
-                        ))
-                    }
-                <BottomWrapper>
-                     <Link to="/Checkout" style={{textDecoration: 'none'}}> <StyledButton variant="contained">Place Order</StyledButton> </Link>
-                </BottomWrapper>
-            </LeftComponent>
-            <RightContainer item lg={3} md={3} sm={12} xs={12}>
-                <TotalBalance cartItems={cartProducts} />
-            </RightContainer>
-        </Component> : <Box><EmptyCart/></Box>
     }
-    </> 
-  )
+    const removeitemfromcart = async (e) => {
+        await removedfromCart(e._id)
+        Items()
+    }
+    //  Items()
+    useEffect(() => {
+        Items()
+    }, [])
+  
+    // const cartItems = useSelector((state) => state.cart.cartItems)
+
+
+    return (
+        <>
+
+            {cartProducts.length ?
+                <Component container>
+                    <LeftComponent item lg={9} md={9} sm={12} xs={12}>
+                        <Header>
+                            <Typography style={{ fontWeight: 600, fontSize: 18 }}>My Cart ({cartProducts?.length})</Typography>
+                        </Header>
+                        {cartProducts.map(item => (
+                            <CartItem item={item} removeitemfromcart={removeitemfromcart} />
+                        ))
+                        }
+                        <BottomWrapper>
+                            <Link to="/Checkout" style={{ textDecoration: 'none' }}> <StyledButton variant="contained">Place Order</StyledButton> </Link>
+                        </BottomWrapper>
+                    </LeftComponent>
+                    <RightContainer item lg={3} md={3} sm={12} xs={12}>
+                        <TotalBalance cartItems={cartProducts} />
+                    </RightContainer>
+                </Component> : <Box><EmptyCart /></Box>
+            }
+        </>
+    )
 }
 
 export default Cart
