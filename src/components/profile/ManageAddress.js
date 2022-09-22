@@ -3,7 +3,7 @@ import { Dialog, DialogContent, TextField, Box, Button, Typography, styled, Card
 import AddIcon from '@mui/icons-material/Add';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteIcon from '@mui/icons-material/Delete';
-import ProfileSceen from './ProfileSceen';
+//import ProfileSceen from './ProfileSceen';
 
 const CardWrapper = styled(Card)`
         width:1000px;

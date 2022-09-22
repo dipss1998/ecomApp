@@ -10,7 +10,7 @@ import LastSlider from './Sliders';
 import Footer from './Footer';
 
 import { useSelector, useDispatch, getState } from 'react-redux'; // hooks
-import { getProducts, fetchProducts  } from '../../redux/actions/productActions';
+import {  fetchProducts  } from '../../redux/actions/productActions';
  import {userdata} from '../../redux/actions/user'
 import store from '../../redux/Store';
 import MidSlide from './MidSlide';
@@ -39,32 +39,19 @@ margin-top: -490px;
 
 `;
 const Home = () => {
-
-
-
-
-
-
 const dispatch = useDispatch();
 const  products = useSelector((state) => state.getallProducts.products);
   // const user = useSelector((state) =>state.userResuder.user)
-
   useEffect(()=>{
     dispatch(fetchProducts());
     // dispatch(userdata());
-
-
   }, [])
   // console.log( "kjdsbfjhfbjf" , products)
-
- 
   return (
-
     <>
       <NavBar />
       <Container>
         <Banner />
-
       </Container>
       <Content>
         <BannerCate />

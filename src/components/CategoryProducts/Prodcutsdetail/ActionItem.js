@@ -162,7 +162,7 @@ const ActionItem = ({ product }) => {
 
     return (
         <LeftContainer>
-            <Image src={product.data.detailUrl} /><br />
+            <Image src={product.images[0].url} /><br />
              <StyledButton onClick={() => addItemToCart(product)} style={{marginRight: 10, background: '#ff9f00'}} variant="contained">Add to Cart</StyledButton>
             {/* <Link to="/Checkout" style={{textDecoration:'none'}}>   */}
            <StyledButton onClick={()=>buyNow()}  style={{background: '#fb641b'}} variant="contained"><Flash /> Buy Now</StyledButton> 

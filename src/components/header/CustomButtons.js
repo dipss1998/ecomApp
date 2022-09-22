@@ -98,8 +98,8 @@ const CustomButtons = () => {
     const dispatch = useDispatch()
           const userdata = JSON.parse(localStorage.getItem("user"))
          
-    const cartItem = useSelector((state) => state.cart.cartItems )
-    console.log(cartItem);
+    const cartItem = useSelector((state) => state.cart )
+    //console.log(cartItem);
     const reloadstop =()=>{
       window.stop();
     }
@@ -116,14 +116,13 @@ const CustomButtons = () => {
           (userdata.name)
         }/>
           :
-          //  setAccounts(userdata.name)
-          //  :
        
        <Link to="/Login" style={{textDecoration:'none', color:'inherit'}}> <LoginButton variant="contained" >Login </LoginButton></Link>
       }
         {/* <Typography>My Account</Typography> */}
-        <Typography>Return</Typography>
-        <Typography>&Orders</Typography>
+        {/* <Typography>Return&Orders</Typography> */}
+        <Link to="/History" style={{textDecoration:'none', color:'inherit', marginTop:20}}>Return&Orders </Link>
+       
        
        <Link to="/Cart" style = {{textDecoration: 'none', color:'inherit',}} >
          <CartDesign  >
@@ -145,7 +144,7 @@ const CustomButtons = () => {
         </Box>
         {/* {
          accounts ? <MyProfile accounts = {accounts} setAccounts={setAccounts}/> : */}
-       <Link to="/ProfileScreen"> <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /></Link>
+       {/* <Link to="/ProfileScreen"> <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /></Link> */}
          {/* } */}
         {/* <LoginDialog open= {open} setOpen={setOpen} /> */}
     </Wrapper>

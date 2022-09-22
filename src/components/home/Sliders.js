@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch, getState } from 'react-redux'; // hooks
 import Countdown from 'react-countdown';
 import Carousel from "react-multi-carousel";
@@ -8,9 +8,9 @@ import { Button, Divider, Box, Typography } from '@mui/material';
 import { styled } from '@mui/material';
 import BannerCate from './BannerCate';
 import axios from 'axios';
-import { getProducts } from '../../redux/actions/productActions';
+//import { getProducts } from '../../redux/actions/productActions';
 
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { convertLength } from '@mui/material/styles/cssUtils';
 const responsive = {
 
@@ -72,81 +72,73 @@ const RenderTimer = styled(Box)(({ theme }) => ({
     }
 }));
 
-const LastSlider = ({  timer, title }) => {
+const LastSlider = ({ timer, title }) => {
 
-const dispatch = useDispatch();
-const  products = useSelector((state) => state.getallProducts.products);
-//  console.log("products", products);
-//   const {id, title, discount, url} = products
- 
-   const fetchProducts = async () =>{
+    const [products, setProducts] = useState([])
 
-  
-      const response = await axios
-      .get("http://localhost:5000/getProducts/getProducts").catch((err) => {
-        console.log("error", err);
-      });
-       
-      dispatch(getProducts(response.data))
-    //   console.log(response);
-      
-  };
+    // const dispatch = useDispatch();
+    //  const products = useSelector((state) => state.getallProducts.products);
+    //  console.log("products", products);
+    //   const {id, title, discount, url} = products
+    const fetchProducts = async () => {
+        const response = await axios
+            .get("http://localhost:5000/getallproducts/getallproducts").catch((err) => {
+                console.log("error", err);
+            });
+        // dispatch(getProducts(response.data))
+        console.log("response=============", response.data.getproducts);
+        setProducts(response.data.getproducts)
+    };
 
-  useEffect(()=>{
-    fetchProducts();
-  }, [])
+    useEffect(() => {
+        fetchProducts();
+    }, [])
 
-  const timerURL = 'https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/timer_a73398.svg';
+    // const timerURL = 'https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/timer_a73398.svg';
 
-  const renderer = ({ hours, minutes, seconds }) => {
-      return <RenderTimer variant="span">{hours} : {minutes} : {seconds}  Left</RenderTimer>;
-  };
-    return (
-
-        <>
-
-            <Deal>
+    // const renderer = ({ hours, minutes, seconds }) => {
+    //     return <RenderTimer variant="span">{hours} : {minutes} : {seconds}  Left</RenderTimer>;
+    // };
+    return (<>
+        <Deal>
                 <DealText>{title}</DealText>
-                {
+                {/* {
                     timer && <Timer>
                                 <img src={timerURL} style={{ width: 24 }} alt='time clock' />
+                                
                                 <Countdown date={Date.now() + 5.04e+7} renderer={renderer} />
                         </Timer>
-                }
+                } */}
                 <ViewAllButton variant="contained" color="primary">View All</ViewAllButton>
             </Deal>
-            <Divider />
-            <Carousel
-                  swipeable={false}
-                  draggable={false}
-                  responsive={responsive}
-                  centerMode={true}
-                  infinite={true}
-                  autoPlay={true}
-                  autoPlaySpeed={2000}
-                  keyBoardControl={true}
-                  showDots={false}
-                  containerClass="carousel-container"
-                  // removeArrowOnDeviceType={["tablet", "mobile"]}
-                  dotListClass="custom-dot-list-style"
-                  itemClass="carousel-item-padding-40-px"
-
-            >
-
-                {
-                    products.map(temp => (
-                        <Link to={`product/${temp.id}`} style={{textDecoration: 'none'}}>
-                             <Box textAlign="center" style={{ padding: '15px 15px', backgroundColor: '#f2f2f2'}}>
-                                    <Image src={temp.url} />
-                                     {/* <Text style={{ fontWeight: 600, color: '#212121' }}>{temp.title.shortTitle}</Text>   */}
-                                    <Text style={{ color: 'green' }}>{temp.discount}</Text>
-                                    <Text style={{ color: '#212121', opacity: '.6' }}>{temp.tagline}</Text>
-                            </Box> 
-                        </Link>
-                    ))
-                }   
-            </Carousel>
-        </>
+        <Divider />
+        <Carousel
+            swipeable={false}
+            draggable={false}
+            responsive={responsive}
+            centerMode={true}
+            infinite={true}
+            autoPlay={true}
+            autoPlaySpeed={2000}
+            keyBoardControl={true}
+            showDots={false}
+            containerClass="carousel-container"
+            // removeArrowOnDeviceType={["tablet", "mobile"]}
+            dotListClass="custom-dot-list-style"
+            itemClass="carousel-item-padding-40-px">
+            {
+                products.map(temp => (
+                    <Link to={`product/${temp._id}`} style={{ textDecoration: 'none' }}>
+                        <Box textAlign="center" style={{ padding: '15px 15px', backgroundColor: '#f2f2f2' }}>
+                            <Image src={temp.images[0].url} />
+                            <Text style={{ color: 'red' }}>{temp.name}</Text>
+                            <Text style={{ color: '#212121', opacity: '.6' }}>{temp.stock}</Text>
+                        </Box>
+                    </Link>
+                ))
+            }
+        </Carousel>
+    </>
     )
 }
 
