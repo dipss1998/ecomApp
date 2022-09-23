@@ -55,11 +55,11 @@ function App() {
       userdata ?
       <Box style={{marginTop: 15}}>
       <Routes>
-      {/* <Route path= '/Checkout' element={<Checkout/>} /> 
+      <Route path= '/Checkout' element={<Checkout/>} /> 
       <Route path= '/AddressForm' element={<AddressForm/>} /> 
       <Route path= '/PaymentForm' element={< PaymentForm/>} />
       <Route path= '/ProfileScreen/:id' element={< ProfileScreen/>} /> 
-      <Route path= '/History' element={< History/>} />  */}
+      <Route path= '/History' element={< History/>} /> 
       <Route path= '/Login' element={<Login />} />    
       <Route path= '/Signup' element={<Signup />} />    
       <Route path= '/Cart' element={<Cart />} />  

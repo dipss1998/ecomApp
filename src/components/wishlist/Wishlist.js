@@ -53,7 +53,6 @@ const RightContainer = styled(Grid)`
     height: 1000px
 `;
 
-
 const Wishlist = () => {
 
   const dispatch = useDispatch();

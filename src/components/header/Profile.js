@@ -55,10 +55,10 @@ const Profile = ({accounts, setAccounts}) => {
                     <MenuItem onClick={() => { handleClose(); logout(); setAccounts('')
 }}>
                         <PowerSettingsNew fontSize='small' color='primary'/> 
-                        <Link to="" refresh="true"> <Logout>Logout</Logout></Link>
+                        <Link to="" refresh="true" style = {{textDecoration:'none', color:'green'}}> <Logout>Logout</Logout></Link>
                     </MenuItem>
                     <MenuItem onClick={() => { handleClose();}}>
-                    <Link to={`/ProfileScreen/${userdata._id}`}>Profile Settings</Link>
+                    <Link to={`/ProfileScreen/${userdata._id}`} style = {{textDecoration:'none', color:'green'}}>Profile Settings</Link>
                     </MenuItem>
                 </Component>
             </>
