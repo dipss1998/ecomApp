@@ -1,22 +1,32 @@
-// import Get_PRODUCT_FAIL from '../constants/productfailConstants'
-// import GET_PRODUCT_DETAILS_SUCCESS from '../constants/getProductsdetails'
-// import products from '../../../../EcomBackend/models/products'
 import axios from 'axios'
 import actionTypes from '../constants/actionTypes'
-
- const url = "http://localhost:5000"
+const url = "http://localhost:8000"
  
 export const fetchProducts = () => async(dispatch) => {
-        const response = await axios.get(`${url}/getProducts/getProducts`)
+    try {
+        dispatch({type:actionTypes.FETCH_PRODUCTS_REQUEST})
+
+        const response = await axios.get(`${url}/getallproducts/getallproducts`)
         dispatch({type:actionTypes.FETCH_PRODUCTS_SUCCESS, payload: response})
-    }    
+        
+    } catch (error) {
+        dispatch({
+            type:actionTypes.FETCH_PRODUCTS_FAIL,
+            payload:error.response.data.message
+        })
+    }
+} 
 
-
-
+export const clearError = () => {
+    return {
+        type: actionTypes.CLEAR_ERROR
+    }
+}
 export const getProducts = (products) => {
 
     // console.log(products);
     return {
+
         type:actionTypes.GET_PRODUCTS_SUCCESS,
         payload: products
        

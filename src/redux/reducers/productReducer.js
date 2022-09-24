@@ -1,35 +1,39 @@
 import actionTypes from '../constants/actionTypes'
  
  const initalState = {
-    products : []
+    products : [],
+    loading : false,
+    error : false
 }
-export const productReducer = (state = initalState, {type, payload}) => {
 
-    switch (type) {
+export const productReducer = (state = initalState,   {type, payload}) => {
+  switch (type) {
+    case actionTypes.FETCH_PRODUCTS_REQUEST:
+        return { 
+            loading: true,
+            products: []  }
 
-        case actionTypes.GET_PRODUCTS_SUCCESS:
-            // console.log("payload,", payload);
+    case actionTypes.FETCH_PRODUCTS_SUCCESS:
+        return { 
+            loadig: false,
+            products: payload  }
 
-            return {  products: payload  }
-  
-        default:
-           return state;
+    case actionTypes.FETCH_PRODUCTS_FAIL:
+        return { 
+            loading:false,
+            error: payload 
+        }
+
+    case actionTypes.CLEAR_ERROR:
+        return {
+            ...state,
+            error: null
+        }
+
+    default:
+        return state;
     }
-
-
 }
-
-// export const productdetailReducer = (state = { product: {}}, action) => {
-    
-//     switch(action.type){
-       
-//         case actionTypes.FETCH_PRODUCT_DETAILS_SUCCESS:
-//             return {  product: {} }
-
-//         default:
-//             return state
-//     }
-// }
 
 export const productdetailReducer = (state = {product: {}}, {type, payload} ) => {
     switch (type) {

@@ -3,7 +3,7 @@ import actionTypes from '../constants/actionTypes';
 import axios from 'axios';
 
 //add to cart
-export const addToCart =  (item) => {
+export const addToCart =  (id, quantity) => {
    
         return{
             type:actionTypes.ADD_TO_CART,
@@ -16,7 +16,6 @@ export const addToCart =  (item) => {
  export const addedToCart = async (e) => {
     const user =  JSON.parse(window.localStorage.getItem('user'));
     const userId = user._id
-      const { _id, quantity} = e.data;
      
       await fetch("http://localhost:5000/carts/cart", {
         method: "POST",
@@ -25,8 +24,8 @@ export const addToCart =  (item) => {
         },
         body: JSON.stringify({
          userId,
-         productId:_id,
-           quantity
+         productId:e._id,
+           quantity:1
         })
     })
    // const res = await data.json();
@@ -74,10 +73,9 @@ export const addtowishlist = (userId, productId) =>{
 }
 //whishlist api
 export const addedtowishlist = async (productId) => {
+    console.log("wishlist api:", productId)
     const user =  JSON.parse(window.localStorage.getItem('user'));
     const userId = user._id
-   
-    //   const { id, quantity} = inpval;
       const data = await fetch("http://localhost:5000/favourites/favourite", {
         method: "POST",
         headers: {
@@ -88,6 +86,6 @@ export const addedtowishlist = async (productId) => {
         })
     })
     const res = await data.json();
-                
+               // console.log("favourite response:", res)
 };
 

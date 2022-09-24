@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import {Box, Typography, Button, ButtonGroup } from '@mui/material'
 import { styled } from '@mui/material/styles';
@@ -42,37 +42,18 @@ const SelletText= styled(Typography)`
     text-Size: 14px;
     font-weight: 600;
 `;
+const ProductItem = ({items, removeitemsfromWishlist}) => {
 
-
-
-
-
-
-const ProductItem = ({items}) => {
-  const removeitemsfromWishlist = async(productId)=>{
-    const user =  JSON.parse(window.localStorage.getItem('user'));
-    const userId =user._id
-    const data = await fetch("http://localhost:5000/favourites/deletefavourite",{
-      method:"POST",
-      headers:{
-          "Content-Type":"application/json"
-      },
-      body:JSON.stringify({
-           productId,  userId
-      })
-  });
-console.log("data in favourites deleted:", data);
-  }
   console.log("---++++----------------", items)
   return (
     <>
     <Component>
       <LeftComponent>
-        <img src={items.url} style={{ height: 110, width: 110 }} /> 
+        <img src={items.images[0].url} alt="product " style={{ height: 110, width: 110 }} /> 
       </LeftComponent> 
          <Container>   
-            <Typography>{addEllipsis(items.title.longTitle)} </Typography>
-            <Typography>{items.title.shortTitle} </Typography>
+            <Typography>{addEllipsis(items.name)} </Typography>
+            {/* <Typography>{items.title.shortTitle} </Typography> */}
       <SelletText>
         Seller: abc
       </SelletText>
@@ -80,9 +61,9 @@ console.log("data in favourites deleted:", data);
         <Typography> Quantity: {items.quantity}</Typography>
 
        <Typography style={{margin: '20px 0'}}>
-           <Cost component="span">₹{items.price.cost}</Cost>&nbsp;&nbsp;&nbsp;
-            <MRP component="span"><strike>₹{items.price.mrp}</strike></MRP>&nbsp;&nbsp;&nbsp;
-            <Discount component="span">{items.price.discount} off</Discount>
+           <Cost component="span">₹{items.price}</Cost>&nbsp;&nbsp;&nbsp;
+            {/* <MRP component="span"><strike>₹{items.price.mrp}</strike></MRP>&nbsp;&nbsp;&nbsp;
+            <Discount component="span">{items.price.discount} off</Discount> */}
         </Typography>
        
         <Button variant='contained' style={{marginTop: -10, height: 30}} onClick={()=>removeitemsfromWishlist(items._id)}>REMOVE</Button>

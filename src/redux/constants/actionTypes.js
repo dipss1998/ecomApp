@@ -3,8 +3,10 @@
 const actionTypes  = {
 
 
-        // GET_PRODUCT_DETAILS_REQUEST : 'getProductsdetailsrequest',
-        FETCH_PRODUCTS_SUCCESS : 'fetchproductssuccess',
+        FETCH_PRODUCTS_REQUEST : 'FETCH_PRODUCTS_REQUEST',
+        FETCH_PRODUCTS_SUCCESS : 'FETCH_PRODUCTS_SUCCESS',
+        FETCH_PRODUCTS_FAIL : 'FETCH_PRODUCTS_FAIL',
+        CLEAR_ERROR: 'CLEAR_ERROR',
         FETCH_PRODUCT_DETAILS_SUCCESS : 'fetchProductsdetailssuccess',
         GET_PRODUCT_DETAILS_SUCCESS : 'getProductsdetailssuccess',
         GET_PRODUCT_DETAILS_FAIL : 'getProductsdetailsfail',

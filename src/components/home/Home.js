@@ -17,7 +17,7 @@ import MidSlide from './MidSlide';
 // import GET_PRODUCTS_SUCCESS from '../../redux/constants/productsuccessConstants';
 const Container = styled(Box)`
    padding: 0px 10px 0px 10px;
-   background: #d9d9d9;
+   background: #D9D9D9;
    background-size:cover;
       background-position:center;
       z-index: -1;
@@ -35,18 +35,18 @@ margin-top: -490px;
       flex-flow:row-wrap;
       background-size:cover;
       background-position:center;
-     
-
 `;
+
 const Home = () => {
+
 const dispatch = useDispatch();
 const  products = useSelector((state) => state.getallProducts.products);
-  // const user = useSelector((state) =>state.userResuder.user)
+console.log('products', products)
+
   useEffect(()=>{
     dispatch(fetchProducts());
-    // dispatch(userdata());
   }, [])
-  // console.log( "kjdsbfjhfbjf" , products)
+
   return (
     <>
       <NavBar />
@@ -59,37 +59,41 @@ const  products = useSelector((state) => state.getallProducts.products);
         {/* <Typography> {name} </Typography> */}
          <MidSlide  />  
         {/* <MidSection/> */}
-        <Box style={{ backgroundColor: "grey" }}>
 
-                <LastSlider
-                  
-                  title='Discounts for You'
-                  timer={false} 
-                  multi={true} 
-                
-                />
+        {
+          products.loading ? "loading" :   <Box style={{ backgroundColor: "#D9D9D9" }}>
 
-                <LastSlider
-                    
-                    title='Suggested Items'
-                    timer={false} 
-                    multi={true} 
-                />
-                <LastSlider
-                    
-                    title='Top Selection'
-                    timer={false} 
-                    multi={true} 
-                />
-                <LastSlider
-                    
-                    title='Recommended Items'
-                    timer={false} 
-                    multi={true} 
-                />
-           
+          <LastSlider
+            
+            title='Discounts for You'
+            timer={false} 
+            multi={true} 
+          
+          />
 
-        </Box> 
+          <LastSlider
+              
+              title='Suggested Items'
+              timer={false} 
+              multi={true} 
+          />
+          <LastSlider
+              
+              title='Top Selection'
+              timer={false} 
+              multi={true} 
+          />
+          <LastSlider
+              
+              title='Recommended Items'
+              timer={false} 
+              multi={true} 
+          />
+     
+
+  </Box> 
+        }
+      
         <Footer />
       </Content>
 

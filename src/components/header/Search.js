@@ -56,12 +56,9 @@ const dispatch = useDispatch();
 
 
     const response = await axios
-    .get("http://localhost:5000/getallproducts/getallproducts").catch((err) => {
-      console.log("error", err);
+    .get("http://localhost:8000/getallproducts/getallproducts").catch((err) => {
     });
-    // console.log(response);
     dispatch(getProducts(response.data))
-    // console.log(response);
     
 };
 

@@ -43,12 +43,12 @@ const DetailView = () => {
  const {id} = useParams(); 
  console.log("product ID", id)
  const dispatch = useDispatch();
- //const product = useSelector((state)=>state.product.product)
- const url = `http://localhost:5000`
+ const products = useSelector((state)=>state.product.product)
+ console.log('products', products)
     const fetchProductDetail = async (id) =>{
         console.log("product id:", id)
         const response = await axios
-        .get(`http://localhost:5000/productdetails/product/${id}`)
+        .get(`http://localhost:8000/productdetails/product/${id}`)
         .catch((err)=>{
             console.log("err", err);
         })
@@ -63,14 +63,9 @@ const DetailView = () => {
         
     }, [])
 
-//   const   productt = "https://m.media-amazon.com/images/I/71-vsNgqZUL._AC_SX451_SY423_.jpg"
-
-//   const {  title, price,  description, cost } = product;
-
-// console.log(id);
    const addTowishlist = async(e)=>{ 
-    console.log("wishlist data", e)  
-    await addedtowishlist(e.data._id) 
+    console.log("wishlist data", e._id)  
+    await addedtowishlist(e._id) 
          dispatch(addtowishlist(e));
         setWishShow(!wishshow)    
     }

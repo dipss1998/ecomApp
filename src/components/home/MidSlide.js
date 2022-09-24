@@ -12,7 +12,7 @@ const LeftComponent = styled(Box)(({ theme}) => ({
 
 const RightComponent = styled(Box)(({ theme}) => ({
     marginTop: 10,
-    background: '#FFFFFF',
+    background: '#D9D9D9',
     width: '17%',
     marginLeft: 10,
     padding: 5,
