@@ -53,7 +53,7 @@ const DetailView = () => {
             console.log("err", err);
         })
                // dispatch(getProductdetails(response))
-                 console.log("product details:",response);
+                //  console.log("product details:",response);
                  setProduct(response.data.getproduct)
     }
 
@@ -64,7 +64,7 @@ const DetailView = () => {
     }, [])
 
    const addTowishlist = async(e)=>{ 
-    console.log("wishlist data", e._id)  
+    // console.log("wishlist data", e._id)  
     await addedtowishlist(e._id) 
          dispatch(addtowishlist(e));
         setWishShow(!wishshow)    
