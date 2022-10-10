@@ -10,11 +10,11 @@ import LastSlider from './Sliders';
 import Footer from './Footer';
 
 import { useSelector, useDispatch, getState } from 'react-redux'; // hooks
-import {  fetchProducts  } from '../../redux/actions/productActions';
+import {  getProducts  } from '../../redux/actions/productActions';
  import {userdata} from '../../redux/actions/user'
 import store from '../../redux/Store';
-import MidSlide from './MidSlide';
-// import GET_PRODUCTS_SUCCESS from '../../redux/constants/productsuccessConstants';
+import MidSlide from './MidSlide'; 
+import CircularIndeterminate from '../../loader/Loader'
 const Container = styled(Box)`
    padding: 0px 10px 0px 10px;
    background: #D9D9D9;
@@ -39,13 +39,12 @@ margin-top: -490px;
 
 const Home = () => {
 
-const dispatch = useDispatch();
-const  products = useSelector((state) => state.getallProducts.products);
-console.log('products', products)
+    const dispatch = useDispatch();
+    const  {products, error, loading} = useSelector((state) => state.getallProducts);
 
-  useEffect(()=>{
-    dispatch(fetchProducts());
-  }, [])
+    useEffect(()=>{
+      dispatch(getProducts());
+    }, [])
 
   return (
     <>
@@ -56,12 +55,10 @@ console.log('products', products)
       <Content>
         <BannerCate />
 
-        {/* <Typography> {name} </Typography> */}
          <MidSlide  />  
-        {/* <MidSection/> */}
 
         {
-          products.loading ? "loading" :   <Box style={{ backgroundColor: "#D9D9D9" }}>
+          products.loading ?  <CircularIndeterminate /> :   <Box style={{ backgroundColor: "#D9D9D9" }}>
 
           <LastSlider
             

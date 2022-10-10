@@ -40,33 +40,28 @@ const WishlistButton = styled(Box)`
 const DetailView = () => {
     const [wishshow, setWishShow] = useState(false)
     const [product, setProduct] = useState(false)
- const {id} = useParams(); 
- console.log("product ID", id)
- const dispatch = useDispatch();
- const products = useSelector((state)=>state.product.product)
- console.log('products', products)
+    const {id} = useParams(); 
+    const dispatch = useDispatch();
+    const products = useSelector((state)=>state.product.product)
+    console.log('products', products)
     const fetchProductDetail = async (id) =>{
-        console.log("product id:", id)
         const response = await axios
         .get(`http://localhost:8000/productdetails/product/${id}`)
         .catch((err)=>{
-            console.log("err", err);
         })
-               // dispatch(getProductdetails(response))
-                 console.log("product details:",response);
                  setProduct(response.data.getproduct)
+                 dispatch(getProductdetails(response))
     }
 
     useEffect(()=>{
-       // if (product && id !== product.id) 
+    //    if (product && id !== product.id) 
         (fetchProductDetail(id));
         
     }, [])
 
    const addTowishlist = async(e)=>{ 
-    console.log("wishlist data", e._id)  
     await addedtowishlist(e._id) 
-         dispatch(addtowishlist(e));
+        dispatch(addtowishlist(e));
         setWishShow(!wishshow)    
     }
 
@@ -82,13 +77,21 @@ const DetailView = () => {
                 <Button  onClick={()=>addTowishlist(product)}> {!wishshow ?<FavoriteBorderIcon />:<FavoriteBorderIcon style= {{color:"red"}}/> }</Button>
             </WishlistButton>
                 <Typography>{product.name}</Typography>
+                   
                 <Typography style={{marginTop: 5, color: '#878787', fontSize: 14 }}>
-                    8 Ratings & 1 Reviews
+                   {product.numOfReviews},
+                   
+                    {product.ratings} Reviews
+                    {/* {product.reviews && product.reviews[0]? {
+                         
+                    }} */}
                 </Typography>
                 <Typography>
                     <span style={{ fontSize: 28 }}>₹{product.price}</span>&nbsp;&nbsp;&nbsp; 
-                    {/* <span style={{ color: '#878787' }}><strike>₹{product.data.price.mrp}</strike></span>&nbsp;&nbsp;&nbsp; */}
-                    {/* <span style={{ color: '#388E3C' }}>{product.data.price.discount} off</span> */}
+                    <p>
+                        <b className = {product.stock <1 ? "redColor" : "greenColor"} />
+                        {product.stock <1 ? "outOfStock" : "InStock"}
+                    </p>
                 </Typography>
                 <ProductDetail product={product} />
             </RightContainer>

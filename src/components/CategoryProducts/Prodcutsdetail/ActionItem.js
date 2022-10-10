@@ -7,6 +7,7 @@ import { payUsingPayTm } from '../../../service/api';
 import { post } from '../../utils/paytm';
 import { addToCart, addedToCart } from '../../../redux/actions/cartActions';
 import { useDispatch, useSelector } from 'react-redux';
+import { useAlert } from 'react-alert';
 
 const LeftContainer = styled(Box)(({ theme }) => ({
     minWidth: '40%',
@@ -34,9 +35,10 @@ const StyledButton = styled(Button)`
 `;
 
 const ActionItem = ({ product }) => {
-
+    const alert = useAlert()
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
     const getData = (data) => {
 
         return fetch(`http://localhost:8000/paytmpayment/paytmpayment`, {
@@ -59,7 +61,6 @@ const ActionItem = ({ product }) => {
     }
     const addItemToCart = async (e) => {
         dispatch(addToCart(e));
-        // console.log("action items:", e._id)
         await addedToCart(e)
         navigate('/Cart');
     }

@@ -14,7 +14,6 @@ export const wishlistReducers = (state = {wishlistItems: []}, {type, payload} ) 
 
 export const cartReducers = (state = {cartItems:[]}, action ) => {
       const product = action.payload 
-      console.log('product', product)    
   switch (action.type) {
             case actionTypes.ADD_TO_CART:   
             const exist = state.cartItems.filter((x)=>x.id === product.id);

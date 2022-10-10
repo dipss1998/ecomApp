@@ -2,15 +2,15 @@
 
 const actionTypes  = {
 
-
         FETCH_PRODUCTS_REQUEST : 'FETCH_PRODUCTS_REQUEST',
         FETCH_PRODUCTS_SUCCESS : 'FETCH_PRODUCTS_SUCCESS',
         FETCH_PRODUCTS_FAIL : 'FETCH_PRODUCTS_FAIL',
         CLEAR_ERROR: 'CLEAR_ERROR',
-        FETCH_PRODUCT_DETAILS_SUCCESS : 'fetchProductsdetailssuccess',
-        GET_PRODUCT_DETAILS_SUCCESS : 'getProductsdetailssuccess',
-        GET_PRODUCT_DETAILS_FAIL : 'getProductsdetailsfail',
-        // GET_PRODUCT_DETAILS_RESET :'getProductsdetailsreset',
+        
+        GET_PRODUCT_DETAILS_SUCCESS : 'GET_PRODUCT_DETAILS_SUCCESS',
+        GET_PRODUCT_DETAILS_FAIL : 'GET_PRODUCT_DETAILS_FAIL',
+        GET_PRODUCT_DETAILS_REQUEST :'GET_PRODUCT_DETAILS_REQUEST',
+
         GET_PRODUCTS_FAIL : 'getProductsFail',
         GET_PRODUCTS_SUCCESS : 'getProductsSuccess',
         ADD_TO_CART:"addtoCart",
@@ -21,6 +21,7 @@ const actionTypes  = {
         ADD_TO_WISHLIST: "ADD_TO_WISHLIST",
         REMOVE_TO_WISHLIST : "REMOVE_TO_WISHLIST",
         REMOVE_ALL_TO_CART:"REMOVE_ALL_TO_CART"
+        
 }
 
 export default actionTypes
