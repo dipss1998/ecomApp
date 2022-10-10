@@ -32,17 +32,12 @@ const Profile = ({ accounts, setAccounts }) => {
     }
 
     const logout = () => {
-
         localStorage.clear();
-        // location.reload()
         history('/Signup')
         dispatch(removefromCartAllProducts())
-
     }
 
-
     const userdata = JSON.parse(localStorage.getItem("user"))
-
 
     return (
         <>

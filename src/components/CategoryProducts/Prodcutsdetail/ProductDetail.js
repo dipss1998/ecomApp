@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { Box, Typography, Table, TableBody, TableRow, TableCell, styled } from '@mui/material';
 import { LocalOffer as Badge } from '@mui/icons-material';
 import { useParams } from 'react-router-dom';
@@ -28,10 +28,10 @@ const StyledBadge = styled(Badge)`
 `;
 
 const ProductDetail = ({ product }) => {
-    // const {productId} = useParams()
-    // const adURL = 'https://rukminim1.flixcart.com/lockin/774/185/images/CCO__PP_2019-07-14.png?q=50';
+  
     console.log("Product ===========:", product)
-    const date = new Date(new Date().getTime()+(5*24*60*60*1000));  
+    const date = new Date(new Date().getTime() + (5 * 24 * 60 * 60 * 1000));
+  
     return (
         <>
             <Typography>Available offers</Typography>
@@ -39,6 +39,7 @@ const ProductDetail = ({ product }) => {
                 <Typography><StyledBadge />Bank Offer 5% Unlimited Cashback on Flipkart Axis Bank Credit Card</Typography>
                 <Typography><StyledBadge />Bank Offer 10% Off on Bank of Baroda Mastercard debit card first time transaction, Terms and Condition apply</Typography>
                 <Typography><StyledBadge />Purchase this Furniture or Appliance and Get Extra ₹500 Off on Select ACs</Typography>
+                <Typography><StyledBadge />Partner OfferExtra 10% off upto ₹500 on next furniture purchase</Typography>
                 <Typography><StyledBadge />Partner OfferExtra 10% off upto ₹500 on next furniture purchase</Typography>
             </SmallText>
             <Table>
@@ -66,7 +67,7 @@ const ProductDetail = ({ product }) => {
                     </TableRow>
                     <ColumnText>
                         <TableCell style={{ color: '#878787' }}>Description</TableCell>
-                        <TableCell>{product.description}</TableCell> 
+                        <TableCell>{product.description}</TableCell>
                     </ColumnText>
                 </TableBody>
             </Table>

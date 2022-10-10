@@ -32,9 +32,6 @@ const LeftComponent = styled(Box)`
                "Content-Type": "application/json",
                "Authorization" : `Bearer ${user.Token}`
            },
-          //  body: JSON.stringify({
-          //   user:userId
-          //  })
        })
       const res = await data.json();
       setCartProducts(res.orders);
@@ -51,7 +48,7 @@ const LeftComponent = styled(Box)`
       </LeftComponent> 
          <Container>  
          <Typography>Title: {items.orderItems[0].name} </Typography>
-            <Typography>Delivered at: {items.deliveredAt} </Typography>
+            <Typography>Order Status: {items.orderStatus} </Typography>
             <Typography>Paid at:{items.paidAt}</Typography>
             <Typography>Shipping Price :{items.shippingPrice}</Typography>
             <Typography>Total Price :{items.totalPrice}</Typography>

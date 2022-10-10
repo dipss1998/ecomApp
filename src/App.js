@@ -9,7 +9,7 @@ import Checkout from './components/checkout/Checkout';
 import PaymentForm from './components/checkout/PaymentForm';
 import TemplateProvider from './templates/TemplateProvider';
 import ContextProvider from './components/context/ContextProvider';
-import ProfileScreen from './components/profile/ProfileScreen';
+import DefaultProfileScreen from './components/profile/DefaultProfileScreen';
 import Cart from './components/cart/Cart';
 //import ManageAddress from './components/profile/ManageAddress'
 import Login from './components/authpages/Login';
@@ -32,20 +32,12 @@ function App() {
   
   const userdata = JSON.parse(localStorage.getItem("user"))
 
-    
-    
-    
-
-
   return (
-    <TemplateProvider>
-
+  <TemplateProvider>
   <ContextProvider  >
   {/* <UserContext.Provider > */}
-  <Router style = {{position:'fixed'}}>    
-   
+  <Router style = {{position:'fixed'}}>     
   <Header  style = {{height:55}} />
-  
     <NavBar/>
     <Routes>
     <Route path= '/' element={<Home />} /> 
@@ -58,7 +50,7 @@ function App() {
       <Route path= '/Checkout' element={<Checkout/>} /> 
       <Route path= '/AddressForm' element={<AddressForm/>} /> 
       <Route path= '/PaymentForm' element={< PaymentForm/>} />
-      <Route path= '/ProfileScreen/:id' element={< ProfileScreen/>} /> 
+      <Route path= '/ProfileScreen/:id' element={< DefaultProfileScreen/>} /> 
       <Route path= '/History' element={< History/>} /> 
       <Route path= '/Login' element={<Login />} />    
       <Route path= '/Signup' element={<Signup />} />    
@@ -67,7 +59,6 @@ function App() {
       <Route path= '/KitchenCategory' element={<KitchenCategory/>} />
       <Route path= '/ElectronicCategory' element={<ElectronicCategory/>} />
       <Route path= '/product/:id'  element={<DetailView />} /> 
-
       </Routes>
       </Box>
       :

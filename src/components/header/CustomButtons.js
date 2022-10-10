@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import {Link} from 'react-router-dom';
 import wishlist from '../wishlist/Wishlist';
 import Avatar from '@mui/material/Avatar';
-import ProfileScreen from '../profile/DefaultProfileScreen';
+import DefaultProfileScreen from '../profile/DefaultProfileScreen';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 const StyledBadge = styled(Badge) ({
   '& .MuiBadge-badge': {
@@ -98,11 +98,7 @@ const CustomButtons = () => {
           const userdata = JSON.parse(localStorage.getItem("user"))
           const user = JSON.parse(window.localStorage.getItem('user'));
           const userId = user._id
-   // const cartItem = useSelector((state) => state.cart )
  
-
-  
-  // console.log("cart length:", cartItem)
     const reloadstop =()=>{
       window.stop();
     } 
@@ -130,8 +126,6 @@ const CustomButtons = () => {
             <ShoppingCartIcon style={{color:"white", marginTop:-5}} />
           {/* </StyledBadge> */}
         </IconButton>    
-                
-         
           </CartDesign>
         </Link> 
          <Box>
