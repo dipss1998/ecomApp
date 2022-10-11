@@ -49,6 +49,8 @@ const DetailView = () => {
         .get(`http://localhost:8000/productdetails/product/${id}`)
         .catch((err)=>{
         })
+               // dispatch(getProductdetails(response))
+                //  console.log("product details:",response);
                  setProduct(response.data.getproduct)
                  dispatch(getProductdetails(response))
     }
@@ -60,6 +62,7 @@ const DetailView = () => {
     }, [])
 
    const addTowishlist = async(e)=>{ 
+    // console.log("wishlist data", e._id)  
     await addedtowishlist(e._id) 
         dispatch(addtowishlist(e));
         setWishShow(!wishshow)    

@@ -1,9 +1,9 @@
-import React from 'react'
+// import React from 'react'
 
-const EmptyWishlist = () => {
-  return (
-    <div>EmptyWishlist</div>
-  )
-}
+// const EmptyWishlist = () => {
+//   return (
+//     <div>EmptyWishlist</div>
+//   )
+// }
 
-export default EmptyWishlist
+// export default EmptyWishlist

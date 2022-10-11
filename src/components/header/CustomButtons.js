@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import {Link} from 'react-router-dom';
 import wishlist from '../wishlist/Wishlist';
 import Avatar from '@mui/material/Avatar';
-import ProfileScreen from '../profile/DefaultProfileScreen';
+import DefaultProfileScreen from '../profile/DefaultProfileScreen';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 const StyledBadge = styled(Badge) ({
   '& .MuiBadge-badge': {
@@ -92,22 +92,18 @@ const CartDesign = styled(Box)`
 }));
 
 const CustomButtons = () => {
-    const [open, setOpen ]= useState(false);
+   
     const {accounts, setAccounts} = useContext(LoginContext);
     
     const dispatch = useDispatch()
           const userdata = JSON.parse(localStorage.getItem("user"))
-         
-    const cartItem = useSelector((state) => state.cart )
-    //console.log(cartItem);
+          const user = JSON.parse(window.localStorage.getItem('user'));
+          // const userId = user._id
+ 
     const reloadstop =()=>{
       window.stop();
-    }
-
-   
-    
+    } 
   return (
-   
     <Wrapper>
       {
         // accounts ? 
@@ -119,28 +115,22 @@ const CustomButtons = () => {
        
        <Link to="/Login" style={{textDecoration:'none', color:'inherit'}}> <LoginButton variant="contained" >Login </LoginButton></Link>
       }
-        {/* <Typography>My Account</Typography> */}
-        {/* <Typography>Return&Orders</Typography> */}
         <Link to="/History" style={{textDecoration:'none', color:'inherit', marginTop:20}}>Return&Orders </Link>
-       
-       
        <Link to="/Cart" style = {{textDecoration: 'none', color:'inherit',}} >
          <CartDesign  >
         <Typography >Cart 
               {/* {cartItem.cart.length} */}
           </Typography>
          
-        {/* <IconButton aria-label="cart" >
-          <StyledBadge badgeContent={cartItem.length} color="secondary">
+        <IconButton aria-label="cart" >
+          {/* <StyledBadge badgeContent={cartItem} color="secondary"> */}
             <ShoppingCartIcon style={{color:"white", marginTop:-5}} />
-          </StyledBadge>
-        </IconButton>     */}
-                
-         
+          {/* </StyledBadge> */}
+        </IconButton>    
           </CartDesign>
         </Link> 
          <Box>
-         <Link to ="/wishlist" cartItem ={cartItem}><FavoriteBorderIcon/></Link>
+         <Link to ="/wishlist" ><FavoriteBorderIcon/></Link>
         </Box>
         {/* {
          accounts ? <MyProfile accounts = {accounts} setAccounts={setAccounts}/> : */}

@@ -53,7 +53,6 @@ const RightContainer = styled(Grid)`
     height: 1000px
 `;
 
-
 const Wishlist = () => {
 
   const dispatch = useDispatch();
@@ -65,7 +64,7 @@ const Wishlist = () => {
     const fetchProductWishlist = async () =>{
       const user =  JSON.parse(window.localStorage.getItem('user'));
       const userId = user._id
-      const data = await fetch("http://localhost:5000/favourites/getfavourite", {
+      const data = await fetch("http://localhost:8000/favourites/getfavourite", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -81,7 +80,7 @@ const Wishlist = () => {
     const removeitemsfromWishlist = async(productId)=>{
       const user =  JSON.parse(window.localStorage.getItem('user'));
       const userId =user._id
-      const data = await fetch("http://localhost:5000/favourites/deletefavourite",{
+      const data = await fetch("http://localhost:8000/favourites/deletefavourite",{
         method:"POST",
         headers:{
             "Content-Type":"application/json"

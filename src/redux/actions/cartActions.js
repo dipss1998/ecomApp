@@ -17,7 +17,7 @@ export const addToCart =  (id, quantity) => {
     const user =  JSON.parse(window.localStorage.getItem('user'));
     const userId = user._id
      
-      await fetch("http://localhost:5000/carts/cart", {
+      await fetch("http://localhost:8000/carts/cart", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -52,7 +52,7 @@ export const removedfromCart = async (productId) => {
     const userId = user._id
   
     //   const { id, quantity} = inpval;
-      const data = await fetch("http://localhost:5000/carts/deletecart", {
+      const data = await fetch("http://localhost:8000/carts/deletecart", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -76,7 +76,7 @@ export const addedtowishlist = async (productId) => {
     console.log("wishlist api:", productId)
     const user =  JSON.parse(window.localStorage.getItem('user'));
     const userId = user._id
-      const data = await fetch("http://localhost:5000/favourites/favourite", {
+      const data = await fetch("http://localhost:8000/favourites/favourite", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

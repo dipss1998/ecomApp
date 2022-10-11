@@ -1,9 +1,9 @@
 import actionTypes from '../constants/actionTypes'
 
-export const userdata =  (user) => {
+export const profilepic =  (pic) => {
   //  console.log(user);
-    return{
-        type:actionTypes.USER,
-        payload:user
+    return {
+        type:actionTypes.USER_PROFILE_PIC,
+        payload:pic
     }
 }

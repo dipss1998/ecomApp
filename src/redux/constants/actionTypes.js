@@ -20,8 +20,8 @@ const actionTypes  = {
         USER:"USER",
         ADD_TO_WISHLIST: "ADD_TO_WISHLIST",
         REMOVE_TO_WISHLIST : "REMOVE_TO_WISHLIST",
-        REMOVE_ALL_TO_CART:"REMOVE_ALL_TO_CART"
-        
+        REMOVE_ALL_TO_CART:"REMOVE_ALL_TO_CART",
+        USER_PROFILE_PIC: "USER_PROFILE_PIC"
 }
 
 export default actionTypes

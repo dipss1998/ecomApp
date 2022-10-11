@@ -15,7 +15,11 @@ export const updateInfo = async (profile) => {
     profile.id = user._id;
     try {
         console.log("url", profile)
-       return await axios.post(`${url}/updateProfile/updateUser`, profile)
+       return await axios.post(`${url}/updateProfile/updateUser`, profile, {
+        headers: {
+          "Authorization" : `Bearer ${user.Token}`
+        }
+      })
       
     } catch (error) {
         console.log('error while calling login API: ', error);
