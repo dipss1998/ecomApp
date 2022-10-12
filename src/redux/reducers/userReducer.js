@@ -1,16 +1,16 @@
 import actionTypes from '../constants/actionTypes'
  
  const initalState = {
-    user : {}
+    pic : {}
 }
-export const userReducer = (state = initalState, {type, payload}) => {
+export const userprofileReducer = (state = initalState, {type, payload}) => {
 
     switch (type) {
 
-        case actionTypes.USER:
+        case actionTypes.USER_PROFILE_PIC:
             // console.log("payload,", payload);
 
-            return {  user: payload  }
+            return { ...state, payload  }
   
         default:
            return state;

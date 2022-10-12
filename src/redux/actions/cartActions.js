@@ -1,46 +1,23 @@
 import { useState, useEffect } from 'react';
-import actionTypes from '../constants/actionTypes'
-// export const addToCart = (id) => async (dispatch) => {
-//     try { 
-//         const  response  = await axios.get(`http://localhost:5000/product/${id}`);
+import actionTypes from '../constants/actionTypes';
+import axios from 'axios';
 
-//         dispatch({ type:actionTypes.ADD_TO_CART, payload: response });
-        
-//         console.log(response);
-
-//     } catch (error) {
-//         console.log('Error while calling cart API');
-//     }
-// };
-
-// export const removeFromCart = (id) => (dispatch) => {
-//     dispatch({
-//         type: actionTypes.REMOVE_TO_CART,
-//         payload: id
-//     })
-
-// };
-
-//const [quantity, setQuantity ] = useState(0)
 //add to cart
-export const addToCart =  (item) => {
+export const addToCart =  (id, quantity) => {
    
         return{
             type:actionTypes.ADD_TO_CART,
-            payload:item
+            payload:{id, quantity}
         }
 }
 
-// const [inpval, setInpval] = useState({
-//     id:"", quantity:""
-//   });
   //setInpval({id:item.data.id, quantity:item.data.quantity})
  // console.log(item);
  export const addedToCart = async (e) => {
     const user =  JSON.parse(window.localStorage.getItem('user'));
     const userId = user._id
      
-      await fetch("http://localhost:5000/carts/cart", {
+      await fetch("http://localhost:8000/carts/cart", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -75,7 +52,7 @@ export const removedfromCart = async (productId) => {
     const userId = user._id
   
     //   const { id, quantity} = inpval;
-      const data = await fetch("http://localhost:5000/carts/deletecart", {
+      const data = await fetch("http://localhost:8000/carts/deletecart", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -99,7 +76,7 @@ export const addedtowishlist = async (productId) => {
     console.log("wishlist api:", productId)
     const user =  JSON.parse(window.localStorage.getItem('user'));
     const userId = user._id
-      const data = await fetch("http://localhost:5000/favourites/favourite", {
+      const data = await fetch("http://localhost:8000/favourites/favourite", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

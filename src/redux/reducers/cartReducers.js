@@ -13,22 +13,39 @@ export const wishlistReducers = (state = {wishlistItems: []}, {type, payload} ) 
 }
 
 export const cartReducers = (state = {cartItems:[]}, action ) => {
-        switch (action.type) {
+      const product = action.payload 
+  switch (action.type) {
             case actionTypes.ADD_TO_CART:   
-            const ItemIndex = state.cartItems.findIndex((item)=>item.id === action.payload.id)
-            if(ItemIndex >=1){
-              state.cartItems[ItemIndex].quantity +=1
-            } else {
-              const temp = {...action.payload, quantity : +1}
-              return {
-                ...state,
-                cartItems : [...state.cartItems, temp]
-              }
-            }
+            const exist = state.cartItems.filter((x)=>x.id === product.id);
+           
+            if(exist){
+            //increse the quantity
+            return state.cartItems.map((x)=>
+            x.id === product.id ? {...x, quantity: x.quantity + 1}: x )
+               
+  }else {
+    const product = action.payload;
+    return [
+
+     { ...state,
+      cartItems : [...state.cartItems, product ]
+      // {
+      //   ...product,
+      //   quantity: 1,
+      // }
+    }
+    ]
+  }
+break;
+
+
+               
+          
+            
             case actionTypes.REMOVE_TO_CART:
               // const itemId = action.payload;
                   const data = state.cartItems.filter((item)=> item.id !== action.payload)
-                //  console.log(data);
+                 console.log(state.cartItems);
                   return{
               ...state,
               cartItems: data

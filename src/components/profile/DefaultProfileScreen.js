@@ -1,16 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { useParams } from 'react-router-dom'
 import { updateInfo, getUser } from '../../service/addressapi';
 import AppBar from '@mui/material/AppBar';
 import {Box, Typography, Card,Grid, Button, TextField, Select, MenuItem} from '@mui/material';
-import { Link } from 'react-router-dom';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
+import { useDispatch } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import { CenterFocusStrong } from '@mui/icons-material';
-
+ import Avatar from '@mui/material/Avatar'
+ import { LoginContext } from '../context/ContextProvider';
+import { profilepic } from '../../redux/actions/user';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#ebf1f7',
   ...theme.typography.body2,
@@ -19,9 +18,22 @@ const Item = styled(Paper)(({ theme }) => ({
   // color: theme.palette.text.primary,
 }));
 
+const AvatarDesign = styled(Avatar)`
+    margin-top: 57px
+    width: 250
+`;
+
 const DefaultProfileScreen = () => {
   const { id } = useParams();
-    const [old, setOld] = useState({})
+  const [old, setOld] = useState({})
+  const [profile, setProfile] = useState(old)
+  const {accounts, setAccounts} = useContext(LoginContext);
+  const [image, setImage] = useState("")
+  const [url, setUrl] = useState("")
+  const dispatch = useDispatch()
+   const user = JSON.parse(localStorage.getItem("user"))
+   console.log('user', user.pic)
+
     const olddata = async () => {
       const data = await getUser(id)
       setOld(data.data)
@@ -29,7 +41,50 @@ const DefaultProfileScreen = () => {
     useEffect(() => {
           olddata()
         },[])
-        const [profile, setProfile] = useState(old)
+
+        useEffect(()=>{
+          if(image){
+           const data = new FormData()
+           data.append("file", image)
+           data.append("upload_preset","cbnitsecomapp")
+           data.append("cloud_name","webss")
+           fetch("https://api.cloudinary.com/v1_1/webss/image/upload",{
+               method:"post",
+               body:data
+           })
+           .then(res=>res.json())
+           .then(data=>{
+       
+              fetch('http://localhost:8000/Profile/photo',{
+                  method:"put",
+                  headers:{
+                      "Content-Type":"application/json",
+                      "Authorization":"Bearer "+localStorage.getItem("token")
+                  },
+                  body:JSON.stringify({
+                      pic:data.url
+                  })
+              }).then(res=>res.json())
+              .then(result=>{
+                  console.log(result)
+                  // localStorage.setItem("user",JSON.stringify({...accounts,pic:result.pic}))
+                  // dispatch(profilepic())
+                  window.location.reload()
+              })
+          
+           })
+           .catch(err=>{
+               console.log(err)
+           })
+          }
+       },[image])
+        
+
+
+        const profilepic = (file)=>{
+            setImage(file)
+        }
+
 
   const presskey = (e) => {
     setProfile({ ...profile, [e.target.name]: e.target.value })
@@ -42,7 +97,22 @@ await updateInfo(profile);
  }
   return(
   <Box sx={{ flexGrow: 1 }} style={{ marginLeft:70}}>
-    <Typography variant='h4'>Personal Information</Typography>
+        <Typography variant='h4'>Personal Information</Typography>
+
+    <Box style={{justifyItems:'center', marginTop: 20,  marginBottom: 30}}>
+    <AvatarDesign alt="Remy Sharp" src={old.pic} /> 
+
+        <Button  variant='contained' >
+
+             <input type='file' placeholder='upload pic ' onChange={(e)=>{
+              profilepic(e.target.files[0])
+             }} />
+        </Button>
+{/* 
+        <Button variant='contained' onClick={()=>{
+              profilepic()
+             }}>Submit</Button> */}
+    </Box>
     <Card style={{ backgroundColor:"#debf12", width:800, padding:10}}>
             <Grid container spacing={3} style={{marginLeft:50, width:600, paddingButtom:20}}>
             <Grid item xs={6} style={{height:30}} >

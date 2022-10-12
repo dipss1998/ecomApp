@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, { useState,useEffect } from 'react';
+import axios from 'axios';
 import { Button, Box, styled } from '@mui/material';
 import { ShoppingCart as Cart, FlashOn as Flash } from '@mui/icons-material';
 import { useNavigate, Link, useParams } from 'react-router-dom';
 import { addToCart, addedToCart } from '../../../redux/actions/cartActions';
 import StripeCheckout from 'react-stripe-checkout';
 import { useDispatch, useSelector } from 'react-redux';
+import { useAlert } from 'react-alert';
 
 const LeftContainer = styled(Box)(({ theme }) => ({
     minWidth: '40%',
@@ -75,7 +77,7 @@ const publishableKey="pk_test_51LmCnkSA0lEKtKgzucaWDlWyhjp4on5WqKOGIZzcB19FzKIBK
         }
     })
     const createOrder = () => {
-        fetch('http://localhost:5000/order/order', {
+        fetch('http://localhost:8000/order/order', {
             method: 'POST', headers: {
                 'Content-Type': 'application/json',
             'Authorization':`Bearer ${user.Token}`},
@@ -99,7 +101,7 @@ const publishableKey="pk_test_51LmCnkSA0lEKtKgzucaWDlWyhjp4on5WqKOGIZzcB19FzKIBK
     //         },
     //         body: JSON.stringify(data)
     //     }).then(response => response.json()).catch(err => console.log(err))
-    return fetch(`http://localhost:5000/stripe/pay`, {
+    return fetch(`http://localhost:8000/stripe/pay`, {
         method: "POST",
         headers: {
             Accept: "application/json",
@@ -123,7 +125,6 @@ const publishableKey="pk_test_51LmCnkSA0lEKtKgzucaWDlWyhjp4on5WqKOGIZzcB19FzKIBK
    // }
     const addItemToCart = async (e) => {
         dispatch(addToCart(e));
-        console.log("action items:", e._id)
         await addedToCart(e)
         navigate('/Cart');
     }

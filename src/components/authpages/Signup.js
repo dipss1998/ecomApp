@@ -76,7 +76,7 @@ const Register = () => {
             });
         } else {
             // console.log("user registration succesfully done");
-            const data = await fetch("http://localhost:5000/signup", {
+            const data = await fetch("http://localhost:8000/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

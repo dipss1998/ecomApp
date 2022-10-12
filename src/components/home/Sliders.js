@@ -33,7 +33,7 @@ const Image = styled('img')({
     position: "fix",
     objectfit: "cover",
     margintop: 0,
-    backgroundcolor: 'grey'
+    backgroundcolor: '#D9D9D9'
 });
 
 const Text = styled(Typography)`
@@ -44,7 +44,7 @@ const Text = styled(Typography)`
 const Deal = styled(Box)`
     display: flex;    
     padding: 15px 20px;
-    background-Color: #f2f2f2
+    background-Color: #D9D9D9
 `;
 
 const Timer = styled(Box)`
@@ -82,11 +82,9 @@ const LastSlider = ({ timer, title }) => {
     //   const {id, title, discount, url} = products
     const fetchProducts = async () => {
         const response = await axios
-            .get("http://localhost:5000/getallproducts/getallproducts").catch((err) => {
-                console.log("error", err);
+            .get("http://localhost:8000/getallproducts/getallproducts").catch((err) => {
             });
         // dispatch(getProducts(response.data))
-        console.log("response=============", response.data.getproducts);
         setProducts(response.data.getproducts)
     };
 

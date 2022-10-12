@@ -10,14 +10,14 @@ import LastSlider from './Sliders';
 import Footer from './Footer';
 
 import { useSelector, useDispatch, getState } from 'react-redux'; // hooks
-import {  fetchProducts  } from '../../redux/actions/productActions';
+import {  getProducts  } from '../../redux/actions/productActions';
  import {userdata} from '../../redux/actions/user'
 import store from '../../redux/Store';
-import MidSlide from './MidSlide';
-// import GET_PRODUCTS_SUCCESS from '../../redux/constants/productsuccessConstants';
+import MidSlide from './MidSlide'; 
+import CircularIndeterminate from '../../loader/Loader'
 const Container = styled(Box)`
    padding: 0px 10px 0px 10px;
-   background: #d9d9d9;
+   background: #D9D9D9;
    background-size:cover;
       background-position:center;
       z-index: -1;
@@ -35,18 +35,17 @@ margin-top: -490px;
       flex-flow:row-wrap;
       background-size:cover;
       background-position:center;
-     
-
 `;
+
 const Home = () => {
-const dispatch = useDispatch();
-const  products = useSelector((state) => state.getallProducts.products);
-  // const user = useSelector((state) =>state.userResuder.user)
-  useEffect(()=>{
-    dispatch(fetchProducts());
-    // dispatch(userdata());
-  }, [])
-  // console.log( "kjdsbfjhfbjf" , products)
+
+    const dispatch = useDispatch();
+    const  {products, error, loading} = useSelector((state) => state.getallProducts);
+
+    useEffect(()=>{
+      dispatch(getProducts());
+    }, [])
+
   return (
     <>
       <NavBar />
@@ -56,40 +55,42 @@ const  products = useSelector((state) => state.getallProducts.products);
       <Content>
         <BannerCate />
 
-        {/* <Typography> {name} </Typography> */}
          <MidSlide  />  
-        {/* <MidSection/> */}
-        <Box style={{ backgroundColor: "grey" }}>
 
-                <LastSlider
-                  
-                  title='Discounts for You'
-                  timer={false} 
-                  multi={true} 
-                
-                />
+        {
+          products.loading ?  <CircularIndeterminate /> :   <Box style={{ backgroundColor: "#D9D9D9" }}>
 
-                <LastSlider
-                    
-                    title='Suggested Items'
-                    timer={false} 
-                    multi={true} 
-                />
-                <LastSlider
-                    
-                    title='Top Selection'
-                    timer={false} 
-                    multi={true} 
-                />
-                <LastSlider
-                    
-                    title='Recommended Items'
-                    timer={false} 
-                    multi={true} 
-                />
-           
+          <LastSlider
+            
+            title='Discounts for You'
+            timer={false} 
+            multi={true} 
+          
+          />
 
-        </Box> 
+          <LastSlider
+              
+              title='Suggested Items'
+              timer={false} 
+              multi={true} 
+          />
+          <LastSlider
+              
+              title='Top Selection'
+              timer={false} 
+              multi={true} 
+          />
+          <LastSlider
+              
+              title='Recommended Items'
+              timer={false} 
+              multi={true} 
+          />
+     
+
+  </Box> 
+        }
+      
         <Footer />
       </Content>
 

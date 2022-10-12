@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:5000';
+const url = 'http://localhost:8000';
 
 export const userLogIn = async (users) => {
     try {
@@ -9,13 +9,7 @@ export const userLogIn = async (users) => {
     } catch (error) {
         console.log('error while calling login API: ', error);
     }
-
 }
-
-
-
-
-
 
 export const userSignUp = async (users) => {
     try {
