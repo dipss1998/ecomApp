@@ -27,11 +27,12 @@ const LeftComponent = styled(Box)`
        const user =  JSON.parse(window.localStorage.getItem('user'));
      //  const userId = user._id
        const data = await fetch(`http://localhost:5000/userOrders/userOrders`, {
-           method: "GET",
+           method: "POST",
            headers: {
                "Content-Type": "application/json",
                "Authorization" : `Bearer ${user.Token}`
            },
+           body: JSON.stringify({_id:user._id})
        })
       const res = await data.json();
       setCartProducts(res.orders);

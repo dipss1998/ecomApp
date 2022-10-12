@@ -51,11 +51,13 @@ const Profile = ({ accounts, setAccounts }) => {
                     handleClose(); logout(); setAccounts('')
                 }}>
                     <PowerSettingsNew fontSize='small' color='primary' />
-                    <Link to="" refresh="true" style={{ textDecoration: 'none', color: 'green' }}> <Logout>Logout</Logout></Link>
+                    <Link to="/Signup" refresh="true" style={{ textDecoration: 'none', color: 'green' }}> <Logout>Logout</Logout></Link>
                 </MenuItem>
+                {userdata?
                 <MenuItem onClick={() => { handleClose(); }}>
                     <Link to={`/ProfileScreen/${userdata._id}`} style={{ textDecoration: 'none', color: 'green' }}>Profile Settings</Link>
                 </MenuItem>
+:''}
             </Component>
         </>
     )

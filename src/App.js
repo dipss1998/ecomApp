@@ -66,10 +66,9 @@ function App() {
       <Routes>
       <Route path= '/Login' element={<Login />} />    
       <Route path= '/Signup' element={<Signup />} />    
-      {/* <Route path= '/Cart' element={<Cart />} />   */}
-      {/* <Route path= '/Wishlist' element={<Wishlist />} />   */}
-    
-        <Route path= '/KitchenCategory' element={<KitchenCategory/>} />
+      <Route path= '/Cart' element={<Cart />} />  
+      <Route path= '/Wishlist' element={<Wishlist />} />  
+      <Route path= '/KitchenCategory' element={<KitchenCategory/>} />
       <Route path= '/ElectronicCategory' element={<ElectronicCategory/>} />
       <Route path= '/product/:id'  element={<DetailView />} />
       <Route path= '/ForgetPass'  element={<ForgetPass />} />

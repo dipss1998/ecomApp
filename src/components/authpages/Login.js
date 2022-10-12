@@ -51,10 +51,7 @@ const Login = () => {
    
     const loginuser = async(e) => {
         e.preventDefault();
-       
-
         const { email, password } = inpval;
-
         if (email === "") {
             toast.error("email is required!", {
                 position: "top-center"

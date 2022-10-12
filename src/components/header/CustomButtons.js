@@ -94,10 +94,10 @@ const CartDesign = styled(Box)`
 const CustomButtons = () => {
    
     const {accounts, setAccounts} = useContext(LoginContext);
-    const dispatch = useDispatch()
+    //const dispatch = useDispatch()
           const userdata = JSON.parse(localStorage.getItem("user"))
           const user = JSON.parse(window.localStorage.getItem('user'));
-          const userId = user._id
+          //const userId = user._id
  
     const reloadstop =()=>{
       window.stop();
