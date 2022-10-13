@@ -82,7 +82,7 @@ const LastSlider = ({ timer, title }) => {
     //   const {id, title, discount, url} = products
     const fetchProducts = async () => {
         const response = await axios
-            .get("http://localhost:8000/getallproducts/getallproducts").catch((err) => {
+            .get("http://localhost:5000/getallproducts/getallproducts").catch((err) => {
             });
         // dispatch(getProducts(response.data))
         setProducts(response.data.getproducts)

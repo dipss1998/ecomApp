@@ -46,16 +46,16 @@ const DefaultProfileScreen = () => {
           if(image){
            const data = new FormData()
            data.append("file", image)
-           data.append("upload_preset","cbnitsecomapp")
-           data.append("cloud_name","webss")
-           fetch("https://api.cloudinary.com/v1_1/webss/image/upload",{
+           data.append("upload_preset","ecomapp")
+           data.append("cloud_name","dptlbfgit")
+           fetch("https://api.cloudinary.com/v1_1/dptlbfgit/image/upload",{
                method:"post",
                body:data
            })
            .then(res=>res.json())
            .then(data=>{
        
-              fetch('http://localhost:8000/Profile/photo',{
+              fetch('http://localhost:5000/Profile/photo',{
                   method:"put",
                   headers:{
                       "Content-Type":"application/json",
