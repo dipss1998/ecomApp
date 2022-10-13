@@ -8,6 +8,8 @@ import { useSelector, useDispatch, getState } from 'react-redux'; // hooks
 // import { getProducts as listProducts } from '../../redux/actions/productActions';
 import axios from 'axios'
 import {getProducts} from '../../redux/actions/productActions'
+const url = "http://localhost:5000"
+
 const SearchContainer = styled(Box)`
     background: #fff;
     margin-left: 10px;
@@ -56,7 +58,7 @@ const dispatch = useDispatch();
 
 
     const response = await axios
-    .get("http://localhost:8000/getallproducts/getallproducts").catch((err) => {
+    .get(`/getallproducts/getallproducts`).catch((err) => {
     });
     dispatch(getProducts(response.data))
     

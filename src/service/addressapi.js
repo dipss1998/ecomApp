@@ -15,7 +15,7 @@ export const updateInfo = async (profile) => {
     profile.id = user._id;
     try {
         console.log("url", profile)
-       return await axios.post(`${url}/updateProfile/updateUser`, profile, {
+       return await axios.post(`/updateProfile/updateUser`, profile, {
         headers: {
           "Authorization" : `Bearer ${user.Token}`
         }

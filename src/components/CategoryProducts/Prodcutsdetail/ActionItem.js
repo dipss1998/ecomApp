@@ -101,7 +101,7 @@ const publishableKey="pk_test_51LmCnkSA0lEKtKgzucaWDlWyhjp4on5WqKOGIZzcB19FzKIBK
     //         },
     //         body: JSON.stringify(data)
     //     }).then(response => response.json()).catch(err => console.log(err))
-    return fetch(`http://localhost:8000/stripe/pay`, {
+    return fetch(`/stripe/pay`, {
         method: "POST",
         headers: {
             Accept: "application/json",

@@ -13,7 +13,7 @@ export const userLogIn = async (users) => {
 
 export const userSignUp = async (users) => {
     try {
-        return await axios.post(`${url}/signup`, users)
+        return await axios.post(`/signup`, users)
     } catch (error) {
         console.log('error while calling Signup API: ', error);
     }

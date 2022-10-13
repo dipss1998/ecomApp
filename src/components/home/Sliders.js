@@ -8,10 +8,11 @@ import { Button, Divider, Box, Typography } from '@mui/material';
 import { styled } from '@mui/material';
 import BannerCate from './BannerCate';
 import axios from 'axios';
-//import { getProducts } from '../../redux/actions/productActions';
 
 import { Link } from 'react-router-dom'
 import { convertLength } from '@mui/material/styles/cssUtils';
+const url = "http://localhost:5000"
+
 const responsive = {
 
     desktop: {
@@ -82,7 +83,7 @@ const LastSlider = ({ timer, title }) => {
     //   const {id, title, discount, url} = products
     const fetchProducts = async () => {
         const response = await axios
-            .get("http://localhost:5000/getallproducts/getallproducts").catch((err) => {
+            .get(`/getallproducts/getallproducts`).catch((err) => {
             });
         // dispatch(getProducts(response.data))
         setProducts(response.data.getproducts)

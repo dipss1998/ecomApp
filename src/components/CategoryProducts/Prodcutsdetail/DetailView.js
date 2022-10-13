@@ -46,7 +46,7 @@ const DetailView = () => {
     console.log('products', products)
     const fetchProductDetail = async (id) =>{
         const response = await axios
-        .get(`http://localhost:5000/productdetails/product/${id}`)
+        .get(`/productdetails/product/${id}`)
         .catch((err)=>{
         })
                // dispatch(getProductdetails(response))

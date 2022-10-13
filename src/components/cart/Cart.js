@@ -59,7 +59,7 @@ const Cart = () => {
         const user = JSON.parse(window.localStorage.getItem('user'));
         const userId = user._id
 
-        const data = await fetch("http://localhost:8000/carts/getcart", {
+        const data = await fetch("/carts/getcart", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
