@@ -98,12 +98,9 @@ await updateInfo(profile);
   return(
   <Box sx={{ flexGrow: 1 }} style={{ marginLeft:70}}>
         <Typography variant='h4'>Personal Information</Typography>
-
     <Box style={{justifyItems:'center', marginTop: 20,  marginBottom: 30}}>
     <AvatarDesign alt="Remy Sharp" src={old.pic} /> 
-
         <Button  variant='contained' >
-
              <input type='file' placeholder='upload pic ' onChange={(e)=>{
               profilepic(e.target.files[0])
              }} />
@@ -168,7 +165,7 @@ await updateInfo(profile);
               </Select>
             </Grid>
             <Grid item xs={6}>
-            <Button variant="contained" size="medium" onClick={() => {console.log("profile:", profile);updateUserInfo(profile)}}>Edit</Button></Grid>
+            <Button variant="contained" size="medium" onClick={() => {console.log("profile:", profile);updateUserInfo(profile)}}>Update</Button></Grid>
             </Grid>
    
       </Card>

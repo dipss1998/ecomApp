@@ -49,39 +49,41 @@ const ActionItem = ({ product, }) => {
 const publishableKey="pk_test_51LmCnkSA0lEKtKgzucaWDlWyhjp4on5WqKOGIZzcB19FzKIBKKyibzbpOWKkldqvcvBMgCDCowuoXIY39QVXJtqC00xW93sEPU"
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [orderObject, setOrderObject]=useState({
-        "itemPrice":product.price,
-        "taxPrice":36,
-        "shippingPrice":100,
-        "totalPrice":136+product.price,
-        "orderItems":[
-            {
-                "product":product._id,
-                "name":product.name,
-                "price":product.price,
-                "image":product.images[0].url,
-                "quantity":1
-            }
-        ],
-        "shippingInfo":{
-            "address":"365",
-            "city":"suart",
-            "state":"gujarat",
-            "country":"india",
-            "pinCode":"394520",
-            "phoneNo":"1258749630"
-        },
-        "paymentInfo":{
-            "id":"sample payment",
-            "status":"succeeded"
-        }
-    })
+    // const [orderObject, setOrderObject]=useState({
+    //     "itemPrice":product.price,
+    //     "taxPrice":36,
+    //     "shippingPrice":100,
+    //     "totalPrice":136+product.price,
+    //     "orderItems":[
+    //         {
+    //             "product":product._id,
+    //             "name":product.name,
+    //             "price":product.price,
+    //             "image":product.images[0].url,
+    //             "quantity":1
+    //         }
+    //     ],
+    //     "shippingInfo":{
+    //         "address":"365",
+    //         "city":"suart",
+    //         "state":"gujarat",
+    //         "country":"india",
+    //         "pinCode":"394520",
+    //         "phoneNo":"1258749630"
+    //     },
+    //     "paymentInfo":{
+    //         "id":"sample payment",
+    //         "status":"succeeded"
+    //     }
+    // })
     const createOrder = () => {
-        fetch('http://localhost:8000/order/order', {
+        fetch(`/order/order`, {
             method: 'POST', headers: {
                 'Content-Type': 'application/json',
             'Authorization':`Bearer ${user.Token}`},
-                body: JSON.stringify(orderObject) 
+                body: JSON.stringify({
+                    userId:user._id, productId:product._id, quantity:1, taxPrice:36, shippingPrice:100
+                }) 
               },)
         .then(response => {
             navigate('/History')
@@ -109,7 +111,8 @@ const publishableKey="pk_test_51LmCnkSA0lEKtKgzucaWDlWyhjp4on5WqKOGIZzcB19FzKIBK
         },
         body: JSON.stringify({
            amount:product.price,
-            token
+            token,
+            userId:user._id
         })
     }).then(response => {console.log(response);if(response.status===200)createOrder()
        ;response.json()}).catch(err => console.log(err))

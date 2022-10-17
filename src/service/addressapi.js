@@ -2,15 +2,7 @@ import axios from 'axios';
 
 const url = 'http://localhost:5000';
 const user =  JSON.parse(window.localStorage.getItem('user'));
-export const addAddress = async (address) => {
-    // try {
-    //     console.log("url",url)
-    //    return await axios.post(`${url}/updateProfile/updateUser`, address)
-      
-    // } catch (error) {
-    //     console.log('error while calling login API: ', error);
-    // }
-}
+
 export const updateInfo = async (profile) => {
     profile.id = user._id;
     try {
